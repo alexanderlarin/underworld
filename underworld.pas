@@ -9,25 +9,35 @@ uses
 	{$ENDIF}
 	math;
 	
-procedure Initialize();
+type
+	THero = record
+		depth: Integer;
+	end;
+	
+procedure Initialize(var hero: THero);
 begin
-	WriteLn('[+]Initizlization');
+	WriteLn('[+] Initizlization');
+	WriteLn('[+] Hero');
+	hero.depth := 0;
 end;
 
-procedure Finalize();
+procedure Finalize(hero: THero);
 begin
-	WriteLn('[+]Finalization');
+	if (hero.depth > 5) then
+		WriteLn('[+] You''re really unlucky man. Your depth is ', hero.depth);
+	WriteLn('[+] Finalization');
 end;
 
-function Fall(): Boolean;
+function Fall(var hero: THero): Boolean;
 begin
-	WriteLn('[-]Falling');
-	Fall := True;
+	WriteLn('[-]Falling in Depth = ', hero.depth);
+	Inc(hero.depth);
+	Fall := hero.depth < 10;
 end;
 
 var
 	isFalling: Boolean;
-	depth: Integer;
+	hero: THero;
 	
 begin
 	{$IFDEF WINDOWS}
@@ -35,10 +45,9 @@ begin
 	{$ENDIF}
 	WriteLn('Привет, Дно.');
 	
-	Initialize();
+	Initialize(hero);
 	repeat
-		isFalling := Fall();
-		Inc(depth);
-	until (not isFalling or (depth = 10));
-	Finalize();
+		isFalling := Fall(hero);
+	until (not isFalling);
+	Finalize(hero);
 end.
