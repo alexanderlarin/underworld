@@ -1,5 +1,17 @@
 program Underworld;
 
+uses
+	{$IFDEF UNIX}
+	cwstring,
+	{$ENDIF}
+	{$IFDEF WINDOWS}
+	windows,
+	{$ENDIF}
+	math;
+ 
 begin
-	WriteLn('Hello, Underworld.');
+	{$IFDEF WINDOWS}
+	SetConsoleOutputCP(CP_UTF8);
+	{$ENDIF}
+	WriteLn('Привет, Дно.');
 end.
