@@ -21,7 +21,7 @@ type
 		toEvent: String;
 	end;
 	
-	TCommands = array of TCommand;
+	TCommands = array [0..1] of TCommand;
 	
 	TEvent = record
 		name: String;
@@ -30,6 +30,15 @@ type
 	end;
 	
 	TEvents = array of TEvent;
+
+const	
+	InitEvent : TEvent = (
+		name: 'Контроша';
+		text: 'Препод без предупреждения даёт контрошу';
+		commands: (
+		(name: 'Свалить'; text: 'Ты свалил(а) с контры'; cmd: '1'; toEvent: 'Разбудили одногруппники';), 
+		(name: 'Писать'; text: 'Ты решил(а) написать контру'; cmd: '2'; toEvent: 'Вызвали к доске'));
+	);	
 	
 procedure Initialize(var hero: THero; var events: TEvents);
 begin
@@ -42,7 +51,7 @@ begin
 	SetLength(events, 3);
 	events[0].name := 'Первая пара';
 	events[0].text := 'Ты пришел(а) к первой паре';
-	SetLength(events[0].commands, 2);
+	//SetLength(events[0].commands, 2);
 	events[0].commands[0].name := 'Слушать';
 	events[0].commands[0].text := 'Ты прослушал(а) пару';
 	events[0].commands[0].cmd := '1';
@@ -53,7 +62,7 @@ begin
 	events[0].commands[1].toEvent := 'Разбудили одногруппники';
 	events[1].name := 'Вызвали к доске';
 	events[1].text := 'Тебя вызывали к доске';
-	SetLength(events[1].commands, 2);
+	//SetLength(events[1].commands, 2);
 	events[1].commands[0].name := 'Тупануть';
 	events[1].commands[0].text := 'Ты тупанул(а) у доски';
 	events[1].commands[0].cmd := '1';
@@ -64,7 +73,7 @@ begin
 	events[1].commands[1].toEvent := 'Вызвали к доске';
 	events[2].name := 'Разбудили одногруппники';
 	events[2].text := 'Тебя разбудили одногруппники';
-	SetLength(events[2].commands, 2);
+	//SetLength(events[2].commands, 2);
 	events[2].commands[0].name := 'Тупануть';
 	events[2].commands[0].text := 'Ты тупанул(а)';
 	events[2].commands[0].cmd := '1';
@@ -119,7 +128,8 @@ begin
 	WriteLn('Привет, Дно.');
 	
 	Initialize(hero, events);
-	event := events[0];
+	//event := events[0];
+	event := InitEvent;
 	repeat
 		isFalling := Fall(hero, event, events);
 	until (not isFalling);
