@@ -12,6 +12,18 @@ uses
 type
 	THero = record
 		depth: Integer;
+		
+		Health: Integer;
+		Energy: Integer;
+		Alchohol: Integer;
+		
+		Strength: Integer;
+		Agility: Integer;
+		Intelligence: Integer;
+		Fortune: Integer;
+	
+		ReputationInGroup: Integer;
+		ReputationInUnderworld: Integer;	
 	end;
 	
 	TCommand = record
@@ -46,6 +58,17 @@ begin
 	
 	WriteLn('[+] Hero');
 	hero.depth := 0;
+	hero.Health := 75;
+	hero.Energy := 15;
+	hero.Alchohol := 23;
+	
+	hero.Strength := 26;
+	hero.Intelligence := 10;
+	hero.Agility := 45;
+	hero.Fortune := 0;
+	
+	hero.ReputationInGroup := 78;
+	hero.ReputationInUnderworld := 5;
 	
 	WriteLn('[+] Events');
 	SetLength(events, 3);
@@ -96,6 +119,16 @@ var
 	I, J: Integer;
 	cmd: String;
 begin
+	WriteLn('=======ХАРАКТЕРИСТИКИ ПЕРСОНАЖА=======');
+	WriteLn('Здоровье: ', hero.Health, '%');
+	WriteLn('Бодрость: ', hero.Energy, '%');
+	WriteLn('Содержание алкоголя: ', hero.Alchohol, '%');
+	WriteLn();
+	WriteLn('Сила: ', hero.Strength);
+	WriteLn('Ловкость: ', hero.Agility);
+	WriteLn('Интеллект: ', hero.Intelligence);
+	WriteLn('Удача: ', hero.Fortune);
+	WriteLn('======================================');
 	WriteLn(event.text);
 	for I := 0 to Length(event.commands) - 1 do
 		WriteLn(event.commands[I].cmd, ': ', event.commands[I].name);
@@ -104,6 +137,16 @@ begin
 	for I := 0 to Length(event.commands) - 1 do
 		if event.commands[I].cmd = cmd then
 		begin
+			WriteLn('=======ХАРАКТЕРИСТИКИ ПЕРСОНАЖА=======');
+			WriteLn('Здоровье: ', hero.Health, '%');
+			WriteLn('Бодрость: ', hero.Energy, '%');
+			WriteLn('Содержание алкоголя: ', hero.Alchohol, '%');
+			WriteLn();
+			WriteLn('Сила: ', hero.Strength);
+			WriteLn('Ловкость: ', hero.Agility);
+			WriteLn('Интеллект: ', hero.Intelligence);
+			WriteLn('Удача: ', hero.Fortune);
+			WriteLn('======================================');
 			WriteLn(event.commands[I].text);
 			for J := 0 to Length(events) - 1 do
 				if events[J].name = event.commands[I].toEvent then
@@ -128,8 +171,8 @@ begin
 	WriteLn('Привет, Дно.');
 	
 	Initialize(hero, events);
-	//event := events[0];
-	event := InitEvent;
+	event := events[0];
+	//event := InitEvent;
 	repeat
 		isFalling := Fall(hero, event, events);
 	until (not isFalling);
