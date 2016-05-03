@@ -12,6 +12,18 @@ uses
 type
 	THero = record
 		depth: Integer;
+		
+		Health: Integer;
+		Energy: Integer;
+		Alchohol: Integer;
+		
+		Strength: Integer;
+		Agility: Integer;
+		Intelligence: Integer;
+		Fortune: Integer;
+	
+		ReputationInGroup: Integer;
+		ReputationInUnderworld: Integer;	
 	end;
 	
 	TCommand = record
@@ -21,7 +33,7 @@ type
 		toEvent: String;
 	end;
 	
-	TCommands = array of TCommand;
+	TCommands = array [0..1] of TCommand;
 	
 	TEvent = record
 		name: String;
@@ -30,6 +42,15 @@ type
 	end;
 	
 	TEvents = array of TEvent;
+
+const	
+	InitEvent : TEvent = (
+		name: 'Контроша';
+		text: 'Препод без предупреждения даёт контрошу';
+		commands: (
+		(name: 'Свалить'; text: 'Ты свалил(а) с контры'; cmd: '1'; toEvent: 'Разбудили одногруппники';), 
+		(name: 'Писать'; text: 'Ты решил(а) написать контру'; cmd: '2'; toEvent: 'Вызвали к доске'));
+	);	
 	
 procedure Initialize(var hero: THero; var events: TEvents);
 begin
@@ -37,12 +58,23 @@ begin
 	
 	WriteLn('[+] Hero');
 	hero.depth := 0;
+	hero.Health := 75;
+	hero.Energy := 15;
+	hero.Alchohol := 23;
+	
+	hero.Strength := 26;
+	hero.Intelligence := 10;
+	hero.Agility := 45;
+	hero.Fortune := 0;
+	
+	hero.ReputationInGroup := 78;
+	hero.ReputationInUnderworld := 5;
 	
 	WriteLn('[+] Events');
 	SetLength(events, 3);
 	events[0].name := 'Первая пара';
 	events[0].text := 'Ты пришел(а) к первой паре';
-	SetLength(events[0].commands, 2);
+	//SetLength(events[0].commands, 2);
 	events[0].commands[0].name := 'Слушать';
 	events[0].commands[0].text := 'Ты прослушал(а) пару';
 	events[0].commands[0].cmd := '1';
@@ -53,7 +85,7 @@ begin
 	events[0].commands[1].toEvent := 'Разбудили одногруппники';
 	events[1].name := 'Вызвали к доске';
 	events[1].text := 'Тебя вызывали к доске';
-	SetLength(events[1].commands, 2);
+	//SetLength(events[1].commands, 2);
 	events[1].commands[0].name := 'Тупануть';
 	events[1].commands[0].text := 'Ты тупанул(а) у доски';
 	events[1].commands[0].cmd := '1';
@@ -64,7 +96,7 @@ begin
 	events[1].commands[1].toEvent := 'Вызвали к доске';
 	events[2].name := 'Разбудили одногруппники';
 	events[2].text := 'Тебя разбудили одногруппники';
-	SetLength(events[2].commands, 2);
+	//SetLength(events[2].commands, 2);
 	events[2].commands[0].name := 'Тупануть';
 	events[2].commands[0].text := 'Ты тупанул(а)';
 	events[2].commands[0].cmd := '1';
@@ -87,6 +119,16 @@ var
 	I, J: Integer;
 	cmd: String;
 begin
+	WriteLn('=======ХАРАКТЕРИСТИКИ ПЕРСОНАЖА=======');
+	WriteLn('Здоровье: ', hero.Health, '%');
+	WriteLn('Бодрость: ', hero.Energy, '%');
+	WriteLn('Содержание алкоголя: ', hero.Alchohol, '%');
+	WriteLn();
+	WriteLn('Сила: ', hero.Strength);
+	WriteLn('Ловкость: ', hero.Agility);
+	WriteLn('Интеллект: ', hero.Intelligence);
+	WriteLn('Удача: ', hero.Fortune);
+	WriteLn('======================================');
 	WriteLn(event.text);
 	for I := 0 to Length(event.commands) - 1 do
 		WriteLn(event.commands[I].cmd, ': ', event.commands[I].name);
@@ -95,6 +137,16 @@ begin
 	for I := 0 to Length(event.commands) - 1 do
 		if event.commands[I].cmd = cmd then
 		begin
+			WriteLn('=======ХАРАКТЕРИСТИКИ ПЕРСОНАЖА=======');
+			WriteLn('Здоровье: ', hero.Health, '%');
+			WriteLn('Бодрость: ', hero.Energy, '%');
+			WriteLn('Содержание алкоголя: ', hero.Alchohol, '%');
+			WriteLn();
+			WriteLn('Сила: ', hero.Strength);
+			WriteLn('Ловкость: ', hero.Agility);
+			WriteLn('Интеллект: ', hero.Intelligence);
+			WriteLn('Удача: ', hero.Fortune);
+			WriteLn('======================================');
 			WriteLn(event.commands[I].text);
 			for J := 0 to Length(events) - 1 do
 				if events[J].name = event.commands[I].toEvent then
@@ -120,6 +172,7 @@ begin
 	
 	Initialize(hero, events);
 	event := events[0];
+	//event := InitEvent;
 	repeat
 		isFalling := Fall(hero, event, events);
 	until (not isFalling);
