@@ -1,0 +1,71 @@
+events 1
+	event 'Первая пара'
+	text 'Ты пришел(а) к первой паре'
+	commands 2
+		command 'Слушать'
+		text 'Ты прослушал(а) пару'
+		cmd '1'
+		toEvent 'Вызвали к доске'
+		end command
+		
+		command 'Спать'
+		text 'Ты проспал(а) пару'
+		cmd '2'
+		toEvent 'Разбудили одногруппники'
+		end command
+	end commands
+	end event
+	
+	event 'Вызвали к доске'
+	text 'Тебя вызывали к доске'
+	commands 2
+		command 'Тупануть'
+		text 'Ты тупанул(а) у доски'
+		cmd '1'
+		toEvent 'Разбудили одногруппники'
+		end command
+		
+		command 'Не пойти'
+		text 'Ты не пошел(а) к доске'
+		cmd '2'
+		toEvent 'Вызвали к доске'
+		end command
+	end commands
+	end event
+	
+	event 'Разбудили одногруппники'
+	text 'Тебя разбудили одногруппники'
+	commands 2
+		command 'Тупануть'
+		text 'Ты тупанул(а)'
+		cmd '1'
+		toEvent 'Вызвали к доске'
+		end command
+		
+		command 'Спать дальше'
+		text 'Ты решил(а) спать дальше'
+		cmd '2'
+		toEvent 'Разбудили одногруппники'
+		end command
+	end commands
+	end event
+	
+	event 'Контроша'
+	text 'Препод без предупреждения даёт контрошу'
+	commands 2
+		command 'Свалить'
+		text 'Ты свалил(а) с контры'
+		cmd '1'
+		toEvent 'Разбудили одногруппники'
+		end command
+		
+		command 'Писать'
+		text 'Ты решил(а) написать контру'
+		cmd '2'
+		toEvent 'Вызвали к доске'
+		end command
+	end commands
+	end event
+end events
+
+

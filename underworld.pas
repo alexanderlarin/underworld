@@ -9,6 +9,7 @@ uses
 	{$ENDIF}
 	math;
 	
+	
 type
 	THero = record
 		depth: Integer;
@@ -52,9 +53,45 @@ const
 		(name: 'Писать'; text: 'Ты решил(а) написать контру'; cmd: '2'; toEvent: 'Вызвали к доске'));
 	);	
 	
+function ReadToken(var text: TextFile; var token: String): Boolean;
+var
+	ch: Char;
+	isStarted: Boolean;
+begin
+	isStarted := False;
+	token := '';
+	while not EOF(text) do
+	begin
+		Read(text, ch);
+		if ch in ['A'..'Z', 'a'..'z', '0'..'9'] then
+			isStarted := True
+		else
+			if isStarted then
+				break;
+		if isStarted then
+			token := token + ch;
+	end;
+	ReadToken := not EOF(text);
+end;
+
+function LoadStory(filename: String): Boolean;
+var
+	text: TextFile;
+	s: String;
+begin
+	Assign(text, filename);
+	Reset(text);
+	while ReadToken(text, s) do
+		WriteLn('Token: ', s);
+	Close(text);
+end;
+	
+
+
 procedure Initialize(var hero: THero; var events: TEvents);
 begin
 	WriteLn('[+] Initizlization');
+	LoadStory('./story.spt');
 	
 	WriteLn('[+] Hero');
 	hero.depth := 0;
