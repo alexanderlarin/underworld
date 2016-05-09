@@ -7,6 +7,7 @@ uses
 	{$IFDEF WINDOWS}
 	windows,
 	{$ENDIF}
+	sysutils,
 	math;
 	
 	
@@ -34,7 +35,7 @@ type
 		toEvent: String;
 	end;
 	
-	TCommands = array [0..1] of TCommand;
+	TCommands = array of TCommand;
 	
 	TEvent = record
 		name: String;
@@ -43,15 +44,6 @@ type
 	end;
 	
 	TEvents = array of TEvent;
-
-const	
-	InitEvent : TEvent = (
-		name: 'Контроша';
-		text: 'Препод без предупреждения даёт контрошу';
-		commands: (
-		(name: 'Свалить'; text: 'Ты свалил(а) с контры'; cmd: '1'; toEvent: 'Разбудили одногруппники';), 
-		(name: 'Писать'; text: 'Ты решил(а) написать контру'; cmd: '2'; toEvent: 'Вызвали к доске'));
-	);	
 	
 function ReadToken(var text: TextFile; var token: String): Boolean;
 var
@@ -70,19 +62,111 @@ begin
 				break;
 		if isStarted then
 			token := token + ch;
+		
+		if ch = '''' then
+		begin
+			isStarted:= True;
+			while not EOF(text) do
+			begin
+				Read(text, ch);
+				if (not (ch = '''')) then
+					token := token + ch
+				else
+					break;
+			end;
+		end;
 	end;
 	ReadToken := not EOF(text);
 end;
 
-function LoadStory(filename: String): Boolean;
+function LoadStory(filename: String; var events: TEvents): Boolean;
 var
 	text: TextFile;
 	s: String;
+	AmountOfEvents: Integer;
+	AmountOfCommands: Integer;
+	EventCount: Integer;
+	CommandCount: Integer;
+	
 begin
 	Assign(text, filename);
 	Reset(text);
+	EventCount := 0;
+	CommandCount := 0;
 	while ReadToken(text, s) do
+	begin
 		WriteLn('Token: ', s);
+		if (s = 'events') then
+		begin
+			ReadToken(text, s);
+			AmountOfEvents := StrToInt(s);
+			SetLength(events, AmountOfEvents);
+			continue;
+		end;
+		
+		if (s = 'event') then
+		begin
+			ReadToken(text, s);
+			events[EventCount].name := s;
+			continue;
+		end;
+		
+		if (s = 'text') then
+		begin
+			ReadToken(text, s);
+			events[EventCount].text := s;
+			continue;
+		end;
+		
+		if (s = 'commands') then
+		begin
+			ReadToken(text, s);
+			AmountOfCommands := StrToInt(s);
+			SetLength(events[EventCount].commands, AmountOfCommands);
+			continue;
+		end;
+		
+		if (s = 'command') then
+		begin
+			ReadToken(text, s);
+			events[EventCount].commands[CommandCount].name := s;
+			continue;
+		end;
+		
+		if (s = 'text') then
+		begin
+			ReadToken(text, s);
+			events[EventCount].commands[CommandCount].text := s;
+			continue;
+		end;
+		
+		if (s = 'cmd') then
+		begin
+			ReadToken(text, s);
+			events[EventCount].commands[CommandCount].cmd := s;
+			continue;
+		end;
+		
+		if (s = 'toEvent') then
+		begin
+			ReadToken(text, s);
+			events[EventCount].commands[CommandCount].toEvent := s;
+			continue;
+		end;
+		
+		if (s = 'end') then
+		begin
+			ReadToken(text, s);
+			if (s = 'command') then
+				CommandCount := CommandCount + 1;
+			if (s = 'commands') then
+				CommandCount := 0;
+			if (s = 'event') then
+				EventCount := EventCount + 1;
+			if (s = 'events') then
+				break;
+		end;	
+	end;
 	Close(text);
 end;
 	
@@ -91,7 +175,7 @@ end;
 procedure Initialize(var hero: THero; var events: TEvents);
 begin
 	WriteLn('[+] Initizlization');
-	LoadStory('./story.spt');
+	LoadStory('./story.spt', events);
 	
 	WriteLn('[+] Hero');
 	hero.depth := 0;
@@ -108,7 +192,7 @@ begin
 	hero.ReputationInUnderworld := 5;
 	
 	WriteLn('[+] Events');
-	SetLength(events, 3);
+	{SetLength(events, 3);
 	events[0].name := 'Первая пара';
 	events[0].text := 'Ты пришел(а) к первой паре';
 	//SetLength(events[0].commands, 2);
@@ -141,7 +225,7 @@ begin
 	events[2].commands[1].name := 'Спать дальше';
 	events[2].commands[1].text := 'Ты решил(а) спать дальше';
 	events[2].commands[1].cmd := '2';
-	events[2].commands[1].toEvent := 'Разбудили одногруппники';
+	events[2].commands[1].toEvent := 'Разбудили одногруппники';}
 end;
 
 procedure Finalize(hero: THero);
