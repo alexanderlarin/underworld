@@ -1,4 +1,4 @@
-events 1
+events 4
 	event 'Первая пара'
 	text 'Ты пришел(а) к первой паре'
 	commands 2
