@@ -1,2 +1,4 @@
 *.o
 underworld.exe
+types.ppu
+*.ppu
