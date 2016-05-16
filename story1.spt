@@ -1,0 +1,142 @@
+events n
+	event 'Понедельник'
+	text 'Посмотрев на расписание, понимаешь, что сегодня есть первая пара'
+	commands 2
+		command 'Пойти на пару'
+		text 'Ты думаешь, что сны не нужны, а знания - сила, и отправляешься на пару'
+		cmd '1'
+		Hero.Health 'Hero.Health-5'
+		Hero.Energy 'Hero.Energy-40'
+		ReputationInGroup 'ReputationInGroup+5'
+		ReputationInUnderworld 'ReputationInUnderworld+1'
+		toEvent 'Первая пара'
+		end command
+		
+		command 'Поспать'
+		text 'Посчитав, что понедельник - день тяжёлый, ты решаешь побольше отдохнуть'
+		cmd '2'
+		Hero.Health 'Hero.Health+7'
+		Hero.Energy 'Hero.Energy+20'
+		ReputationInUnderworld 'ReputationInUnderworld-0.5'
+		toEvent 'Перед утренним сном'
+		end command
+	end commands
+	end event
+	
+	event 'Первая пара'
+	text 'Твои веки тяжелеют. Но лекция идёт полным ходом, и преподаватель задаёт группе вопрос'
+	commands 3
+		command 'Ответить'
+		text 'Красава, ты попытался(ась) ответить, но тупанул(а)'
+		cmd '1'
+		Fortune 'Fortune+1'
+		ReputationInGroup 'ReputationInGroup-5'
+		toEvent 'Вторая пара'
+		end command
+		
+		command 'Притвориться мёртвым'
+		text 'Увидев за твоей спиной женщину в чёрном балахоне, преподаватель решает, что тебе хватит мучений'
+		cmd '2'
+		ReputationInUnderworld 'ReputationInUnderworld-0.5'
+		toEvent 'Вторая пара'
+		end command
+		
+		command 'Притвориться Анчишкиным'
+		text 'Ты затащил, как и всегда. Вся группа благодарит тебя и продолжает спать'
+		cmd '3'
+		Intelligence 'Intelligence+1'
+		ReputationInGroup 'ReputationInGroup+2'
+		ReputationInUnderworld 'ReputationInUnderworld+2'
+		Hero.Energy 'Hero.Energy-1'
+		toEvent 'Вторая пара'
+		end command
+	end commands
+	end event
+	
+	event 'Перед утренним сном'
+	text 'А заводить ли будильник, чтоб поехать ко второй паре?'
+	commands 3
+	    command 'Нет, очнусь сам(а)'
+	    text 'Сам господин Время завидует твоей уверенности'
+	    cmd '1'
+		Fortune 'Fortune-1'
+		Hero.Health 'Hero.Health+4'
+		Hero.Energy 'Hero.Energy+5'
+	    toEvent 'Перед второй парой'
+	    end command
+		
+		command 'Нет, пары - для лохов'
+	    text 'Ты достиг успеха и уже на первом курсе рубишь доллары на фрилансе, собирая на дому шариковые ручки'
+	    cmd '2'
+		Fortune 'Fortune+3'
+		Hero.Health 'Hero.Health-30'
+		Hero.Energy 'Hero.Energy-15'
+		ReputationInGroup 'ReputationInGroup+30'
+		ReputationInUnderworld '0'
+	    toEvent 'В перспективе'
+	    end command 
+		
+		command 'Дя'
+	    text 'Большой брат надеется, что ты проснёшься'
+	    cmd '3'
+		Hero.Health 'Hero.Health+2'
+		Hero.Energy 'Hero.Energy+3'
+	    toEvent 'Перед второй парой'
+	    end command
+		
+    end commands
+	end event
+	
+	event 'Перед второй парой'
+	text 'Скоро вторая пара. Твои действия?'
+	commands 
+	    command 'Пора учиться, а то стану дворником'
+	    text 'Идёшь/едешь/летишь на пару'
+	    cmd '1'
+		Hero.Health 'Hero.Health+5'
+	    toEvent 'Вторая пара'
+	    end command
+		
+		command 'Меня ждут несобранные шариковые ручки'
+	    text 'Ты достиг успеха и уже на первом курсе рубишь доллары на фрилансе, собирая на дому шариковые ручки'
+	    cmd '2'
+		Fortune 'Fortune+3'
+		Hero.Health 'Hero.Health-30'
+		Hero.Energy 'Hero.Energy-15'
+		ReputationInGroup 'ReputationInGroup+30'
+		ReputationInUnderworld '0'
+	    toEvent 'В перспективе'
+	    end command 
+		
+		command 'zZzZzzzz...'
+	    text 'Проходящий мимо твоего окна дворник кричит: Mоё увожение! (вы не можете спать, пока рядом враги)'
+	    cmd '3'
+	    Hero.Health 'Hero.Health-20'
+		Hero.Energy 'Hero.Energy-15'
+		ReputationInUnderworld '0'
+	    toEvent 'В перспективе'
+	    end command
+		
+    end commands
+	end event
+	
+    event 'Вторая пара'
+    text 'Группу снимают с пары, чтоб пойти на возложение'
+	commands 2
+		command 'Пойти на возложение'
+		text 'Как часть стада, отправляешься со всеми'
+		cmd '1'
+		ReputationInUnderworld 'ReputationInUnderworld+0.5'
+		toEvent 'Возложение'
+		end command
+		
+		command 'Свалить домой/поесть и т.п.'
+		text 'Считая подвиг ветеранов юзлессным, ты, наплевав на группу и универ, топаешь по своим делам'
+		cmd '2'
+		ReputationInUnderworld 'ReputationInUnderworld-1'
+		toEvent 'В перспективе'
+		end command
+	end commands
+	end event
+	
+	
