@@ -22,6 +22,11 @@ events 4
 		command 'Тупануть'
 		text 'Ты тупанул(а) у доски'
 		cmd '1'
+		effects 1
+			effect 'damage'
+			value '10'
+			end effect
+		end effects
 		toEvent 'Разбудили одногруппники'
 		end command
 		

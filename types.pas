@@ -18,10 +18,19 @@ interface
 			ReputationInUnderworld: Integer;	
 		end;
 		
+		TEffect = record
+			name: String;
+			text: String;
+			value: Integer;
+		end;
+		
+		TEffects = array of TEffect;
+		
 		TCommand = record
 			name: String;
 			text: String;
 			cmd: String;
+			effects: TEffects;
 			toEvent: String;
 		end;
 		
