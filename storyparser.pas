@@ -3,6 +3,16 @@ unit StoryParser;
 interface
 	uses
 		SysUtils, Types;
+	const
+		TokenEnd = 'end'; 
+		TokenText = 'text';
+		TokenCmd = 'cmd';
+		TokenToEvent = 'toEvent';
+		TokenCommand = 'command';
+		TokenCommands = 'commands';
+		TokenEvent = 'event';
+		TokenEvents = 'events';
+	
 	function ReadToken(var text: TextFile; var token: String): Boolean;
 	function ReadEvent(var text: TextFile; var event: TEvent): Boolean;
 	function ReadEvents(var text: TextFile; var events: TEvents): Boolean;
@@ -20,16 +30,16 @@ implementation
 			Exit(False);
 		while ReadToken(text, token) do
 		begin
-			if token = 'text' then
+			if token = TokenText then
 				ReadToken(text, command.text);
-			if token = 'cmd' then
+			if token = TokenCmd then
 				ReadToken(text, command.cmd);
-			if token = 'toEvent' then
+			if token = TokenToEvent then
 				ReadToken(text, command.toEvent);
-			if token = 'end' then
+			if token = TokenEnd then
 			begin
 				ReadToken(text, token);
-				if token = 'command' then
+				if token = TokenCommand then
 					Exit(True);
 			end
 		end;
@@ -38,22 +48,22 @@ implementation
 	function ReadCommands(var text: TextFile; var commands: TCommands): Boolean;
 	var
 		token: String;
-		CommandsCount, i: Integer;
+		commandsCount, I: Integer;
 	begin
 		ReadToken(text, token);
-		CommandsCount := StrToInt(token);
-		for i:= 0 to CommandsCount - 1 do
+		commandsCount := StrToInt(token);
+		for I:= 0 to commandsCount - 1 do
 		begin
 			if (ReadToken(text, token)) then
 			begin
-				if (token = 'command') then
+				if (token = TokenCommand) then
 				begin
-					ReadCommand(text, commands[i]);
+					ReadCommand(text, commands[I]);
 				end;
 			end;
 		end;
 		ReadToken(text, token);
-		if token = 'end' then
+		if token = TokenEnd then
 		begin
 			ReadToken(text, token);			
 		end;
@@ -67,14 +77,14 @@ implementation
 		if ReadToken(text, event.name) then
 		begin
 			ReadToken(text, token);
-			if token = 'text' then
+			if token = TokenText then
 				ReadToken(text, event.text);
-			if token = 'commands' then
+			if token = TokenCommands then
 			begin
 				ReadCommands(text, event.commands);
 			end;
 			ReadToken(text, token);
-			if token = 'end' then
+			if token = TokenEnd then
 				ReadToken(text, token);			
 		end;
 	end;
@@ -82,20 +92,20 @@ implementation
 	function ReadEvents(var text: TextFile; var events: TEvents): Boolean;
 	var
 		token: String;
-		EventsCount, i: Integer;
+		eventsCount, I: Integer;
 	begin
 		ReadToken(text, token);
-		EventsCount := StrToInt(token);
-		For i := 0 to EventsCount - 1 do
+		eventsCount := StrToInt(token);
+		for I := 0 to eventsCount - 1 do
 		begin
 			ReadToken(text, token);
-			if (token = 'event') then
+			if (token = TokenEvent) then
 			begin
-				ReadEvent(text, events[i]);
+				ReadEvent(text, events[I]);
 			end;
 		end;
 		ReadToken(text, token);
-		if token = 'end' then
+		if token = TokenEnd then
 		begin
 			ReadToken(text, token);
 		end;
@@ -146,7 +156,7 @@ implementation
 		Assign(text, filename);
 		Reset(text);
 		ReadToken(text, token);
-		if token = 'events' then
+		if token = TokenEvents then
 			ReadEvents(text, events);
 		Close(text);
 	end;
