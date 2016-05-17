@@ -9,6 +9,7 @@ uses
 	{$ENDIF}
 	sysutils,
 	math,
+	effects,
 	storyparser,
 	types;
 
@@ -64,25 +65,16 @@ begin
 	for I := 0 to Length(event.commands) - 1 do
 		if event.commands[I].cmd = cmd then
 		begin
-			WriteLn('=======ХАРАКТЕРИСТИКИ ПЕРСОНАЖА=======');
-			WriteLn('Здоровье: ', hero.Health, '%');
-			WriteLn('Бодрость: ', hero.Energy, '%');
-			WriteLn('Содержание алкоголя: ', hero.Alchohol, '%');
-			WriteLn();
-			WriteLn('Сила: ', hero.Strength);
-			WriteLn('Ловкость: ', hero.Agility);
-			WriteLn('Интеллект: ', hero.Intelligence);
-			WriteLn('Удача: ', hero.Fortune);
-			WriteLn('======================================');
 			WriteLn(event.commands[I].text);
+			Affect(hero, event.commands[I].effects);
 			for J := 0 to Length(events) - 1 do
 				if events[J].name = event.commands[I].toEvent then
 				begin
 					event := events[J];
-					exit();
+					Exit(False);
 				end;
 		end;
-	Fall := True;
+	Exit(True);
 end;
 
 var
