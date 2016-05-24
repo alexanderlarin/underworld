@@ -15,12 +15,21 @@ interface
 		TokenCommands = 'commands';
 		TokenEvent = 'event';
 		TokenEvents = 'events';
+		TokenTransition = 'transition';
+		TokenTransitions = 'transitions';
+		TokenCondition = 'condition';
+		TokenConditions = 'conditions';
+		TokenAttribute = 'attribute';
 	
 	function ReadToken(var text: TextFile; var token: String): Boolean;
 	function ReadEvent(var text: TextFile; var event: TEvent): Boolean;
 	function ReadEvents(var text: TextFile; var events: TEvents): Boolean;
 	function ReadCommand(var text: TextFile; var command: TCommand): Boolean;
 	function ReadCommands(var text: TextFile; var commands: TCommands): Boolean;
+	function ReadTransition(var text: TextFile; var transition: TTransition): Boolean;
+	function ReadTransitions(var text: TextFile; var transitions: TTransitions): Boolean;
+	function ReadCondition(var text: TextFile; var condition: TCondition): Boolean;
+	function ReadConditions(var text: TextFile; var conditions: TConditions): Boolean;
 	function ReadEffect(var text: TextFile; var effect: TEffect): Boolean;
 	function ReadEffects(var text: TextFile; var effects: TEffects): Boolean;
 	function LoadStory(filename: String; var events: TEvents): Boolean;
@@ -77,6 +86,106 @@ implementation
 		Exit(False);
 	end;
 	
+	function ReadCondition(var text: TextFile; var condition: TCondition): Boolean;
+	var
+		token: String;
+	begin
+		token := '';
+		if not ReadToken(text, condition.name) then
+			Exit(False);
+		while ReadToken(text, token) do
+		begin
+			if token = TokenAttribute then
+				ReadToken(text, condition.attribute);
+			if token = TokenValue then
+			begin
+				ReadToken(text, token);
+				condition.value := StrToInt(token);
+			end;
+				
+			if token = TokenEnd then
+			begin
+				ReadToken(text, token);
+				if token = TokenCommand then
+					Exit(True);
+			end
+		end;
+		Exit(False);
+	end;
+	
+	function ReadConditions(var text: TextFile; var conditions: TConditions): Boolean;
+	var
+		token: String;
+		conditionsCount, I: Integer;
+	begin
+		ReadToken(text, token);
+		conditionsCount := StrToInt(token);
+		for I:= 0 to conditionsCount - 1 do
+		begin
+			if (ReadToken(text, token)) then
+			begin
+				if (token = TokenCondition) then
+				begin
+					ReadCondition(text, conditions[I]);
+				end;
+			end;
+		end;
+		ReadToken(text, token);
+		if token = TokenEnd then
+		begin
+			ReadToken(text, token);			
+		end;
+	end;
+	
+	function ReadTransition(var text: TextFile; var transition: TTransition): Boolean;
+	var
+		token: String;
+	begin
+		token := '';
+		if not ReadToken(text, transition.name) then
+			Exit(False);
+		while ReadToken(text, token) do
+		begin
+			if token = TokenConditions then
+				ReadConditions(text, transition.conditions);
+			if token = TokenEffects then
+				ReadEffects(text, transition.effects);
+			if token = TokenToEvent then
+				ReadToken(text, transition.toEvent);
+			if token = TokenEnd then
+			begin
+				ReadToken(text, token);
+				if token = TokenCommand then
+					Exit(True);
+			end
+		end;
+		Exit(False);
+	end;
+	
+	function ReadTransitions(var text: TextFile; var transitions: TTransitions): Boolean;
+	var
+		token: String;
+		transitionsCount, I: Integer;
+	begin
+		ReadToken(text, token);
+		transitionsCount := StrToInt(token);
+		for I:= 0 to transitionsCount - 1 do
+		begin
+			if (ReadToken(text, token)) then
+			begin
+				if (token = TokenTransition) then
+				begin
+					ReadTransition(text, transitions[I]);
+				end;
+			end;
+		end;
+		ReadToken(text, token);
+		if token = TokenEnd then
+		begin
+			ReadToken(text, token);			
+		end;
+	end;
+	
 	function ReadCommand(var text: TextFile; var command: TCommand): Boolean;
 	var
 		token: String;
@@ -90,10 +199,8 @@ implementation
 				ReadToken(text, command.text);
 			if token = TokenCmd then
 				ReadToken(text, command.cmd);
-			if token = TokenToEvent then
-				ReadToken(text, command.toEvent);
-			if token = TokenEffects then
-				ReadEffects(text, command.effects);
+			if token = TokenTransitions then
+				ReadTransitions(text, command.transitions);
 			if token = TokenEnd then
 			begin
 				ReadToken(text, token);

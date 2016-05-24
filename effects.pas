@@ -13,7 +13,7 @@ implementation
 	begin
 		hero.Health := hero.Health - effect.value;
 		if hero.Health < 0 then
-			hero.Health = 0;
+			hero.Health := 0;
 		if hero.Health = 0 then
 			Exit(False);
 		Exit(True);

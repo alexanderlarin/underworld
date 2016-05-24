@@ -26,12 +26,28 @@ interface
 		
 		TEffects = array of TEffect;
 		
+		TCondition = record
+			name: String;
+			attribute: String;
+			value: Integer;			
+		end;
+		
+		TConditions = array of TCondition;
+		
+		TTransition = record
+			name: String;
+			conditions: TConditions;
+			effects: TEffects;
+			toEvent: String;
+		end;
+		
+		TTransitions = array of TTransition;
+		
 		TCommand = record
 			name: String;
 			text: String;
 			cmd: String;
-			effects: TEffects;
-			toEvent: String;
+			transitions: TTransitions;
 		end;
 		
 		TCommands = array of TCommand;
