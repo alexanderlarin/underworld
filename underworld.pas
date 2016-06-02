@@ -66,15 +66,15 @@ begin
 		if event.commands[I].cmd = cmd then
 		begin
 			WriteLn(event.commands[I].text);
-			Affect(hero, event.commands[I].effects);
+			//Affect(hero, event.commands[I].effects);
 			for J := 0 to Length(events) - 1 do
-				if events[J].name = event.commands[I].toEvent then
+				if events[J].name = event.commands[I].transitions[0].toEvent then
 				begin
 					event := events[J];
-					Exit(False);
+					Exit(True);
 				end;
 		end;
-	Exit(True);
+	Exit(False);
 end;
 
 var
