@@ -15,8 +15,8 @@ interface
 	
 	function PumpUp(var hero: THero; effect: TEffect): Boolean;
 	function PumpDown(var hero: THero; effect: TEffect): Boolean;
-	function Reduceintelligence(var hero: THero; effect: TEffect): Boolean;
-	function Increaseintelligence(var hero: THero; effect: TEffect): Boolean;
+	function ReduceIntelligence(var hero: THero; effect: TEffect): Boolean;
+	function IncreaseIntelligence(var hero: THero; effect: TEffect): Boolean;
 	function Cheatter(var hero: THero; effect: TEffect): Boolean;
 	function Cheatless(var hero: THero; effect: TEffect): Boolean;
 	function Luckly(var hero: THero; effect: TEffect): Boolean;
@@ -109,7 +109,7 @@ implementation
 		Exit(True);
 	end;
 	
-	function Reduceintelligence(var hero: THero; effect: TEffect): Boolean;
+	function ReduceIntelligence(var hero: THero; effect: TEffect): Boolean;
 	begin
 		hero.intelligence := hero.strength - effect.value;
 		if hero.intelligence < 0 then
@@ -119,7 +119,7 @@ implementation
 		Exit(True);
 	end;
 	
-	function Increaseintelligence(var hero: THero; effect: TEffect): Boolean;
+	function IncreaseIntelligence(var hero: THero; effect: TEffect): Boolean;
 	begin
 		hero.intelligence := hero.strength + effect.value;
 		if hero.intelligence > 100 then
@@ -235,11 +235,11 @@ implementation
 		if effect.name = 'pumpDown' then
 			if not PumpDown(hero, effect) then
 				Exit(False);
-		if effect.name = 'reduceIntelligence' then
-			if not Reduceintelligence(hero, effect) then
+		if effect.name = 'ReduceIntelligence' then
+			if not ReduceIntelligence(hero, effect) then
 				Exit(False);
 		if effect.name = 'inreaseIntelligence' then
-			if not Increaseintelligence(hero, effect) then
+			if not IncreaseIntelligence(hero, effect) then
 				Exit(False);
 		if effect.name = 'cheatter' then
 			if not Cheatter(hero, effect) then
