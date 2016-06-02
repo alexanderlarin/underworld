@@ -32,7 +32,7 @@ interface
 	function ReadConditions(var text: TextFile; var conditions: TConditions): Boolean;
 	function ReadEffect(var text: TextFile; var effect: TEffect): Boolean;
 	function ReadEffects(var text: TextFile; var effects: TEffects): Boolean;
-	function LoadStory(story: String; var events: TEvents): Boolean;
+	function LoadStory(filename: String; var events: TEvents): Boolean;
 
 implementation
 	function ReadEffect(var text: TextFile; var effect: TEffect): Boolean;
@@ -68,7 +68,6 @@ implementation
 	begin
 		ReadToken(text, token);
 		effectsCount := StrToInt(token);
-		setLength(effects, effectsCount);
 		for I:= 0 to effectsCount - 1 do
 		begin
 			if ReadToken(text, token) then
@@ -107,7 +106,7 @@ implementation
 			if token = TokenEnd then
 			begin
 				ReadToken(text, token);
-				if token = TokenCondition then
+				if token = TokenCommand then
 					Exit(True);
 			end
 		end;
@@ -121,7 +120,6 @@ implementation
 	begin
 		ReadToken(text, token);
 		conditionsCount := StrToInt(token);
-		setLength(conditions, conditionsCount);
 		for I:= 0 to conditionsCount - 1 do
 		begin
 			if (ReadToken(text, token)) then
@@ -153,13 +151,11 @@ implementation
 			if token = TokenEffects then
 				ReadEffects(text, transition.effects);
 			if token = TokenToEvent then
-			begin
 				ReadToken(text, transition.toEvent);
-			end;
 			if token = TokenEnd then
 			begin
 				ReadToken(text, token);
-				if token = TokenTransition then
+				if token = TokenCommand then
 					Exit(True);
 			end
 		end;
@@ -173,7 +169,6 @@ implementation
 	begin
 		ReadToken(text, token);
 		transitionsCount := StrToInt(token);
-		setLength(transitions, transitionsCount);
 		for I:= 0 to transitionsCount - 1 do
 		begin
 			if (ReadToken(text, token)) then
@@ -210,9 +205,7 @@ implementation
 			begin
 				ReadToken(text, token);
 				if token = TokenCommand then
-				begin
 					Exit(True);
-				end;
 			end
 		end;
 		Exit(False);
@@ -225,8 +218,6 @@ implementation
 	begin
 		ReadToken(text, token);
 		commandsCount := StrToInt(token);
-		setLength(commands, commandsCount);
-		
 		for I:= 0 to commandsCount - 1 do
 		begin
 			if (ReadToken(text, token)) then
@@ -249,21 +240,18 @@ implementation
 		token: String;		
 	begin
 		token := '';
-		if not ReadToken(text, event.name) then
-			Exit(False);
-		Writeln('Event: ', event.name);
-		while ReadToken(text, token) do	
-		begin	
+		if ReadToken(text, event.name) then
+		begin
+			ReadToken(text, token);
 			if token = TokenText then
 				ReadToken(text, event.text);
 			if token = TokenCommands then
-				ReadCommands(text, event.commands);
-			if token = TokenEnd then
 			begin
-				ReadToken(text, token);
-				if token = TokenEvent then
-					Exit(True);
-			end;		
+				ReadCommands(text, event.commands);
+			end;
+			ReadToken(text, token);
+			if token = TokenEnd then
+				ReadToken(text, token);			
 		end;
 	end;
 	
@@ -274,11 +262,9 @@ implementation
 	begin
 		ReadToken(text, token);
 		eventsCount := StrToInt(token);
-		setLength(events, eventsCount);
 		for I := 0 to eventsCount - 1 do
 		begin
 			ReadToken(text, token);
-
 			if (token = TokenEvent) then
 			begin
 				ReadEvent(text, events[I]);
@@ -287,7 +273,6 @@ implementation
 		ReadToken(text, token);
 		if token = TokenEnd then
 		begin
-			Writeln('events end');
 			ReadToken(text, token);
 		end;
 		
@@ -298,10 +283,8 @@ implementation
 		isStarted, isSpecial: Boolean;
 		ch: Char;
 	begin
-		isSpecial := False;
 		isStarted := False;
 		token := '';
-		ch := Chr(0);
 		while not EOF(text) do
 		begin
 			Read(text, ch);
@@ -311,46 +294,31 @@ implementation
 				begin
 					isSpecial := True;
 					if not isStarted then
-					begin
-						isStarted := True;
-						continue;
-					end
+						isStarted := True
 					else
-					begin
 						break;
-					end;
 				end
 				else
 					isStarted := True;
 			end
 			else
 			begin
-				if (not isSpecial) and isStarted then
-				begin
+				if not isSpecial then
 					break;
-				end;
 			end;
 			
-			if isStarted then		
-			begin
-				token := token + ch;
-			end;
+			if isStarted then
+				token := token + ch;		
 		end;
 		ReadToken := not EOF(text);
-		if (token = '') and EOF(text) then
-		begin
-			Writeln('danger, ', Ord(ch));
-			ReadLn();
-		end;
 	end;
 	
-	function LoadStory(story: String; var events: TEvents): Boolean;
+	function LoadStory(filename: String; var events: TEvents): Boolean;
 	var
 		text: TextFile;
 		token: String;
-		filename: String;
+		
 	begin
-		filename := './' + story + '.spt';
 		Assign(text, filename);
 		Reset(text);
 		ReadToken(text, token);

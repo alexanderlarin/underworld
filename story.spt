@@ -5,7 +5,7 @@ events 4
 		command 'Слушать'
 		text 'Ты прослушал(а) пару'
 		cmd '1'
-		transitions 2
+		transitions 1
 			transition 'Смерть'
 			conditions 1
 				condition '<'
@@ -18,30 +18,20 @@ events 4
 				value '10'
 				end effect
 			end effects
-			toEvent 'Разбудили одногруппники'
-			end transition
-			transition 'Параша'
-			conditions 1
-				condition '>'
-					attribute 'Health'
-					value '70'
-				end condition	
-			end conditions
-			effects 1
-				effect 'damage'
-				value '20'
-				end effect
-			end effects
 			toEvent 'Вызвали к доске'
 			end transition
 		end transitions
 		end command
+		
 		command 'Спать'
 		text 'Ты проспал(а) пару'
 		cmd '2'
 		transitions 1
 			transition 'Смерть'
 			conditions 0
+				condition
+					
+				end condition
 			end conditions
 			effects 1
 				effect 'damage'
@@ -51,6 +41,7 @@ events 4
 			toEvent 'Разбудили одногруппники'
 			end transition
 		end transitions
+		
 		end command
 	end commands
 	end event
@@ -64,12 +55,15 @@ events 4
 		transitions 1
 			transition 'Смерть'
 			conditions 0
+				condition
+					
+				end condition
 			end conditions
 			effects 1
 				effect 'damage'
 				value '10'
 				end effect
-			end effects			
+			end effects
 			toEvent 'Разбудили одногруппники'
 			end transition
 		end transitions
@@ -81,6 +75,9 @@ events 4
 		transitions 1
 			transition 'Смерть'
 			conditions 0
+				condition
+					
+				end condition
 			end conditions
 			effects 1
 				effect 'damage'
@@ -104,6 +101,9 @@ events 4
 		transitions 1
 			transition 'Смерть'
 			conditions 0
+				condition
+					
+				end condition
 			end conditions
 			effects 1
 				effect 'damage'
@@ -121,6 +121,9 @@ events 4
 		transitions 1
 			transition 'Смерть'
 			conditions 0
+				condition
+					
+				end condition
 			end conditions
 			effects 1
 				effect 'damage'
@@ -143,6 +146,9 @@ events 4
 		transitions 1
 			transition 'Смерть'
 			conditions 0
+				condition
+					
+				end condition
 			end conditions
 			effects 1
 				effect 'damage'
