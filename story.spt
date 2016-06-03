@@ -1,12 +1,12 @@
 events 4
-	event 'РџРµСЂРІР°СЏ РїР°СЂР°'
-	text 'РўС‹ РїСЂРёС€РµР»(Р°) Рє РїРµСЂРІРѕР№ РїР°СЂРµ'
+	event 'Первая пара#Red'
+	text 'Ты пришел(а) к первой паре#Blue'
 	commands 2
-		command 'РЎР»СѓС€Р°С‚СЊ'
-		text 'РўС‹ РїСЂРѕСЃР»СѓС€Р°Р»(Р°) РїР°СЂСѓ'
+		command 'Слушать'
+		text 'Ты прослушал(а) пару'
 		cmd '1'
 		transitions 2
-			transition 'РЎРјРµСЂС‚СЊ'
+			transition 'Смерть'
 			conditions 1
 				condition '<'
 					attribute 'Health'
@@ -21,9 +21,9 @@ events 4
 				value '9'
 				end effect
 			end effects
-			toEvent 'Р Р°Р·Р±СѓРґРёР»Рё РѕРґРЅРѕРіСЂСѓРїРїРЅРёРєРё'
+			toEvent 'Разбудили одногруппники'
 			end transition
-			transition 'РџР°СЂР°С€Р°'
+			transition 'Параша'
 			conditions 1
 				condition '>'
 					attribute 'Health'
@@ -38,15 +38,15 @@ events 4
 				value '22'
 				end effect
 			end effects
-			toEvent 'Р’С‹Р·РІР°Р»Рё Рє РґРѕСЃРєРµ'
+			toEvent 'Вызвали к доске'
 			end transition
 		end transitions
 		end command
-		command 'РЎРїР°С‚СЊ'
-		text 'РўС‹ РїСЂРѕСЃРїР°Р»(Р°) РїР°СЂСѓ'
+		command 'Спать'
+		text 'Ты проспал(а) пару'
 		cmd '2'
 		transitions 1
-			transition 'РЎРјРµСЂС‚СЊ'
+			transition 'Смерть'
 			conditions 0
 			end conditions
 			effects 1
@@ -54,21 +54,21 @@ events 4
 				value '10'
 				end effect
 			end effects
-			toEvent 'Р Р°Р·Р±СѓРґРёР»Рё РѕРґРЅРѕРіСЂСѓРїРїРЅРёРєРё'
+			toEvent 'Разбудили одногруппники'
 			end transition
 		end transitions
 		end command
 	end commands
 	end event
 	
-	event 'Р’С‹Р·РІР°Р»Рё Рє РґРѕСЃРєРµ'
-	text 'РўРµР±СЏ РІС‹Р·С‹РІР°Р»Рё Рє РґРѕСЃРєРµ'
+	event 'Вызвали к доске#White'
+	text 'Тебя вызывали к доске#White'
 	commands 2
-		command 'РўСѓРїР°РЅСѓС‚СЊ'
-		text 'РўС‹ С‚СѓРїР°РЅСѓР»(Р°) Сѓ РґРѕСЃРєРё'
+		command 'Тупануть'
+		text 'Ты тупанул(а) у доски'
 		cmd '1'
 		transitions 1
-			transition 'РЎРјРµСЂС‚СЊ'
+			transition 'Смерть'
 			conditions 0
 			end conditions
 			effects 1
@@ -76,16 +76,16 @@ events 4
 				value '10'
 				end effect
 			end effects			
-			toEvent 'Р Р°Р·Р±СѓРґРёР»Рё РѕРґРЅРѕРіСЂСѓРїРїРЅРёРєРё'
+			toEvent 'Разбудили одногруппники'
 			end transition
 		end transitions
 		end command
 		
-		command 'РќРµ РїРѕР№С‚Рё'
-		text 'РўС‹ РЅРµ РїРѕС€РµР»(Р°) Рє РґРѕСЃРєРµ'
+		command 'Не пойти'
+		text 'Ты не пошел(а) к доске'
 		cmd '2'
 		transitions 1
-			transition 'РЎРјРµСЂС‚СЊ'
+			transition 'Смерть'
 			conditions 0
 			end conditions
 			effects 1
@@ -93,22 +93,22 @@ events 4
 				value '10'
 				end effect
 			end effects
-			toEvent 'Р Р°Р·Р±СѓРґРёР»Рё РѕРґРЅРѕРіСЂСѓРїРїРЅРёРєРё'
+			toEvent 'Разбудили одногруппники'
 			end transition
 		end transitions
 		end command
 	end commands
 	end event
 	
-	event 'Р Р°Р·Р±СѓРґРёР»Рё РѕРґРЅРѕРіСЂСѓРїРїРЅРёРєРё'
-	text 'РўРµР±СЏ СЂР°Р·Р±СѓРґРёР»Рё РѕРґРЅРѕРіСЂСѓРїРїРЅРёРєРё'
+	event 'Разбудили одногруппники'
+	text 'Тебя разбудили одногруппники#Green'
 	commands 2
-		command 'РўСѓРїР°РЅСѓС‚СЊ'
-		text 'РўС‹ С‚СѓРїР°РЅСѓР»(Р°)'
+		command 'Тупануть'
+		text 'Ты тупанул(а)'
 		cmd '1'
 		
 		transitions 1
-			transition 'РЎРјРµСЂС‚СЊ'
+			transition 'Смерть'
 			conditions 0
 			end conditions
 			effects 1
@@ -116,16 +116,16 @@ events 4
 				value '10'
 				end effect
 			end effects
-			toEvent 'Р’С‹Р·РІР°Р»Рё Рє РґРѕСЃРєРµ'
+			toEvent 'Вызвали к доске'
 			end transition
 		end transitions	
 		end command
 		
-		command 'РЎРїР°С‚СЊ РґР°Р»СЊС€Рµ'
-		text 'РўС‹ СЂРµС€РёР»(Р°) СЃРїР°С‚СЊ РґР°Р»СЊС€Рµ'
+		command 'Спать дальше'
+		text 'Ты решил(а) спать дальше'
 		cmd '2'
 		transitions 1
-			transition 'РЎРјРµСЂС‚СЊ'
+			transition 'Смерть'
 			conditions 0
 			end conditions
 			effects 1
@@ -133,21 +133,21 @@ events 4
 				value '10'
 				end effect
 			end effects
-			toEvent 'Р Р°Р·Р±СѓРґРёР»Рё РѕРґРЅРѕРіСЂСѓРїРїРЅРёРєРё'
+			toEvent 'Разбудили одногруппники'
 			end transition
 		end transitions
 		end command
 	end commands
 	end event
 	
-	event 'РљРѕРЅС‚СЂРѕС€Р°'
-	text 'РџСЂРµРїРѕРґ Р±РµР· РїСЂРµРґСѓРїСЂРµР¶РґРµРЅРёСЏ РґР°С‘С‚ РєРѕРЅС‚СЂРѕС€Сѓ'
+	event 'Контроша'
+	text 'Препод без предупреждения даёт контрошу'
 	commands 2
-		command 'РЎРІР°Р»РёС‚СЊ'
-		text 'РўС‹ СЃРІР°Р»РёР»(Р°) СЃ РєРѕРЅС‚СЂС‹'
+		command 'Свалить'
+		text 'Ты свалил(а) с контры'
 		cmd '1'
 		transitions 1
-			transition 'РЎРјРµСЂС‚СЊ'
+			transition 'Смерть'
 			conditions 0
 			end conditions
 			effects 1
@@ -155,16 +155,16 @@ events 4
 				value '10'
 				end effect
 			end effects
-			toEvent 'Р Р°Р·Р±СѓРґРёР»Рё РѕРґРЅРѕРіСЂСѓРїРїРЅРёРєРё'
+			toEvent 'Разбудили одногруппники'
 			end transition
 		end transitions
 		end command
 		
-		command 'РџРёСЃР°С‚СЊ'
-		text 'РўС‹ СЂРµС€РёР»(Р°) РЅР°РїРёСЃР°С‚СЊ РєРѕРЅС‚СЂСѓ'
+		command 'Писать'
+		text 'Ты решил(а) написать контру'
 		cmd '2'
 		transitions 1
-			transition 'РЎРјРµСЂС‚СЊ'
+			transition 'Смерть'
 			conditions 1
 				condition '<'
 					attribute 'Health'
@@ -176,7 +176,7 @@ events 4
 				value '10'
 				end effect
 			end effects
-			toEvent 'Р Р°Р·Р±СѓРґРёР»Рё РѕРґРЅРѕРіСЂСѓРїРїРЅРёРєРё'
+			toEvent 'Разбудили одногруппники'
 			end transition
 		end transitions
 		end command
