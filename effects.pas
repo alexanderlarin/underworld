@@ -27,6 +27,7 @@ interface
 	function UpRIU(var hero: THero; effect: TEffect): Boolean;
 	function DownRIU(var hero: THero; effect: TEffect): Boolean;
 	
+	function GetAttrHero(hero: THero; attribute: String): Integer;
 
 implementation
 	function Damage(var hero: THero; effect: TEffect): Boolean;
@@ -277,5 +278,28 @@ implementation
 			if not Affect(hero, effects[I]) then
 				Exit(False);
 		Exit(True);
+	end;
+	
+	function GetAttrHero(hero: THero; attribute: String): Integer;
+	var
+		value: Integer;
+	begin
+		value := hero.Health;
+		case attribute of
+		'depth': value := hero.depth;
+		
+		'Health': value := hero.Health;
+		'Energy': value := hero.Energy;
+		'Alchohol': value := hero.Alchohol;
+		
+		'Strength': value := hero.Strength;
+		'Agility': value := hero.Agility;
+		'Intelligence': value := hero.Intelligence;
+		'Fortune': value := hero.Fortune;
+		
+		'ReputationInGroup': value := hero.ReputationInGroup;
+		'ReputationInUnderWorld': value := hero.ReputationInUnderWorld;
+		end;
+		GetAttrHero := value;
 	end;
 end.

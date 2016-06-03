@@ -13,9 +13,12 @@ events 4
 					value '10'
 				end condition	
 			end conditions
-			effects 1
-				effect 'damage'
+			effects 2
+				effect 'heal'
 				value '10'
+				end effect
+				effect 'boost'
+				value '9'
 				end effect
 			end effects
 			toEvent 'Разбудили одногруппники'
@@ -27,9 +30,12 @@ events 4
 					value '70'
 				end condition	
 			end conditions
-			effects 1
-				effect 'damage'
-				value '20'
+			effects 2
+				effect 'heal'
+				value '11'
+				end effect
+				effect 'boost'
+				value '22'
 				end effect
 			end effects
 			toEvent 'Вызвали к доске'
