@@ -1,0 +1,177 @@
+locations 1
+	location 'Пересдача'	
+		events 3
+			event 'Не тот билет'
+			text 'Ты пришел(а) на последнюю возможную пересдачу, тебе выпал не тот билет'
+			commands 3
+				command 'Плакать'
+				text 'Ты заплакал(а)'
+				cmd '1'
+				transitions 2
+					transition 'Смерть'
+					conditions 1
+						condition '<'
+							attribute 'Health'
+							value '10'
+						end condition	
+					end conditions
+					effects 1
+						effect 'damage'
+						value '10'
+						end effect
+					end effects
+					toLocation ''
+					toEvent ''
+					end transition
+					transition 'Совсем Смерть'
+					conditions 1
+						condition '>'
+							attribute 'Health'
+							value '10'
+						end condition	
+					end conditions
+					effects 1
+						effect 'damage'
+						value '10'
+						end effect
+					end effects
+					toLocation 'Аудитория 312'
+					toEvent 'Вызвали к доске'
+					end transition
+				end transitions
+				end command
+				command 'Спать'
+				text 'Ты извинился перед преподом, лёг на пол и заснул'
+				cmd '2'
+				transitions 1
+					transition 'Смерть'
+					conditions 0
+						condition
+							
+						end condition
+					end conditions
+					effects 1
+						effect 'damage'
+						value '10'
+						end effect
+					end effects
+					toLocation 'Аудитория 312'
+					toEvent 'Разбудили одногруппники'
+					end transition
+				end transitions
+				end command
+				command 'Попросить другой'
+				text 'Ты попросил другой билет, потому что ночью тебе приснилось, что этот билет съест тебя заживо. С кетчупом. С подливой.'
+				cmd '3'
+				transitions 1
+					transition 'Смерть'
+					conditions 0
+						condition
+							
+						end condition
+					end conditions
+					effects 1
+						effect 'damage'
+						value '10'
+						end effect
+					end effects
+					toEvent 'Разбудили одногруппники'
+					end transition
+				end transitions
+				end command
+			end commands
+			end event
+			
+			event 'Билет, который ты знаешь'
+			text 'Ты берёшь билет, и его тема кажется тебе знакомой'
+			commands 3
+				command 'Писать самому'
+				text 'Ты пишешь билет по обрывкам памяти лекций'
+				cmd '1'
+				transitions 1
+					transition 'Смерть'
+					conditions 0
+						condition
+							
+						end condition
+					end conditions
+					effects 1
+						effect 'damage'
+						value '10'
+						end effect
+					end effects
+					toEvent 'Разбудили одногруппники'
+					end transition
+				end transitions
+				end command
+				
+				command 'Списать'
+				text 'Ты достаёшь шпору, находишь нужный вопрос и начинаешь списывать'
+				cmd '2'
+				transitions 1
+					transition 'Смерть'
+					conditions 0
+						condition
+							
+						end condition
+					end conditions
+					effects 1
+						effect 'damage'
+						value '10'
+						end effect
+					end effects
+					toEvent 'Разбудили одногруппники'
+					end transition
+				end transitions
+				end command
+				
+				command 'Перекреститься'
+				text 'Ты вспоминаешь поговорку и озаряешь себя крестом'
+				cmd '3'
+				transitions 1
+					transition 'Смерть'
+					conditions 0
+						condition
+							
+						end condition
+					end conditions
+					effects 1
+						effect 'damage'
+						value '10'
+						end effect
+					end effects
+					toEvent 'Разбудили одногруппники'
+					end transition
+				end transitions
+				end command
+			end commands
+			end event
+			
+			event 'Не то число'
+			text 'Ты приходишь на пересдачу, но она была вчера'
+			commands 1
+				command 'Уйти'
+				text 'Ты уходишь под музыку из "Хороший. Плохой. Злой"'
+				cmd '1'
+				
+				transitions 1
+					transition 'Смерть'
+					conditions 0
+						condition
+							
+						end condition
+					end conditions
+					effects 1
+						effect 'damage'
+						value '10'
+						end effect
+					end effects
+					toEvent 'Вызвали к доске' 
+					end transition
+				end transitions	
+				end command
+			end commands
+			end event
+		end events
+	end location
+end locations

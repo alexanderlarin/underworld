@@ -7,6 +7,7 @@ interface
 		TokenEnd = 'end'; 
 		TokenText = 'text';
 		TokenCmd = 'cmd';
+		TokenToLocation = 'toLocation';
 		TokenToEvent = 'toEvent';
 		TokenEffect = 'effect';
 		TokenEffects = 'effects';
@@ -20,8 +21,12 @@ interface
 		TokenCondition = 'condition';
 		TokenConditions = 'conditions';
 		TokenAttribute = 'attribute';
+		TokenLocation = 'location';
+		TokenLocations = 'locations';
 	
 	function ReadToken(var text: TextFile; var token: String): Boolean;
+	function ReadLocation(var text: TextFile; var location: TLocation): Boolean;
+	function ReadLocations(var text: TextFile; var locations: TLocations): Boolean;
 	function ReadEvent(var text: TextFile; var event: TEvent): Boolean;
 	function ReadEvents(var text: TextFile; var events: TEvents): Boolean;
 	function ReadCommand(var text: TextFile; var command: TCommand): Boolean;
@@ -32,7 +37,7 @@ interface
 	function ReadConditions(var text: TextFile; var conditions: TConditions): Boolean;
 	function ReadEffect(var text: TextFile; var effect: TEffect): Boolean;
 	function ReadEffects(var text: TextFile; var effects: TEffects): Boolean;
-	function LoadStory(filename: String; var events: TEvents): Boolean;
+	function LoadStory(folderName: UnicodeString; var locations: TLocations): Boolean;
 
 implementation
 	function ReadEffect(var text: TextFile; var effect: TEffect): Boolean;
@@ -152,6 +157,10 @@ implementation
 				ReadConditions(text, transition.conditions);
 			if token = TokenEffects then
 				ReadEffects(text, transition.effects);
+			if token = TokenToLocation then
+			begin
+				ReadToken(text, transition.toLocation);
+			end;
 			if token = TokenToEvent then
 			begin
 				ReadToken(text, transition.toEvent);
@@ -293,6 +302,52 @@ implementation
 		
 	end;
 	
+	function ReadLocation(var text: TextFile; var location: TLocation): Boolean;
+	var
+		token: String;		
+	begin
+		token := '';
+		if not ReadToken(text, location.name) then
+			Exit(False);
+		while ReadToken(text, token) do	
+		begin	
+			if token = TokenEvents then
+				ReadEvents(text, location.events);
+			if token = TokenEnd then
+			begin
+				ReadToken(text, token);
+				if token = TokenLocation then
+					Exit(True);
+			end;		
+		end;
+	end;
+	
+	function ReadLocations(var text: TextFile; var locations: TLocations): Boolean;
+	var
+		token: String;
+		locationsCount, I: Integer;
+		preLength: Integer;
+	begin
+		ReadToken(text, token);
+		locationsCount := StrToInt(token);
+		preLength := Length(locations);
+		setLength(locations, locationsCount + Length(locations));
+		for I := (preLength) to (locationsCount + preLength - 1) do
+		begin
+			ReadToken(text, token);
+
+			if (token = TokenLocation) then
+			begin
+				ReadLocation(text, locations[I]);
+			end;
+		end;
+		ReadToken(text, token);
+		if token = TokenEnd then
+		begin
+			ReadToken(text, token);
+		end;
+	end;
+	
 	function ReadToken(var text: TextFile; var token: String): Boolean;
 	var
 		isStarted, isSpecial: Boolean;
@@ -305,7 +360,7 @@ implementation
 		while not EOF(text) do
 		begin
 			Read(text, ch);
-			if ch in ['A'..'Z', 'a'..'z', '0'..'9', ''''] then
+			if ch in ['A'..'Z', 'a'..'z', '0'..'9', ',', ''''] then
 			begin
 				if ch = '''' then
 				begin
@@ -344,16 +399,26 @@ implementation
 		end;
 	end;
 	
-	function LoadStory(filename: String; var events: TEvents): Boolean;
+	function LoadStory(folderName: UnicodeString; var locations: TLocations): Boolean;
 	var
 		text: TextFile;
 		token: String;
+		folderPath: UnicodeString;
+		fileName: String;
+		search: TUnicodeSearchRec;
+		searchResult: LongInt;
 	begin
-		Assign(text, filename);
-		Reset(text);
-		ReadToken(text, token);
-		if token = TokenEvents then
-			ReadEvents(text, events);
-		Close(text);
+		folderPath := './' + folderName + '/';
+		searchResult := FindFirst(folderPath + '*', 0, search);
+		while searchResult = 0 do
+		begin
+			Assign(text, folderPath + search.name);
+			Reset(text);
+			ReadToken(text, token);
+			if token = TokenLocations then
+				ReadLocations(text, locations);
+			Close(text);
+			searchResult := FindNext(search);
+		end;
 	end;
 end.
