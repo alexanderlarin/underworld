@@ -1,0 +1,181 @@
+events 4
+	event 'Первая пара'
+	text 'Ты пришел(а) к первой паре'
+	commands 2
+		command 'Слушать'
+		text 'Ты прослушал(а) пару'
+		cmd '1'
+		transitions 2
+			transition 'Смерть'
+			conditions 1
+				condition '<'
+					attribute 'Health'
+					value '10'
+				end condition	
+			end conditions
+			effects 1
+				effect 'damage'
+				value '10'
+				end effect
+			end effects
+			toEvent 'Разбудили одногруппники'
+			end transition
+			transition 'Параша'
+			conditions 1
+				condition '>'
+					attribute 'Health'
+					value '70'
+				end condition	
+			end conditions
+			effects 1
+				effect 'damage'
+				value '20'
+				end effect
+			end effects
+			toEvent 'Вызвали к доске'
+			end transition
+		end transitions
+		end command
+		command 'Спать'
+		text 'Ты проспал(а) пару'
+		cmd '2'
+		transitions 1
+			transition 'Смерть'
+			conditions 0
+			end conditions
+			effects 1
+				effect 'damage'
+				value '10'
+				end effect
+			end effects
+			toEvent 'Разбудили одногруппники'
+			end transition
+		end transitions
+		end command
+	end commands
+	end event
+	
+	event 'Вызвали к доске'
+	text 'Тебя вызывали к доске'
+	commands 2
+		command 'Тупануть'
+		text 'Ты тупанул(а) у доски'
+		cmd '1'
+		transitions 1
+			transition 'Смерть'
+			conditions 0
+			end conditions
+			effects 1
+				effect 'damage'
+				value '10'
+				end effect
+			end effects			
+			toEvent 'Разбудили одногруппники'
+			end transition
+		end transitions
+		end command
+		
+		command 'Не пойти'
+		text 'Ты не пошел(а) к доске'
+		cmd '2'
+		transitions 1
+			transition 'Смерть'
+			conditions 0
+			end conditions
+			effects 1
+				effect 'damage'
+				value '10'
+				end effect
+			end effects
+			toEvent 'Разбудили одногруппники'
+			end transition
+		end transitions
+		end command
+	end commands
+	end event
+	
+	event 'Разбудили одногруппники'
+	text 'Тебя разбудили одногруппники'
+	commands 2
+		command 'Тупануть'
+		text 'Ты тупанул(а)'
+		cmd '1'
+		
+		transitions 1
+			transition 'Смерть'
+			conditions 0
+			end conditions
+			effects 1
+				effect 'damage'
+				value '10'
+				end effect
+			end effects
+			toEvent 'Вызвали к доске'
+			end transition
+		end transitions	
+		end command
+		
+		command 'Спать дальше'
+		text 'Ты решил(а) спать дальше'
+		cmd '2'
+		transitions 1
+			transition 'Смерть'
+			conditions 0
+			end conditions
+			effects 1
+				effect 'damage'
+				value '10'
+				end effect
+			end effects
+			toEvent 'Разбудили одногруппники'
+			end transition
+		end transitions
+		end command
+	end commands
+	end event
+	
+	event 'Контроша'
+	text 'Препод без предупреждения даёт контрошу'
+	commands 2
+		command 'Свалить'
+		text 'Ты свалил(а) с контры'
+		cmd '1'
+		transitions 1
+			transition 'Смерть'
+			conditions 0
+			end conditions
+			effects 1
+				effect 'damage'
+				value '10'
+				end effect
+			end effects
+			toEvent 'Разбудили одногруппники'
+			end transition
+		end transitions
+		end command
+		
+		command 'Писать'
+		text 'Ты решил(а) написать контру'
+		cmd '2'
+		transitions 1
+			transition 'Смерть'
+			conditions 1
+				condition '<'
+					attribute 'Health'
+					value '10'
+				end condition				
+			end conditions
+			effects 1
+				effect 'damage'
+				value '10'
+				end effect
+			end effects
+			toEvent 'Разбудили одногруппники'
+			end transition
+		end transitions
+		end command
+	end commands
+	end event
+end events
+
+

@@ -13,10 +13,10 @@ uses
 	storyparser,
 	types;
 
-procedure Initialize(var hero: THero; var locations: TLocations);
+procedure Initialize(var hero: THero; var events: TEvents);
 begin
 	WriteLn('[+] Initizlization');
-	LoadStory('Story', locations);
+	LoadStory('./story.spt', events);
 	
 	WriteLn('[+] Hero');
 	hero.depth := 0;
@@ -37,58 +37,16 @@ end;
 
 procedure Finalize(hero: THero);
 begin
-	if (hero.depth > -1) then
+	if (hero.depth > 5) then
 		WriteLn('[+] You''re really unlucky man. Your depth is ', hero.depth);
 	WriteLn('[+] Finalization');
 end;
 
-function ChangeLocation(locations: TLocations; var location: TLocation; toLocation: String): Boolean;
+function Fall(var hero: THero; var event: TEvent; events: TEvents): Boolean;
 var
-	I: Integer;
-begin
-	if toLocation <> '' then
-	begin
-		for I := 0 to (Length(locations) - 1) do
-		begin
-			if locations[I].name = toLocation then
-			begin	
-				location := locations[I];
-				write('Переход на локацию "', location.name, '"');
-				Exit(True);
-			end;	
-		end;	
-	end;
-	Exit(False);
-end;
-
-function ChangeEvent(events: TEvents; var event: TEvent; toEvent: String): Boolean;
-var
-	I: Integer;
-begin
-	if toEvent <> '' then
-	begin
-		for I := 0 to (Length(events) - 1) do
-		begin
-			if events[I].name = toEvent then
-			begin	
-				event := events[I];
-				writeln(' к событию "', event.name, '"');
-				Exit(True);
-			end;	
-		end;	
-	end;
-	Exit(False);
-end;
-
-function Fall(var hero: THero; var event: TEvent; events: TEvents; var location: String): Boolean;
-var
-	I, J, K, L: Integer;
-	isTransition: Boolean;
-	transition: TTransition;
-	condition: TCondition;
+	I, J: Integer;
 	cmd: String;
 begin
-	isTransition := false;
 	WriteLn('=======ХАРАКТЕРИСТИКИ ПЕРСОНАЖА=======');
 	WriteLn('Здоровье: ', hero.Health, '%');
 	WriteLn('Бодрость: ', hero.Energy, '%');
@@ -108,83 +66,34 @@ begin
 		if event.commands[I].cmd = cmd then
 		begin
 			WriteLn(event.commands[I].text);
-			Writeln();
-			
-			for J := 0 to Length(event.commands[I].transitions) - 1 do
-			begin
-				isTransition := true;
-				transition := event.commands[I].transitions[J];
-				for K := 0 to Length(transition.conditions) - 1 do
-				begin		
-					condition := transition.conditions[K];
-					if (condition.name = '=') then
-						if not (GetAttrHero(hero, condition.attribute) = condition.Value) then
-						begin
-							isTransition := false;
-							break;
-						end;
-						
-					if (condition.name = '>') then
-						if not (GetAttrHero(hero, condition.attribute) > condition.Value) then
-						begin
-							isTransition := false;
-							break;
-						end;
-					
-					if (condition.name = '<') then
-						if not (GetAttrHero(hero, condition.attribute) < condition.Value) then
-						begin
-							isTransition := false;
-							break;
-						end;
-				end;
-				if (isTransition) then
+			//Affect(hero, event.commands[I].effects);
+			for J := 0 to Length(events) - 1 do
+				if events[J].name = event.commands[I].transitions[0].toEvent then
 				begin
-					Affect(hero, transition.effects);
-					if (transition.toLocation <> '') then
-					begin
-						location := transition.toLocation;
-						event.name := transition.toEvent;
-						Exit(False);
-					end
-					else
-					begin
-						for L := 0 to Length(events) - 1 do
-							if events[L].name = transition.toEvent then
-							begin					
-								event := events[L];
-								Exit(true);
-							end;
-					end;
+					event := events[J];
+					Exit(True);
 				end;
-			end;	
 		end;
-	Exit(True);
+	Exit(False);
 end;
 
 var
 	isFalling: Boolean;
-	isLocating: Boolean;
-	location: TLocation;
-	locations: TLocations;
 	hero: THero;
+	events: TEvents;
 	event: TEvent;
-	toLocation: String;
+	
 begin
 	{$IFDEF WINDOWS}
 	SetConsoleOutputCP(CP_UTF8);
 	{$ENDIF}
 	WriteLn('Привет, Дно.');
 	
-	Initialize(hero, locations);
-	location := locations[0];
-	event := location.events[0];
-	repeat		
-		repeat
-			isFalling := Fall(hero, event, location.events, location.name);
-		until (not isFalling);
-		isLocating := ChangeLocation(locations, location, location.name);
-		isLocating := ChangeEvent(location.events, event, event.name);
-	until (not isLocating);
+	Initialize(hero, events);
+	event := events[0];
+	//event := InitEvent;
+	repeat
+		isFalling := Fall(hero, event, events);
+	until (not isFalling);
 	Finalize(hero);
 end.

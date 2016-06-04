@@ -38,7 +38,6 @@ interface
 			name: String;
 			conditions: TConditions;
 			effects: TEffects;
-			toLocation: String;
 			toEvent: String;
 		end;
 		
@@ -60,13 +59,6 @@ interface
 		end;
 		
 		TEvents = array of TEvent;
-		
-		TLocation = record
-			name: String;
-			events: TEvents;
-		end;
-		
-		TLocations = array of TLocation;
 implementation
 
 end.
