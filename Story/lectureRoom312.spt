@@ -2,7 +2,7 @@ locations 1
 	location 'Аудитория 312'
 		events 4
 			event 'Первая пара'
-			text 'Ты пришел(а) к первой паре'
+			text 'Ты пришел(а) к первой паре#Red'
 			commands 2
 				command 'Слушать'
 				text 'Ты прослушал(а) пару'
@@ -112,7 +112,7 @@ locations 1
 					transition 'Смерть'
 					conditions 0
 					end conditions
-					effects 3
+					effects 2
 						effect 'damage'
 						value '10'
 						end effect

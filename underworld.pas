@@ -9,16 +9,22 @@ uses
 	{$ENDIF}
 	sysutils,
 	math,
+	crt,
 	effects,
 	storyparser,
-	types;
+	types,
+	coloredtext;
 
 procedure Initialize(var hero: THero; var locations: TLocations);
 begin
-	WriteLn('[+] Initizlization');
+	{$IFDEF WINDOWS}
+	SetConsoleCP(CP_UTF8);
+	SetConsoleOutputCP(CP_UTF8);
+	{$ENDIF}
+	MsgColor('[+] Initizlization', ColorDebug, 1);
 	LoadStory('Story', locations);
 	
-	WriteLn('[+] Hero');
+	MsgColor('[+] Hero', ColorDebug, 1);
 	hero.depth := 0;
 	hero.Health := 75;
 	hero.Energy := 15;
@@ -32,14 +38,18 @@ begin
 	hero.ReputationInGroup := 78;
 	hero.ReputationInUnderworld := 5;
 	
-	WriteLn('[+] Events');
+	MsgColor('[+] Events', ColorDebug, 1);
 end;
 
 procedure Finalize(hero: THero);
 begin
-	if (hero.depth > -1) then
-		WriteLn('[+] You''re really unlucky man. Your depth is ', hero.depth);
-	WriteLn('[+] Finalization');
+	if (hero.depth > 5) then
+	begin
+		MsgColor('[+] You''re really unlucky man. Your depth is ', ColorFinish);
+		MsgColor(hero.depth, ColorFinish, 1);
+	end;
+		
+	MsgColor('[+] Finalization', ColorDebug);
 end;
 
 function ChangeLocation(locations: TLocations; var location: TLocation; toLocation: String): Boolean;
@@ -50,10 +60,12 @@ begin
 	begin
 		for I := 0 to (Length(locations) - 1) do
 		begin
-			if locations[I].name = toLocation then
+			if locations[I].name.text = toLocation then
 			begin	
 				location := locations[I];
-				write('Переход на локацию "', location.name, '"');
+				MsgColor('Переход на локацию "', ColorTransLocation);
+				MsgColor(location.name.text, ColorLocation);
+				MsgColor('" ', ColorTransLocation);
 				Exit(True);
 			end;	
 		end;	
@@ -69,10 +81,12 @@ begin
 	begin
 		for I := 0 to (Length(events) - 1) do
 		begin
-			if events[I].name = toEvent then
+			if events[I].name.text = toEvent then
 			begin	
 				event := events[I];
-				writeln(' к событию "', event.name, '"');
+				MsgColor('к событию "', ColorTransLocation);
+				MsgColor(event.name.text, ColorEventName);
+				MsgColor('" ', ColorTransLocation, 1);
 				Exit(True);
 			end;	
 		end;	
@@ -89,26 +103,39 @@ var
 	cmd: String;
 begin
 	isTransition := false;
-	WriteLn('=======ХАРАКТЕРИСТИКИ ПЕРСОНАЖА=======');
-	WriteLn('Здоровье: ', hero.Health, '%');
-	WriteLn('Бодрость: ', hero.Energy, '%');
-	WriteLn('Содержание алкоголя: ', hero.Alchohol, '%');
-	WriteLn();
-	WriteLn('Сила: ', hero.Strength);
-	WriteLn('Ловкость: ', hero.Agility);
-	WriteLn('Интеллект: ', hero.Intelligence);
-	WriteLn('Удача: ', hero.Fortune);
-	WriteLn('======================================');
-	WriteLn(event.text);
+	MsgColor('=======ХАРАКТЕРИСТИКИ ПЕРСОНАЖА=======',ColorDefault,1);
+	MsgColor('Здоровье: ', ColorAttribute);
+	MsgColor(hero.Health, ColorNumber);
+	MsgColor('%', ColorNumber, 1);
+	MsgColor('Бодрость: ', ColorAttribute);
+	MsgColor(hero.Energy, ColorNumber);
+	MsgColor('%', ColorNumber, 1);
+	MsgColor('Содержание алкоголя: ', ColorAttribute);
+	MsgColor(hero.Alchohol, ColorNumber);
+	MsgColor('%', ColorNumber, 2);
+
+	MsgColor('Сила: ',ColorAttribute);
+	MsgColor(hero.Strength, ColorNumber, 1);
+	MsgColor('Ловкость: ', ColorAttribute);
+	MsgColor(hero.Agility, ColorNumber, 1);
+	MsgColor('Интеллект: ',ColorAttribute);
+	MsgColor(hero.Intelligence, ColorNumber, 1);
+	MsgColor('Удача: ',ColorAttribute);
+	MsgColor(hero.Fortune, ColorNumber, 1);
+	MsgColor('======================================', ColorDefault, 1);
+	MsgColor(event.text.text, event.text.color, 1);
 	for I := 0 to Length(event.commands) - 1 do
-		WriteLn(event.commands[I].cmd, ': ', event.commands[I].name);
-	Write('Введите команду: ');
+	begin
+		MsgColor(event.commands[I].cmd, ColorNumber);
+		MsgColor(': ', ColorDefault);
+		MsgColor(event.commands[I].name.text, event.commands[I].name.color, 1);
+	end;
+	MsgColor('Введите команду: ', ColorDefault);
 	ReadLn(cmd);
 	for I := 0 to Length(event.commands) - 1 do
 		if event.commands[I].cmd = cmd then
 		begin
-			WriteLn(event.commands[I].text);
-			Writeln();
+			MsgColor(event.commands[I].text.text, event.commands[I].text.color, 1);
 			
 			for J := 0 to Length(event.commands[I].transitions) - 1 do
 			begin
@@ -144,13 +171,13 @@ begin
 					if (transition.toLocation <> '') then
 					begin
 						location := transition.toLocation;
-						event.name := transition.toEvent;
+						event.name.text := transition.toEvent;
 						Exit(False);
 					end
 					else
 					begin
 						for L := 0 to Length(events) - 1 do
-							if events[L].name = transition.toEvent then
+							if events[L].name.text = transition.toEvent then
 							begin					
 								event := events[L];
 								Exit(true);
@@ -172,19 +199,19 @@ var
 	toLocation: String;
 begin
 	{$IFDEF WINDOWS}
-	SetConsoleOutputCP(CP_UTF8);
+	SetConsoleOutputCP(1251);
 	{$ENDIF}
-	WriteLn('Привет, Дно.');
+	MsgColor('Привет, Дно.', 'Yellow', 1);
 	
 	Initialize(hero, locations);
 	location := locations[0];
 	event := location.events[0];
 	repeat		
 		repeat
-			isFalling := Fall(hero, event, location.events, location.name);
+			isFalling := Fall(hero, event, location.events, location.name.text);
 		until (not isFalling);
-		isLocating := ChangeLocation(locations, location, location.name);
-		isLocating := ChangeEvent(location.events, event, event.name);
+		isLocating := ChangeLocation(locations, location, location.name.text);
+		isLocating := ChangeEvent(location.events, event, event.name.text);
 	until (not isLocating);
 	Finalize(hero);
 end.

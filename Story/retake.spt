@@ -131,7 +131,7 @@ locations 1
 						end effect
 						effect 'cheattles'
 						value '83'
-						end effect'
+						end effect
 						effect 'luckless'
 						value '23'
 						end effect
@@ -156,7 +156,7 @@ locations 1
 						value '10'
 						end effect
 						effect 'decrease'
-						value '30
+						value '30'
 						end effect
 						effect 'luckless'
 						value '13'

@@ -2,7 +2,7 @@ unit StoryParser;
 	
 interface
 	uses
-		SysUtils, Types;
+		SysUtils, Types, ColoredText;
 	const
 		TokenEnd = 'end'; 
 		TokenText = 'text';
@@ -25,6 +25,7 @@ interface
 		TokenLocations = 'locations';
 	
 	function ReadToken(var text: TextFile; var token: String): Boolean;
+	function ReadToken(var text: TextFile; var token: TColorString): Boolean;
 	function ReadLocation(var text: TextFile; var location: TLocation): Boolean;
 	function ReadLocations(var text: TextFile; var locations: TLocations): Boolean;
 	function ReadEvent(var text: TextFile; var event: TEvent): Boolean;
@@ -260,11 +261,18 @@ implementation
 		token := '';
 		if not ReadToken(text, event.name) then
 			Exit(False);
-		Writeln('Event: ', event.name);
+		if (event.name.color = '') then
+			event.name.color := ColorEventName;
+		Write('Event: ');
+		MsgColor(event.name.text, event.name.color, 1);
 		while ReadToken(text, token) do	
 		begin	
 			if token = TokenText then
+			begin
 				ReadToken(text, event.text);
+				if (event.text.color = '') then
+					event.text.color := ColorEventText;
+			end;
 			if token = TokenCommands then
 				ReadCommands(text, event.commands);
 			if token = TokenEnd then
@@ -398,6 +406,63 @@ implementation
 			ReadLn();
 		end;
 	end;
+	
+	function ReadToken(var text: TextFile; var token: TColorString): Boolean;
+	var
+		isStarted, isSpecial, isColor: Boolean;
+		ch: Char;
+	begin
+		isSpecial := False;
+		isStarted := False;
+		isColor := False;
+		token.text := '';
+		token.color := '';
+		ch := Chr(0);
+		while not EOF(text) do
+		begin
+			Read(text, ch);
+			if ch in ['A'..'Z', 'a'..'z', '0'..'9', '''', '#'] then
+			begin
+				if ch = '''' then
+				begin
+					isSpecial := True;
+					if not isStarted then
+					begin
+						isStarted := True;
+						continue;
+					end
+					else
+					begin
+						break;
+					end;
+				end
+				else
+					isStarted := True;
+				
+				if ch = '#' then
+				begin
+					isColor := true;
+					continue;
+				end;
+			end
+			else
+			begin
+				if (not isSpecial) and isStarted then
+				begin
+					break;
+				end;
+			end;
+			
+			if isStarted then		
+			begin
+				if not isColor then
+					token.text := token.text + ch
+				else
+					token.color := token.color + ch;
+			end;
+		end;
+		ReadToken := not EOF(text);
+	end;	
 	
 	function LoadStory(folderName: UnicodeString; var locations: TLocations): Boolean;
 	var
