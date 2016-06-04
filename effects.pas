@@ -22,190 +22,189 @@ interface
 	function Luckly(var hero: THero; effect: TEffect): Boolean;
 	function Luckless(var hero: THero; effect: TEffect): Boolean;
 	
-	function UpReputationInGroup(var hero: THero; effect: TEffect): Boolean;
-	function DownReputationInGroup(var hero: THero; effect: TEffect): Boolean;
-	function UpReputationInUniversity(var hero: THero; effect: TEffect): Boolean;
-	function DownReputationInUniversity(var hero: THero; effect: TEffect): Boolean;
+	function UpRIG(var hero: THero; effect: TEffect): Boolean;
+	function DownRIG(var hero: THero; effect: TEffect): Boolean;
+	function UpRIU(var hero: THero; effect: TEffect): Boolean;
+	function DownRIU(var hero: THero; effect: TEffect): Boolean;
 	
-	function GetAttrHero(hero: THero; attribute: String): Integer;
 
 implementation
 	function Damage(var hero: THero; effect: TEffect): Boolean;
 	begin
-		hero.health := hero.health - effect.value;
-		if hero.health < 0 then
-			hero.health := 0;
-		if hero.health = 0 then
+		hero.Health := hero.Health - effect.value;
+		if hero.Health < 0 then
+			hero.Health := 0;
+		if hero.Health = 0 then
 			Exit(False);
 		Exit(True);
 	end;
 	
 	function Heal(var hero: THero; effect: TEffect): Boolean;
 	begin
-		hero.health := hero.health + effect.value;
-		if hero.health > 100 then
-			hero.health := 100;
-		if hero.health = 100 then
+		hero.Health := hero.Health + effect.value;
+		if hero.Health > 100 then
+			hero.Health := 100;
+		if hero.Health = 100 then
 			Exit(True);
 		Exit(False);
 	end;
 
 	function Boost(var hero: THero; effect: TEffect): Boolean;
 	begin
-		hero.energy := hero.energy + effect.value;
-		if hero.energy > 100 then
-			hero.energy := 100;
-		if hero.energy = 100 then
+		hero.Energy := hero.Energy + effect.value;
+		if hero.Energy > 100 then
+			hero.Energy := 100;
+		if hero.Energy = 100 then
 			Exit(True);
 		Exit(False);
 	end;
 	
 	function Decrease(var hero: THero; effect: TEffect): Boolean;
 	begin
-		hero.energy := hero.energy - effect.value;
-		if hero.energy < 0 then
-			hero.energy := 0;
-		if hero.energy = 0 then
+		hero.Energy := hero.Energy - effect.value;
+		if hero.Energy < 0 then
+			hero.Energy := 0;
+		if hero.Energy = 0 then
 			Exit(False);
 		Exit(True);
 	end;
 	
 	function TakeToDrink(var hero: THero; effect: TEffect): Boolean;
 	begin
-		hero.alchohol := hero.alchohol + effect.value;
-		if hero.alchohol > 100 then
-			hero.alchohol := 100;
-		if hero.alchohol = 100 then
+		hero.Alchohol := hero.Alchohol + effect.value;
+		if hero.Alchohol > 100 then
+			hero.Alchohol := 100;
+		if hero.Alchohol = 100 then
 			Exit(False);
 		Exit(True);
 	end;
 	
 	function Sober(var hero: THero; effect: TEffect): Boolean;
 	begin
-		hero.alchohol := hero.alchohol - effect.value;
-		if hero.alchohol < 0 then
-			hero.alchohol := 0;
-		if hero.alchohol = 0 then 
+		hero.Alchohol := hero.Alchohol - effect.value;
+		if hero.Alchohol < 0 then
+			hero.Alchohol := 0;
+		if hero.Alchohol = 0 then 
 			Exit(True);
 		Exit(False);
 	end;
 	
 	function PumpUp(var hero: THero; effect: TEffect): Boolean; 
 	begin
-		hero.strength := hero.strength + effect.value;
-		if hero.strength > 100 then
-			hero.strength := 100;
-		if hero.strength = 100 then
+		hero.Strength := hero.Strength + effect.value;
+		if hero.Strength > 100 then
+			hero.Strength := 100;
+		if hero.Strength = 100 then
 			Exit(True);
 		Exit(False);
 	end;
 	
 	function PumpDown(var hero: THero; effect: TEffect): Boolean;
 	begin
-		hero.strength := hero.strength - effect.value;
-		if hero.strength < 0 then
-			hero.strength := 0;
-		if hero.strength = 0 then
+		hero.Strength := hero.Strength - effect.value;
+		if hero.Strength < 0 then
+			hero.Strength := 0;
+		if hero.Strength = 0 then
 			Exit(False);
 		Exit(True);
 	end;
 	
 	function ReduceIntelligence(var hero: THero; effect: TEffect): Boolean;
 	begin
-		hero.intelligence := hero.strength - effect.value;
-		if hero.intelligence < 0 then
-			hero.intelligence := 0;
-		if hero.intelligence = 0 then
+		hero.Intelligence := hero.Strength - effect.value;
+		if hero.Intelligence < 0 then
+			hero.Intelligence := 0;
+		if hero.Intelligence = 0 then
 			Exit(False);
 		Exit(True);
 	end;
 	
 	function IncreaseIntelligence(var hero: THero; effect: TEffect): Boolean;
 	begin
-		hero.intelligence := hero.strength + effect.value;
-		if hero.intelligence > 100 then
-			hero.intelligence := 100;
-		if hero.intelligence = 100 then
+		hero.Intelligence := hero.Strength + effect.value;
+		if hero.Intelligence > 100 then
+			hero.Intelligence := 100;
+		if hero.Intelligence = 100 then
 			Exit(True);
 		Exit(False);
 	end;
 	
 	function Cheatter(var hero: THero; effect: TEffect): Boolean;
 	begin
-		hero.agility := hero.agility + effect.value;
-		if hero.agility > 100 then
-			hero.agility := 100;
-		if hero.agility = 100 then
+		hero.Agility := hero.Agility + effect.value;
+		if hero.Agility > 100 then
+			hero.Agility := 100;
+		if hero.Agility = 100 then
 			Exit(True);
 		Exit(False);
 	end;
 	
 	function Cheatless(var hero: THero; effect: TEffect): Boolean;
 	begin
-		hero.agility := hero.agility - effect.value;
-		if hero.agility < 0 then
-			hero.agility := 0;
-		if hero.agility = 0 then
+		hero.Agility := hero.Agility - effect.value;
+		if hero.Agility < 0 then
+			hero.Agility := 0;
+		if hero.Agility = 0 then
 			Exit(False);
 		Exit(True);
 	end;
 	
 	function Luckly(var hero: THero; effect: TEffect): Boolean;
 	begin
-		hero.fortune := hero.fortune + effect.value;
-		if hero.fortune > 100 then
-			hero.fortune := 100;
-		if hero.fortune = 100 then
+		hero.Fortune := hero.Fortune + effect.value;
+		if hero.Fortune > 100 then
+			hero.Fortune := 100;
+		if hero.Fortune = 100 then
 			Exit(True);
 		Exit(False);
 	end;
 	
 	function Luckless(var hero: THero; effect: TEffect): Boolean;
 	begin
-		hero.fortune := hero.fortune - effect.value;
-		if hero.fortune < 0 then
-			hero.fortune := 0;
-		if hero.fortune = 0 then
+		hero.Fortune := hero.Fortune - effect.value;
+		if hero.Fortune < 0 then
+			hero.Fortune := 0;
+		if hero.Fortune = 0 then
 			Exit(False);
 		Exit(True);
 	end;
 	
-	function UpReputationInGroup(var hero: THero; effect: TEffect): Boolean;
+	function UpRIG(var hero: THero; effect: TEffect): Boolean;
 	begin
-		hero.reputationInGroup := hero.reputationInGroup + effect.value;
-		if hero.reputationInGroup > 100 then
-			hero.reputationInGroup := 100;
-		if hero.reputationInGroup = 100 then
+		hero.ReputationInGroup := hero.ReputationInGroup + effect.value;
+		if hero.ReputationInGroup > 100 then
+			hero.ReputationInGroup := 100;
+		if hero.ReputationInGroup = 100 then
 			Exit(True);
 		Exit(False);
 	end;
 	
-	function DownReputationInGroup(var hero: THero; effect: TEffect): Boolean;
+	function DownRIG(var hero: THero; effect: TEffect): Boolean;
 	begin
-		hero.reputationInGroup := hero.reputationInGroup - effect.value;
-		if hero.reputationInGroup < 0 then
-			hero.reputationInGroup := 0;
-		if hero.reputationInGroup = 0 then
+		hero.ReputationInGroup := hero.ReputationInGroup - effect.value;
+		if hero.ReputationInGroup < 0 then
+			hero.ReputationInGroup := 0;
+		if hero.ReputationInGroup = 0 then
 			Exit(False);
 		Exit(True);
 	end;
 	
-	function UpReputationInUniversity(var hero: THero; effect: TEffect): Boolean;
+	function UpRIU(var hero: THero; effect: TEffect): Boolean;
 	begin
-		hero.reputationInUnderworld := hero.reputationInUnderworld + effect.value;
-		if hero.reputationInUnderworld > 100 then
-			hero.reputationInUnderworld := 100;
-		if hero.reputationInUnderworld = 100 then
+		hero.ReputationInUnderworld := hero.ReputationInUnderworld + effect.value;
+		if hero.ReputationInUnderworld > 100 then
+			hero.ReputationInUnderworld := 100;
+		if hero.ReputationInUnderworld = 100 then
 			Exit(True);
 		Exit(False);
 	end;
 	
-	function DownReputationInUniversity(var hero: THero; effect: TEffect): Boolean;
+	function DownRIU(var hero: THero; effect: TEffect): Boolean;
 	begin
-		hero.reputationInUnderworld := hero.reputationInUnderworld - effect.value;
-		if hero.reputationInUnderworld < 0 then
-			hero.reputationInUnderworld := 0;
-		if hero.reputationInUnderworld = 0 then
+		hero.ReputationInUnderworld := hero.ReputationInUnderworld - effect.value;
+		if hero.ReputationInUnderworld < 0 then
+			hero.ReputationInUnderworld := 0;
+		if hero.ReputationInUnderworld = 0 then
 			Exit(False);
 		Exit(True);
 	end;
@@ -224,22 +223,22 @@ implementation
 		if effect.name = 'decrease' then
 			if not Decrease(hero, effect) then
 				Exit(False);
-		if effect.name = 'takeToDrink' then
+		if effect.name = 'take_to_drink' then
 			if not TakeToDrink(hero, effect) then
 				Exit(False);
 		if effect.name = 'sober' then
 			if not Sober(hero, effect) then
 				Exit(False);
-		if effect.name = 'pumpUp' then
+		if effect.name = 'pump_up' then
 			if not PumpUp(hero, effect) then
 				Exit(False);
-		if effect.name = 'pumpDown' then
+		if effect.name = 'pump_down' then
 			if not PumpDown(hero, effect) then
 				Exit(False);
-		if effect.name = 'ReduceIntelligence' then
+		if effect.name = 'reduce_intelligence' then
 			if not ReduceIntelligence(hero, effect) then
 				Exit(False);
-		if effect.name = 'inreaseIntelligence' then
+		if effect.name = 'inrease_intelligence' then
 			if not IncreaseIntelligence(hero, effect) then
 				Exit(False);
 		if effect.name = 'cheatter' then
@@ -254,17 +253,17 @@ implementation
 		if effect.name = 'luckless' then
 			if not Luckless(hero, effect) then
 				Exit(False);
-		if effect.name = 'upReputationInGroup' then
-			if not UpReputationInGroup(hero, effect) then
+		if effect.name = 'up_reputation_in_group' then
+			if not UpRIG(hero, effect) then
 				Exit(False);
-		if effect.name = 'downReputationInGroup' then
-			if not DownReputationInGroup(hero, effect) then
+		if effect.name = 'down_reputation_in_group' then
+			if not DownRIG(hero, effect) then
 				Exit(False);
-		if effect.name = 'upReputationInUniversity' then
-			if not UpReputationInUniversity(hero, effect) then
+		if effect.name = 'up_reputation_in_university' then
+			if not UpRIU(hero, effect) then
 				Exit(False);
-		if effect.name = 'downReputationInUniversity' then
-			if not DownReputationInUniversity(hero, effect) then
+		if effect.name = 'down_reputation_in_university' then
+			if not DownRIU(hero, effect) then
 				Exit(False);
 		Exit(True);
 	end;
@@ -278,28 +277,5 @@ implementation
 			if not Affect(hero, effects[I]) then
 				Exit(False);
 		Exit(True);
-	end;
-	
-	function GetAttrHero(hero: THero; attribute: String): Integer;
-	var
-		value: Integer;
-	begin
-		value := hero.Health;
-		case attribute of
-		'depth': value := hero.depth;
-		
-		'Health': value := hero.Health;
-		'Energy': value := hero.Energy;
-		'Alchohol': value := hero.Alchohol;
-		
-		'Strength': value := hero.Strength;
-		'Agility': value := hero.Agility;
-		'Intelligence': value := hero.Intelligence;
-		'Fortune': value := hero.Fortune;
-		
-		'ReputationInGroup': value := hero.ReputationInGroup;
-		'ReputationInUnderWorld': value := hero.ReputationInUnderWorld;
-		end;
-		GetAttrHero := value;
 	end;
 end.
