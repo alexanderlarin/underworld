@@ -1,7 +1,14 @@
 unit Types;
 
 interface
+	uses
+		coloredtext;
 	type
+		TColorString = record
+			text: String;
+			color: String;
+		end;
+		
 		THero = record
 			depth: Integer;
 			
@@ -45,8 +52,8 @@ interface
 		TTransitions = array of TTransition;
 		
 		TCommand = record
-			name: String;
-			text: String;
+			name: TColorString;
+			text: TColorString;
 			cmd: String;
 			transitions: TTransitions;
 		end;
@@ -54,15 +61,15 @@ interface
 		TCommands = array of TCommand;
 		
 		TEvent = record
-			name: String;
-			text: String;
+			name: TColorString;
+			text: TColorString;
 			commands: TCommands;
 		end;
 		
 		TEvents = array of TEvent;
 		
 		TLocation = record
-			name: String;
+			name: TColorString;
 			events: TEvents;
 		end;
 		
