@@ -15,9 +15,12 @@ locations 1
 							value '10'
 						end condition	
 					end conditions
-					effects 1
+					effects 2
 						effect 'damage'
 						value '10'
+						end effect
+						effect 'downReputationInGroup'
+						value '42'
 						end effect
 					end effects
 					toLocation ''
@@ -30,9 +33,15 @@ locations 1
 							value '10'
 						end condition	
 					end conditions
-					effects 1
+					effects 3
 						effect 'damage'
-						value '10'
+						value '40'
+						end effect
+						effect 'decrease'
+						value '20'
+						end effect
+						effect 'pumpDown'
+						value '1'
 						end effect
 					end effects
 					toLocation 'Аудитория 312'
@@ -50,9 +59,18 @@ locations 1
 							
 						end condition
 					end conditions
-					effects 1
+					effects 4
 						effect 'damage'
 						value '10'
+						end effect
+						effect 'upReputationInGroup'
+						value '21'
+						end effect
+						effect 'boost'
+						value '37'
+						end effect
+						effect 'sober'
+						value '23'
 						end effect
 					end effects
 					toLocation 'Аудитория 312'
@@ -70,9 +88,21 @@ locations 1
 							
 						end condition
 					end conditions
-					effects 1
+					effects 5
 						effect 'damage'
 						value '10'
+						end effect
+						effect 'downReputationInGroup'
+						value '29'
+						end effect
+						effect 'downReputationInUniversity'
+						value '31'
+						end effect
+						effect 'cheatter'
+						value '1'
+						end effect
+						effect'pumpUp'
+						value '3'
 						end effect
 					end effects
 					toEvent 'Разбудили одногруппники'
@@ -95,9 +125,15 @@ locations 1
 							
 						end condition
 					end conditions
-					effects 1
+					effects 3
 						effect 'damage'
 						value '10'
+						end effect
+						effect 'cheattles'
+						value '83'
+						end effect'
+						effect 'luckless'
+						value '23'
 						end effect
 					end effects
 					toEvent 'Разбудили одногруппники'
@@ -115,9 +151,15 @@ locations 1
 							
 						end condition
 					end conditions
-					effects 1
+					effects 3
 						effect 'damage'
 						value '10'
+						end effect
+						effect 'decrease'
+						value '30
+						end effect
+						effect 'luckless'
+						value '13'
 						end effect
 					end effects
 					toEvent 'Разбудили одногруппники'
@@ -135,9 +177,18 @@ locations 1
 							
 						end condition
 					end conditions
-					effects 1
-						effect 'damage'
-						value '10'
+					effects 4
+						effect 'heal'
+						value '14'
+						end effect
+						effect 'boost'
+						value '34'
+						end effect
+						effect 'luckly'
+						value '47'
+						end effect
+						effect 'cheatter'
+						value '32'
 						end effect
 					end effects
 					toEvent 'Разбудили одногруппники'
@@ -161,9 +212,15 @@ locations 1
 							
 						end condition
 					end conditions
-					effects 1
+					effects 3
 						effect 'damage'
 						value '10'
+						end effect
+						effect 'takeToDrink'
+						value '27'
+						end effect
+						effect 'upReputationInGroup'
+						value '3'
 						end effect
 					end effects
 					toEvent 'Вызвали к доске' 
