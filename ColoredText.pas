@@ -2,8 +2,9 @@ unit ColoredText;
 
 interface
 	uses
-		crt, 
+		{$IFDEF WINDOWS}
 		windows;
+		{$ENDIF}
 	
 	const
 		ColorDefault = 'LightGray';
@@ -18,6 +19,7 @@ interface
 		ColorTransLocation = 'White';
 		ColorLocation = 'LightMagenta';
 	
+	procedure TextColor(color: Integer);
 	procedure MsgColor(NormalText: String);	
 	procedure MsgColor(NormalText: String; ChosenColor: String);
 	procedure MsgColor(NormalText: String; ChosenColor: String; NewLine: Integer);
@@ -27,10 +29,15 @@ interface
 	procedure MsgColor(NormalText: Real; ChosenColor: String; NewLine: Integer);
 	
 implementation	
+	procedure TextColor(color: Integer);
+	begin
+		SetConsoleTextAttribute(GetStdHandle( STD_OUTPUT_HANDLE), color);
+	end;
+	
 	procedure MsgColor(NormalText: String);	
 	begin
 		TextColor(7);
-		WriteLn(utf8toansi(NormalText));
+		WriteLn(NormalText);
 	end;
 	
 	procedure MsgColor(NormalText: String; ChosenColor: String);
@@ -56,7 +63,7 @@ implementation
 			else 
 				TextColor(15);
 		end;
-		Write(utf8toansi(NormalText));
+		Write(NormalText);
 		TextColor(15);
 	end;
 	
@@ -84,7 +91,7 @@ implementation
 			else 
 				TextColor(15);
 		end;
-		Write(utf8toansi(NormalText));
+		Write(NormalText);
 		TextColor(15);
 		for NewLineCounter := 1 to NewLine do 
 		begin
