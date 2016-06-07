@@ -9,7 +9,6 @@ uses
 	{$ENDIF}
 	sysutils,
 	math,
-	crt,
 	effects,
 	storyparser,
 	types,
@@ -18,9 +17,10 @@ uses
 procedure Initialize(var hero: THero; var locations: TLocations);
 begin
 	{$IFDEF WINDOWS}
-	SetConsoleCP(CP_UTF8);
 	SetConsoleOutputCP(CP_UTF8);
 	{$ENDIF}
+	MsgColor('Привет, Дно.', 'Yellow', 1);
+	
 	MsgColor('[+] Initizlization', ColorDebug, 1);
 	LoadStory('Story', locations);
 	
@@ -197,12 +197,8 @@ var
 	hero: THero;
 	event: TEvent;
 	toLocation: String;
-begin
-	{$IFDEF WINDOWS}
-	SetConsoleOutputCP(1251);
-	{$ENDIF}
-	MsgColor('Привет, Дно.', 'Yellow', 1);
 	
+begin
 	Initialize(hero, locations);
 	location := locations[0];
 	event := location.events[0];
