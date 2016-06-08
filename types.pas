@@ -2,7 +2,7 @@ unit Types;
 
 interface
 	uses
-		coloredtext;
+		outputcolor;
 	type
 		TColorString = record
 			text: String;
