@@ -31,7 +31,9 @@ interface
 implementation	
 	procedure TextColor(color: Integer);
 	begin
+		{$IFDEF WINDOWS}
 		SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), color);
+		{$ENDIF}
 	end;
 	
 	procedure ColorWrite(normalText: String);	
