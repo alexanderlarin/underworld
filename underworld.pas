@@ -12,19 +12,19 @@ uses
 	effects,
 	storyparser,
 	types,
-	coloredtext;
+	outputcolor;
 
 procedure Initialize(var hero: THero; var locations: TLocations);
 begin
 	{$IFDEF WINDOWS}
 	SetConsoleOutputCP(CP_UTF8);
 	{$ENDIF}
-	MsgColor('Привет, Дно.', 'Yellow', 1);
+	ColorWrite('Привет, Дно.', 'Yellow', 1);
 	
-	MsgColor('[+] Initizlization', ColorDebug, 1);
+	ColorWrite('[+] Initizlization', ColorDebug, 1);
 	LoadStory('Story', locations);
 	
-	MsgColor('[+] Hero', ColorDebug, 1);
+	ColorWrite('[+] Hero', ColorDebug, 1);
 	hero.depth := 0;
 	hero.Health := 75;
 	hero.Energy := 15;
@@ -38,18 +38,18 @@ begin
 	hero.ReputationInGroup := 78;
 	hero.ReputationInUnderworld := 5;
 	
-	MsgColor('[+] Events', ColorDebug, 1);
+	ColorWrite('[+] Events', ColorDebug, 1);
 end;
 
 procedure Finalize(hero: THero);
 begin
 	if (hero.depth > 5) then
 	begin
-		MsgColor('[+] You''re really unlucky man. Your depth is ', ColorFinish);
-		MsgColor(hero.depth, ColorFinish, 1);
+		ColorWrite('[+] You''re really unlucky man. Your depth is ', ColorFinish);
+		ColorWrite(hero.depth, ColorFinish, 1);
 	end;
 		
-	MsgColor('[+] Finalization', ColorDebug);
+	ColorWrite('[+] Finalization', ColorDebug);
 end;
 
 function ChangeLocation(locations: TLocations; var location: TLocation; toLocation: String): Boolean;
@@ -63,9 +63,9 @@ begin
 			if locations[I].name.text = toLocation then
 			begin	
 				location := locations[I];
-				MsgColor('Переход на локацию "', ColorTransLocation);
-				MsgColor(location.name.text, ColorLocation);
-				MsgColor('" ', ColorTransLocation);
+				ColorWrite('Переход на локацию "', ColorTransLocation);
+				ColorWrite(location.name.text, ColorLocation);
+				ColorWrite('" ', ColorTransLocation);
 				Exit(True);
 			end;	
 		end;	
@@ -84,9 +84,9 @@ begin
 			if events[I].name.text = toEvent then
 			begin	
 				event := events[I];
-				MsgColor('к событию "', ColorTransLocation);
-				MsgColor(event.name.text, ColorEventName);
-				MsgColor('" ', ColorTransLocation, 1);
+				ColorWrite('к событию "', ColorTransLocation);
+				ColorWrite(event.name.text, ColorEventName);
+				ColorWrite('" ', ColorTransLocation, 1);
 				Exit(True);
 			end;	
 		end;	
@@ -103,39 +103,39 @@ var
 	cmd: String;
 begin
 	isTransition := false;
-	MsgColor('=======ХАРАКТЕРИСТИКИ ПЕРСОНАЖА=======',ColorDefault,1);
-	MsgColor('Здоровье: ', ColorAttribute);
-	MsgColor(hero.Health, ColorNumber);
-	MsgColor('%', ColorNumber, 1);
-	MsgColor('Бодрость: ', ColorAttribute);
-	MsgColor(hero.Energy, ColorNumber);
-	MsgColor('%', ColorNumber, 1);
-	MsgColor('Содержание алкоголя: ', ColorAttribute);
-	MsgColor(hero.Alchohol, ColorNumber);
-	MsgColor('%', ColorNumber, 2);
+	ColorWrite('=======ХАРАКТЕРИСТИКИ ПЕРСОНАЖА=======',ColorDefault,1);
+	ColorWrite('Здоровье: ', ColorAttribute);
+	ColorWrite(hero.Health, ColorNumber);
+	ColorWrite('%', ColorNumber, 1);
+	ColorWrite('Бодрость: ', ColorAttribute);
+	ColorWrite(hero.Energy, ColorNumber);
+	ColorWrite('%', ColorNumber, 1);
+	ColorWrite('Содержание алкоголя: ', ColorAttribute);
+	ColorWrite(hero.Alchohol, ColorNumber);
+	ColorWrite('%', ColorNumber, 2);
 
-	MsgColor('Сила: ',ColorAttribute);
-	MsgColor(hero.Strength, ColorNumber, 1);
-	MsgColor('Ловкость: ', ColorAttribute);
-	MsgColor(hero.Agility, ColorNumber, 1);
-	MsgColor('Интеллект: ',ColorAttribute);
-	MsgColor(hero.Intelligence, ColorNumber, 1);
-	MsgColor('Удача: ',ColorAttribute);
-	MsgColor(hero.Fortune, ColorNumber, 1);
-	MsgColor('======================================', ColorDefault, 1);
-	MsgColor(event.text.text, event.text.color, 1);
+	ColorWrite('Сила: ',ColorAttribute);
+	ColorWrite(hero.Strength, ColorNumber, 1);
+	ColorWrite('Ловкость: ', ColorAttribute);
+	ColorWrite(hero.Agility, ColorNumber, 1);
+	ColorWrite('Интеллект: ',ColorAttribute);
+	ColorWrite(hero.Intelligence, ColorNumber, 1);
+	ColorWrite('Удача: ',ColorAttribute);
+	ColorWrite(hero.Fortune, ColorNumber, 1);
+	ColorWrite('======================================', ColorDefault, 1);
+	ColorWrite(event.text.text, event.text.color, 1);
 	for I := 0 to Length(event.commands) - 1 do
 	begin
-		MsgColor(event.commands[I].cmd, ColorNumber);
-		MsgColor(': ', ColorDefault);
-		MsgColor(event.commands[I].name.text, event.commands[I].name.color, 1);
+		ColorWrite(event.commands[I].cmd, ColorNumber);
+		ColorWrite(': ', ColorDefault);
+		ColorWrite(event.commands[I].name.text, event.commands[I].name.color, 1);
 	end;
-	MsgColor('Введите команду: ', ColorDefault);
+	ColorWrite('Введите команду: ', ColorDefault);
 	ReadLn(cmd);
 	for I := 0 to Length(event.commands) - 1 do
 		if event.commands[I].cmd = cmd then
 		begin
-			MsgColor(event.commands[I].text.text, event.commands[I].text.color, 1);
+			ColorWrite(event.commands[I].text.text, event.commands[I].text.color, 1);
 			
 			for J := 0 to Length(event.commands[I].transitions) - 1 do
 			begin

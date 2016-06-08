@@ -1,4 +1,4 @@
-unit ColoredText;
+unit OutputColor;
 
 interface
 	uses
@@ -20,29 +20,29 @@ interface
 		ColorLocation = 'LightMagenta';
 	
 	procedure TextColor(color: Integer);
-	procedure MsgColor(NormalText: String);	
-	procedure MsgColor(NormalText: String; ChosenColor: String);
-	procedure MsgColor(NormalText: String; ChosenColor: String; NewLine: Integer);
-	procedure MsgColor(NormalText: Integer; ChosenColor: String);
-	procedure MsgColor(NormalText: Integer; ChosenColor: String; NewLine: Integer);
-	procedure MsgColor(NormalText: Real; ChosenColor: String);
-	procedure MsgColor(NormalText: Real; ChosenColor: String; NewLine: Integer);
+	procedure ColorWrite(normaltext: String);	
+	procedure ColorWrite(normaltext: String; chosencolor: String);
+	procedure ColorWrite(normaltext: String; chosencolor: String; newline: Integer);
+	procedure ColorWrite(normaltext: Integer; chosencolor: String);
+	procedure ColorWrite(normaltext: Integer; chosencolor: String; newline: Integer);
+	procedure ColorWrite(normaltext: Real; chosencolor: String);
+	procedure ColorWrite(normaltext: Real; chosencolor: String; newline: Integer);
 	
 implementation	
 	procedure TextColor(color: Integer);
 	begin
-		SetConsoleTextAttribute(GetStdHandle( STD_OUTPUT_HANDLE), color);
+		SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), color);
 	end;
 	
-	procedure MsgColor(NormalText: String);	
+	procedure ColorWrite(normaltext: String);	
 	begin
 		TextColor(7);
-		WriteLn(NormalText);
+		WriteLn(normaltext);
 	end;
 	
-	procedure MsgColor(NormalText: String; ChosenColor: String);
+	procedure ColorWrite(normaltext: String; chosencolor: String);
 	begin
-		case ChosenColor of 
+		case chosencolor of 
 			'Black': TextColor(0);
 			'Blue': TextColor(1);
 			'Green': TextColor(2);
@@ -63,14 +63,14 @@ implementation
 			else 
 				TextColor(15);
 		end;
-		Write(NormalText);
+		Write(normaltext);
 		TextColor(15);
 	end;
 	
-	procedure MsgColor(NormalText: String; ChosenColor: String; NewLine: Integer);
-	var NewLineCounter:integer;
+	procedure ColorWrite(normaltext: String; chosencolor: String; newline: Integer);
+	var newlinecounter: Integer;
 	begin
-		case ChosenColor of 
+		case chosencolor of 
 			'Black': TextColor(0);
 			'Blue': TextColor(1);
 			'Green': TextColor(2);
@@ -91,17 +91,17 @@ implementation
 			else 
 				TextColor(15);
 		end;
-		Write(NormalText);
+		Write(normaltext);
 		TextColor(15);
-		for NewLineCounter := 1 to NewLine do 
+		for newlinecounter := 1 to newline do 
 		begin
 			WriteLn();
 		end;
 	end;
 	
-	procedure MsgColor(NormalText: Integer; ChosenColor: String);
+	procedure ColorWrite(normaltext: Integer; chosencolor: String);
 	begin
-		case ChosenColor of 
+		case chosencolor of 
 			'Black': TextColor(0);
 			'Blue': TextColor(1);
 			'Green': TextColor(2);
@@ -122,14 +122,14 @@ implementation
 			else 
 				TextColor(15);
 		end;
-		Write(NormalText);
+		Write(normaltext);
 		TextColor(15);
 	end;
 	
-	procedure MsgColor(NormalText: Integer; ChosenColor: String; NewLine: Integer);
-	var NewLineCounter:integer;
+	procedure ColorWrite(normaltext: Integer; chosencolor: String; newline: Integer);
+	var newlinecounter: Integer;
 	begin
-		case ChosenColor of 
+		case chosencolor of 
 			'Black': TextColor(0);
 			'Blue': TextColor(1);
 			'Green': TextColor(2);
@@ -150,17 +150,17 @@ implementation
 			else 
 				TextColor(15);
 		end;
-		Write(NormalText);
+		Write(normaltext);
 		TextColor(15);
-		for NewLineCounter := 1 to NewLine do 
+		for newlinecounter := 1 to newline do 
 		begin
 			WriteLn();
 		end;
 	end;
 	
-	procedure MsgColor(NormalText: Real; ChosenColor: String);
+	procedure ColorWrite(normaltext: Real; chosencolor: String);
 	begin
-		case ChosenColor of 
+		case chosencolor of 
 			'Black': TextColor(0);
 			'Blue': TextColor(1);
 			'Green': TextColor(2);
@@ -181,14 +181,14 @@ implementation
 			else 
 				TextColor(15);
 		end;
-		Write(NormalText);
+		Write(normaltext);
 		TextColor(15);
 	end;
 	
-	procedure MsgColor(NormalText: Real; ChosenColor: String; NewLine: Integer);
-	var NewLineCounter:integer;
+	procedure ColorWrite(normaltext: Real; chosencolor: String; newline: Integer);
+	var newlinecounter: Integer;
 	begin
-		case ChosenColor of 
+		case chosencolor of 
 			'Black': TextColor(0);
 			'Blue': TextColor(1);
 			'Green': TextColor(2);
@@ -209,9 +209,9 @@ implementation
 			else 
 				TextColor(15);
 		end;
-		Write(NormalText);
+		Write(normaltext);
 		TextColor(15);
-		for NewLineCounter := 1 to NewLine do 
+		for newlinecounter := 1 to newline do 
 		begin
 			WriteLn();
 		end;

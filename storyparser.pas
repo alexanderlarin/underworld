@@ -2,7 +2,7 @@ unit StoryParser;
 	
 interface
 	uses
-		SysUtils, Types, ColoredText;
+		SysUtils, Types, outputcolor;
 	const
 		TokenEnd = 'end'; 
 		TokenText = 'text';
@@ -264,7 +264,7 @@ implementation
 		if (event.name.color = '') then
 			event.name.color := ColorEventName;
 		Write('Event: ');
-		MsgColor(event.name.text, event.name.color, 1);
+		ColorWrite(event.name.text, event.name.color, 1);
 		while ReadToken(text, token) do	
 		begin	
 			if token = TokenText then
