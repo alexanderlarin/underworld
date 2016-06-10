@@ -10,8 +10,7 @@ locations 1
 				transitions 2
 					transition 'Смерть'
 					conditions 1
-						condition '<'
-							attribute 'Health'
+						condition 'HealthLess'							
 							value '10'
 						end condition	
 					end conditions
@@ -28,8 +27,7 @@ locations 1
 					end transition
 					transition 'Совсем Смерть'
 					conditions 1
-						condition '>'
-							attribute 'Health'
+						condition 'HealthMore'							
 							value '10'
 						end condition	
 					end conditions

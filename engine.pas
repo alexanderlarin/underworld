@@ -4,6 +4,7 @@ interface
 	uses
 		outputcolor,
 		effects,
+		conditions,
 		types;
 		
 	procedure Playing(var hero: THero; locations: TLocations; location: TLocation; event: TEvent);
@@ -14,8 +15,6 @@ interface
 	function ChooseCommand(commands: TCommands; cmd: String; var command: TCommand): Boolean;
 	procedure PrintEvent(event: TEvent);
 	procedure PrintStatsHero(hero: THero);
-	
-	function CheckConditions(hero: THero; conditions: TConditions): Boolean;
 	
 implementation
 	procedure PrintStatsHero(hero: THero);
@@ -53,35 +52,6 @@ implementation
 			ColorWrite(event.commands[I].name.text, event.commands[I].name.color, 1);
 		end;
 		ColorWrite('Введите команду: ', ColorDefault);
-	end;
-	
-	function CheckConditions(hero: THero; conditions: TConditions): Boolean;
-	var
-		I: Integer;
-		condition: TCondition;
-	begin
-		for I := 0 to Length(conditions) - 1 do
-		begin		
-			condition := conditions[I];
-			if (condition.name = '=') then
-				if not (GetAttrHero(hero, condition.attribute) = condition.Value) then
-				begin
-					Exit(False);
-				end;
-				
-			if (condition.name = '>') then
-				if not (GetAttrHero(hero, condition.attribute) > condition.Value) then
-				begin
-					Exit(False);
-				end;
-			
-			if (condition.name = '<') then
-				if not (GetAttrHero(hero, condition.attribute) < condition.Value) then
-				begin
-					Exit(False);
-				end;
-		end;
-		Exit(true);
 	end;
 	
 	function ChooseCommand(commands: TCommands; cmd: String; var command: TCommand): Boolean;
