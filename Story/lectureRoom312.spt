@@ -27,7 +27,7 @@ locations 1
 						end effect
 					end effects
 					toLocation ''
-					toEvent ''
+					toEvent 'Разбудили одногруппники'
 					end transition
 					transition 'Параша'
 					conditions 1

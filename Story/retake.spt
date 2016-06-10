@@ -105,6 +105,7 @@ locations 1
 						value '3'
 						end effect
 					end effects
+					toLocation 'Аудитория 312'
 					toEvent 'Разбудили одногруппники'
 					end transition
 				end transitions
@@ -136,6 +137,7 @@ locations 1
 						value '23'
 						end effect
 					end effects
+					toLocation 'Аудитория 312'
 					toEvent 'Разбудили одногруппники'
 					end transition
 				end transitions
@@ -162,6 +164,7 @@ locations 1
 						value '13'
 						end effect
 					end effects
+					toLocation 'Аудитория 312'
 					toEvent 'Разбудили одногруппники'
 					end transition
 				end transitions
@@ -191,6 +194,7 @@ locations 1
 						value '32'
 						end effect
 					end effects
+					toLocation 'Аудитория 312'
 					toEvent 'Разбудили одногруппники'
 					end transition
 				end transitions
