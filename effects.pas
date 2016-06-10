@@ -17,11 +17,14 @@ interface
 	function PumpDown(var hero: THero; effect: TEffect): Boolean;
 	function ReduceIntelligence(var hero: THero; effect: TEffect): Boolean;
 	function IncreaseIntelligence(var hero: THero; effect: TEffect): Boolean;
-	function Cheatter(var hero: THero; effect: TEffect): Boolean;
-	function Cheatless(var hero: THero; effect: TEffect): Boolean;
 	function Luckly(var hero: THero; effect: TEffect): Boolean;
 	function Luckless(var hero: THero; effect: TEffect): Boolean;
 	
+	function InLove(var hero: THero; effect: TEffect): Boolean;
+	function Lonely(var hero: THero; effect: TEffect): Boolean;
+	function Happiness(var hero: THero; effect: TEffect): Boolean;
+	function Misfortune(var hero: THero; effect: TEffect): Boolean;
+	 
 	function UpReputationInGroup(var hero: THero; effect: TEffect): Boolean;
 	function DownReputationInGroup(var hero: THero; effect: TEffect): Boolean;
 	function UpReputationInUniversity(var hero: THero; effect: TEffect): Boolean;
@@ -130,26 +133,6 @@ implementation
 		Exit(False);
 	end;
 	
-	function Cheatter(var hero: THero; effect: TEffect): Boolean;
-	begin
-		hero.agility := hero.agility + effect.value;
-		if hero.agility > 100 then
-			hero.agility := 100;
-		if hero.agility = 100 then
-			Exit(True);
-		Exit(False);
-	end;
-	
-	function Cheatless(var hero: THero; effect: TEffect): Boolean;
-	begin
-		hero.agility := hero.agility - effect.value;
-		if hero.agility < 0 then
-			hero.agility := 0;
-		if hero.agility = 0 then
-			Exit(False);
-		Exit(True);
-	end;
-	
 	function Luckly(var hero: THero; effect: TEffect): Boolean;
 	begin
 		hero.fortune := hero.fortune + effect.value;
@@ -166,6 +149,46 @@ implementation
 		if hero.fortune < 0 then
 			hero.fortune := 0;
 		if hero.fortune = 0 then
+			Exit(False);
+		Exit(True);
+	end;
+	
+	function Lonely(var hero: THero; effect: TEffect): Boolean;
+	begin
+		hero.love := hero.love - effect.value;
+		if hero.love < 0 then
+			hero.love := 0;
+		if hero.love = 0 then
+			Exit(False);
+		Exit(True);
+	end;
+	
+	function InLove(var hero: THero; effect: TEffect): Boolean;
+	begin
+		hero.love := hero.love + effect.value;
+		if hero.love < 0 then
+			hero.love := 0;
+		if hero.love = 0 then
+			Exit(False);
+		Exit(True);
+	end;
+	
+  function Happiness(var hero: THero; effect: TEffect): Boolean;
+	begin
+		hero.happy := hero.happy + effect.value;
+		if hero.happy < 0 then
+			hero.happy := 0;
+		if hero.happy = 0 then
+			Exit(False);
+		Exit(True);
+	end;
+	
+	function Misfortune(var hero: THero; effect: TEffect): Boolean;
+	begin
+		hero.happy := hero.happy - effect.value;
+		if hero.happy < 0 then
+			hero.happy := 0;
+		if hero.happy = 0 then
 			Exit(False);
 		Exit(True);
 	end;
@@ -236,23 +259,29 @@ implementation
 		if effect.name = 'pumpDown' then
 			if not PumpDown(hero, effect) then
 				Exit(False);
-		if effect.name = 'ReduceIntelligence' then
+		if effect.name = 'reduceIntelligence' then
 			if not ReduceIntelligence(hero, effect) then
 				Exit(False);
 		if effect.name = 'inreaseIntelligence' then
 			if not IncreaseIntelligence(hero, effect) then
-				Exit(False);
-		if effect.name = 'cheatter' then
-			if not Cheatter(hero, effect) then
-				Exit(False);
-		if effect.name = 'cheatless' then
-			if not Cheatless(hero, effect) then
 				Exit(False);
 		if effect.name = 'luckly' then
 			if not Luckly(hero, effect) then
 				Exit(False);
 		if effect.name = 'luckless' then
 			if not Luckless(hero, effect) then
+				Exit(False);
+		if effect.name = 'happiness' then
+			if not Damage(hero, effect) then
+				Exit(False);
+		if effect.name = 'misfortune' then
+			if not Damage(hero, effect) then
+				Exit(False);
+		if effect.name = 'inLove' then
+			if not Damage(hero, effect) then
+				Exit(False);
+		if effect.name = 'lonely' then
+			if not Damage(hero, effect) then
 				Exit(False);
 		if effect.name = 'upReputationInGroup' then
 			if not UpReputationInGroup(hero, effect) then
@@ -286,19 +315,20 @@ implementation
 	begin
 		value := hero.Health;
 		case attribute of
-		'depth': value := hero.depth;
 		
-		'Health': value := hero.Health;
-		'Energy': value := hero.Energy;
-		'Alchohol': value := hero.Alchohol;
+		'health': value := hero.health;
+		'energy': value := hero.energy;
+		'alchohol': value := hero.alchohol;
 		
-		'Strength': value := hero.Strength;
-		'Agility': value := hero.Agility;
-		'Intelligence': value := hero.Intelligence;
-		'Fortune': value := hero.Fortune;
+		'strength': value := hero.strength;
+		'intelligence': value := hero.intelligence;
+		'fortune': value := hero.fortune;
 		
-		'ReputationInGroup': value := hero.ReputationInGroup;
-		'ReputationInUnderWorld': value := hero.ReputationInUnderWorld;
+		'happy': value := hero.happy;
+		'love': value := hero.love;
+		
+		'reputationInGroup': value := hero.ReputationInGroup;
+		'reputationInUnderWorld': value := hero.ReputationInUnderWorld;
 		end;
 		GetAttrHero := value;
 	end;

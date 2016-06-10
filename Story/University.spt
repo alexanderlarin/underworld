@@ -1,0 +1,295 @@
+locations 1	
+	location 'Универ'
+		events 4
+		    event 'Первая пара понедельника'
+			text 'Ты всё же пришёл(ла) на первую пару... \n Именно на ней именно тебя спрашивает препод'
+			commands 3
+				command 'Ответить'
+				text 'Ты попытался(ась) ответить, но тупанул(а) \n Препода взорвало, а тебя задело ударной волной'
+				cmd '1'
+				transitions 1
+					transition 'Тупанул(а) на первой паре в понедельник'
+					conditions 0
+					end conditions
+					effects 6
+						effect 'damage'
+						value '1'
+						end effect
+						effect 'decrease'
+						value '1'
+						end effect
+						effect 'reduceIntelligence'
+						value '1'
+						end effect
+						effect 'luckless'
+						value '2'
+						end effect
+						effect 'downReputationInGroup'
+						value '1'
+						end effect
+						effect 'downReputationInUniversity'
+						value '1'
+						end effect
+					end effects
+					toLocation ''
+					toEvent 'Вторая пара понедельника'
+					end transition
+				end transitions
+				end command
+				command 'Притвориться мёртвым'
+				text 'Препод подумал, что ты не кот, а хлеб, и не заметил тебя'
+				cmd '2'
+				transitions 1
+					transition 'Не кот, а хлеб'
+					conditions 0
+					end conditions
+					effects 3
+						effect 'luckly'
+						value '1'
+						end effect
+						effect 'decrease'
+						value '1'
+						end effect
+						effect 'reduceIntelligence'
+						value '1'
+						end effect
+					end effects
+					toLocation 'Универ'
+					toEvent 'Вторая пара понедельника'
+					end transition
+				end transitions
+				end command
+				command 'Притвориться Саней'
+				text 'Ты ТОП-студент и знаешь ответы на всё!'
+				cmd '3'
+				transitions 1
+					transition 'Ты - аки Саня'
+					conditions 0
+					end conditions
+					effects 4
+						effect 'increaseIntelligence'
+						value '1'
+						end effect
+						effect 'decrease'
+						value '1'
+						end effect
+						effect 'upReputationInGroup'
+						value '1'
+						end effect
+						effect 'upReputationInUniversity'
+						value '1'
+						end effect
+					end effects
+					toLocation 'Универ'
+					toEvent 'Вторая пара понедельника'
+					end transition
+				end transitions
+				end command
+			end commands
+			end event
+			event 'Вторая пара понедельника'
+			text 'НЕЖДАНЧИК!#LightGray\n Всю группу на 2 следующие пары уводят на возложение'
+			commands 3
+				command 'Пойти со всеми'
+				text 'Почтить дедов - дело цветное'
+				cmd '1'
+				transitions 1
+					transition 'Почтить дедов'
+					conditions 0
+					end conditions
+					effects 2
+						effect 'decrease'
+						value '1'
+						end effect
+						effect 'upReputationInUniversity'
+						value '1'
+						end effect
+					end effects
+					toLocation ''
+					toEvent 'Перед 4 парой понедельника'
+					end transition
+				end transitions
+				end command
+				command 'Свалить'
+				text 'Деды воевали, но тебя это не колышит'
+				cmd '2'
+				transitions 1
+					transition 'Ты решил(а) свалить, но тебя заметили и наорали.'
+					conditions 0
+					end conditions
+					effects 3
+						effect 'downReputationInGroup'
+						value '1'
+						end effect
+						effect 'downReputationInUniversity'
+						value '1'
+						end effect
+						effect 'damage'
+						value '1'
+						end effect
+					end effects
+					toLocation 'Падик'
+					toEvent 'Что я вообще тут делаю?'
+					end transition
+				end transitions
+				end command
+				command 'Возглавить возложение'
+				text 'Алярма, игра имеет возрастное ограничение 60-!#Red\n Пожалуйста, прожмите alt+F4'
+				cmd '3'
+				transitions 1
+					transition 'Game over'
+					conditions 0
+					end conditions
+					effects 0
+					end effects
+					toLocation 'Game over'
+					toEvent 'Game over'
+					end transition
+				end transitions
+				end command
+			end commands
+			end event
+			event 'Перед 4 парой понедельника'
+			text 'Пора бы похавать...'
+			commands 4
+				command 'Занять денег и купить дошик'
+				text 'Мечтая о ведре бпшек, покупаешь 1 дошик'
+				cmd '1'
+				transitions 1
+					transition ''
+					conditions 0
+					end conditions
+					effects 3
+						effect 'damage'
+						value '1'
+						end effect
+						effect 'decrease'
+						value '1'
+						end effect
+						effect 'pumpDown'
+						value '1'
+						end effect
+					end effects
+					toLocation ''
+					toEvent '4 пара понедельника'
+					end transition
+				end transitions
+				end command
+				command 'Питаться лишь запахом еды из столовки'
+				text 'А пахнет-то вкууууусно'
+				cmd '2'
+				transitions 1
+					transition ''
+					conditions 0
+					end conditions
+					effects 0
+					end effects
+					toLocation ''
+					toEvent '4 пара понедельника'
+					end transition
+				end transitions
+				end command
+				command 'Поболтать с одногруппниками'
+				text 'Обсуждая новый патч в дотане, забываешь про хавку'
+				cmd '3'
+				transitions 1
+					transition ''
+					conditions 0
+					end conditions
+					effects 2
+						effect 'upReputationInGroup'
+						value '1'
+						end effect
+						effect 'luckly'
+						value '1'
+						end effect
+					end effects
+					toLocation ''
+					toEvent '4 пара понедельника'
+					end transition
+				end transitions
+				end command
+				command 'Поиграть в бесконечное лето'
+				text 'За перемену ты склеил(а) Алису Двачевскую'
+				cmd '4'
+				transitions 1
+					transition ''
+					conditions 0
+					end conditions
+					effects 2
+						effect 'lonely'
+						value '1'
+						end effect
+						effect 'happiness'
+						value '1'
+						end effect
+					end effects
+					toLocation 'Универ'
+					toEvent '4 пара понедельника'
+					end transition
+				end transitions
+				end command
+			end commands
+			end event
+			event '4 пара понедельника'
+			text 'Кто бы мог подумать, что на философии будет так весело... \n От нечего делать ты: '
+			commands 3
+				command 'Споришь с преподом о смысле бытия'
+				text 'Препод доказал, что его смысл бытия лучше, чем твой'
+				cmd '1'
+				transitions 1
+					transition 'Довн'
+					conditions 0
+					end conditions
+					effects 2
+						effect 'decrease'
+						value '1'
+						end effect
+						effect 'downReputationInGroup'
+						value '1'
+						end effect
+					end effects
+					toLocation 'Дом'
+					toEvent 'Досуг'
+					end transition
+				end transitions
+				end command
+				command 'Философствуешь в один голос с преподом'
+				text 'Вы оба поехавшие, ясно'
+				cmd '2'
+				transitions 1
+					transition 'Филасафы'
+					conditions 0
+					end conditions
+					effects 0
+					end effects
+					toLocation 'Дом'
+					toEvent 'Досуг'
+					end transition
+				end transitions
+				end command
+				command 'Помолчать'
+				text 'Как говорится, молчи - за умного сойдёшь'
+				cmd '3'
+				transitions 1
+					transition 'Увожение'
+					conditions 0
+					end conditions
+					effects 2
+						effect 'upReputationInUniversity'
+						value '1'
+						end effect
+						effect 'increaseIntelligence'
+						value '1'
+						end effect
+					end effects
+					toLocation 'Дом'
+					toEvent 'Досуг'
+					end transition
+				end transitions
+				end command
+			end commands
+			end event
+		end events
+	end location
+end locations

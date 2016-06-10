@@ -1,4 +1,4 @@
-program Underworld;
+﻿program Underworld;
 
 uses
 	{$IFDEF UNIX}
@@ -30,32 +30,25 @@ begin
 	
 	ColorWrite('[+] Events', ColorDebug, 1);
 	
-	hero.depth := 0;
-	hero.health := 75;
-	hero.energy := 15;
-	hero.alchohol := 23;
+	hero.health := 9;
+	hero.energy := 7;
+	hero.alchohol := 1;
 	
-	hero.strength := 26;
-	hero.intelligence := 10;
-	hero.agility := 45;
+	hero.strength := 6;
+	hero.intelligence := 6;
 	hero.fortune := 0;
 	
-	hero.reputationInGroup := 78;
-	hero.reputationInUnderworld := 5;
+	hero.love := 0;
+	hero.happy := 5;
+	hero.reputationInGroup := 5;
+	hero.reputationInUnderworld := 3;
 	
 	ColorWrite('[+] Hero', ColorDebug, 1);
 end;
 
 procedure Finalize(hero: THero);
-begin
-	if (hero.depth > 5) then
-	begin
-		ColorWrite('[+] You''re really unlucky man. Your depth is ', ColorFinish);
-		ColorWrite(hero.depth, ColorFinish, 1);
-	end;
-		
+begin	
 	ColorWrite('[+] Finalization', ColorDebug);
-	readln;
 end;
 
 var

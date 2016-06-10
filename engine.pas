@@ -23,22 +23,23 @@ implementation
 		ColorWrite('=======ХАРАКТЕРИСТИКИ ПЕРСОНАЖА=======',ColorDefault,1);
 		ColorWrite('Здоровье: ', ColorAttribute);
 		ColorWrite(hero.health, ColorNumber);
-		ColorWrite('%', ColorNumber, 1);
+		ColorWrite('0%', ColorNumber, 1);
 		ColorWrite('Бодрость: ', ColorAttribute);
 		ColorWrite(hero.Energy, ColorNumber);
-		ColorWrite('%', ColorNumber, 1);
+		ColorWrite('0%', ColorNumber, 1);
 		ColorWrite('Содержание алкоголя: ', ColorAttribute);
 		ColorWrite(hero.Alchohol, ColorNumber);
-		ColorWrite('%', ColorNumber, 2);
+		ColorWrite('0%', ColorNumber, 2);
 
 		ColorWrite('Сила: ',ColorAttribute);
-		ColorWrite(hero.Strength, ColorNumber, 1);
-		ColorWrite('Ловкость: ', ColorAttribute);
-		ColorWrite(hero.Agility, ColorNumber, 1);
+		ColorWrite(hero.Strength, ColorNumber);
+		ColorWrite('0%', ColorNumber, 1);
 		ColorWrite('Интеллект: ',ColorAttribute);
-		ColorWrite(hero.Intelligence, ColorNumber, 1);
+		ColorWrite(hero.Intelligence, ColorNumber);
+		ColorWrite('0%', ColorNumber, 1);
 		ColorWrite('Удача: ',ColorAttribute);
-		ColorWrite(hero.Fortune, ColorNumber, 1);
+		ColorWrite(hero.Fortune, ColorNumber);
+		ColorWrite('0%', ColorNumber, 1);
 		ColorWrite('======================================', ColorDefault, 1);
 	end;
 	
