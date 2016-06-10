@@ -10,16 +10,17 @@ interface
 		end;
 		
 		THero = record
-			depth: Integer;
 			
-			Health: Integer;
-			Energy: Integer;
-			Alchohol: Integer;
+			health: Integer;
+			energy: Integer;
+			alchohol: Integer;
 			
-			Strength: Integer;
-			Agility: Integer;
-			Intelligence: Integer;
-			Fortune: Integer;
+			strength: Integer;
+			intelligence: Integer;
+			fortune: Integer;
+			
+			love: Integer;
+			happy: Integer;
 		
 			ReputationInGroup: Integer;
 			ReputationInUnderworld: Integer;	
