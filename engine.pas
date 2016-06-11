@@ -7,11 +7,11 @@ interface
 		conditions,
 		types;
 		
-	procedure Playing(var hero: THero; locations: TLocations; location: TLocation; event: TEvent);
-	function Fall(var hero: THero; locations: TLocations; var location: TLocation; var event: TEvent): Boolean;
+	procedure Playing(var hero: THero; var antiHero: THero; locations: TLocations; location: TLocation; event: TEvent);
+	function Fall(var hero: THero; var antiHero: THero; locations: TLocations; var location: TLocation; var event: TEvent): Boolean;
 	function ChangeLocation(locations: TLocations; var location: TLocation; transition: TTransition): Boolean;
 	function ChangeEvent(events: TEvents; var event: TEvent; toEvent: String): Boolean;
-	function ChooseTransition(hero: THero; transitions: TTransitions; var transition: TTransition): Boolean;
+	function ChooseTransition(hero: THero; antiHero: THero; transitions: TTransitions; var transition: TTransition): Boolean;
 	function ChooseCommand(commands: TCommands; cmd: String; var command: TCommand): Boolean;
 	procedure PrintEvent(event: TEvent);
 	procedure PrintStatsHero(hero: THero);
@@ -100,13 +100,13 @@ implementation
  		end;
  	end;
  
-	function ChooseTransition(hero: THero; transitions: TTransitions; var transition: TTransition): Boolean;
+	function ChooseTransition(hero: THero; antiHero: THero; transitions: TTransitions; var transition: TTransition): Boolean;
 	var
 		I: Integer;
 	begin
 		for I := 0 to Length(transitions) - 1 do
 		begin			
-			if (CheckConditions(hero, transitions[I].conditions)) then
+			if (CheckConditions(hero, antiHero, transitions[I].conditions)) then
 			begin
 				transition := transitions[I];					
 				Exit(True);
@@ -156,7 +156,7 @@ implementation
 		Exit(False);
 	end;
 	
-	function Fall(var hero: THero; locations: TLocations; var location: TLocation; var event: TEvent): Boolean;
+	function Fall(var hero: THero; var antiHero: THero; locations: TLocations; var location: TLocation; var event: TEvent): Boolean;
 	var
 		isFalling: Boolean;
 		command: TCommand;
@@ -167,19 +167,19 @@ implementation
 		PrintEvent(event);
 		ChooseCommand(event.commands, cmd, command);
 		PrintCommand(command);
-		ChooseTransition(hero, command.transitions, transition);
-		Affect(hero, transition.effects);
+		ChooseTransition(hero, antiHero, command.transitions, transition);
+		Affect(hero, antiHero, transition.effects);
 		ChangeLocation(locations, location, transition);
 		isFalling := ChangeEvent(location.events, event, transition.toEvent);		
 		Exit(isFalling);
 	end;
 	
-	procedure Playing(var hero: THero; locations: TLocations; location: TLocation; event: TEvent);
+	procedure Playing(var hero: THero; var antiHero: THero; locations: TLocations; location: TLocation; event: TEvent);
 	var
 		isFalling: Boolean;
 	begin		
 		repeat
-			isFalling := Fall(hero, locations, location, event);
+			isFalling := Fall(hero, antiHero, locations, location, event);
 		until (not isFalling);
 	end;
 end.

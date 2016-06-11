@@ -14,7 +14,9 @@ locations 1
 				cmd '1'
 				transitions 1
 					transition 'Пошёл(ла) на первую пару'
-					conditions 0
+					conditions 1
+						condition 'StrengthAntiMore'
+						end condition
 					end conditions
 					effects 3
 						effect 'damage'
