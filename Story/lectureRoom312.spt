@@ -2,10 +2,18 @@ locations 1
 	location 'Аудитория 312'
 		events 4
 			event 'Первая пара'
-			text 'Ты пришел(а) к первой паре#Red'
+			texts 2 
+				text 'Ты пришел(а) к первой паре#Red'
+				text 'Тебе не очень'
+			end texts
 			commands 2
 				command 'Слушать'
-				text 'Ты прослушал(а) пару'
+				texts 4 
+					text 'Ты прослушал(а) пару'
+					text 'Тебе по-прежнему плохо#Green'
+					text 'Ты хочешь домой#Yellow'
+					text 'Очень#White'
+				end texts
 				cmd '1'
 				transitions 2
 					transition 'Смерть'

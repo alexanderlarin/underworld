@@ -9,6 +9,8 @@ interface
 			color: String;
 		end;
 		
+		TMultiLineColorText = array of TColorString;
+		
 		THero = record
 			depth: Integer;
 			
@@ -54,6 +56,8 @@ interface
 		TCommand = record
 			name: TColorString;
 			text: TColorString;
+			texts: TMultiLineColorText;
+			isMultiLine: Boolean;
 			cmd: String;
 			transitions: TTransitions;
 		end;
@@ -63,6 +67,8 @@ interface
 		TEvent = record
 			name: TColorString;
 			text: TColorString;
+			texts: TMultiLineColorText;
+			isMultiLine: Boolean;
 			commands: TCommands;
 		end;
 		
