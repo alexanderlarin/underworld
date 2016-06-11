@@ -6,6 +6,7 @@ interface
 	const
 		TokenEnd = 'end'; 
 		TokenText = 'text';
+		TokenTexts = 'texts';
 		TokenCmd = 'cmd';
 		TokenToLocation = 'toLocation';
 		TokenToEvent = 'toEvent';
@@ -23,9 +24,10 @@ interface
 		TokenAttribute = 'attribute';
 		TokenLocation = 'location';
 		TokenLocations = 'locations';
-	
+		
 	function ReadToken(var text: TextFile; var token: String): Boolean;
 	function ReadToken(var text: TextFile; var token: TColorString): Boolean;
+	function ReadTexts(var text: TextFile; var texts: TMultiLineColorText): Boolean;
 	function ReadLocation(var text: TextFile; var location: TLocation): Boolean;
 	function ReadLocations(var text: TextFile; var locations: TLocations): Boolean;
 	function ReadEvent(var text: TextFile; var event: TEvent): Boolean;
@@ -212,6 +214,11 @@ implementation
 		begin
 			if token = TokenText then
 				ReadToken(text, command.text);
+			if token = TokenTexts then
+			begin
+				command.isMultiLine := true;
+				ReadTexts(text, command.texts);
+			end;
 			if token = TokenCmd then
 				ReadToken(text, command.cmd);
 			if token = TokenTransitions then
@@ -269,10 +276,16 @@ implementation
 		begin	
 			if token = TokenText then
 			begin
+				event.isMultiLine := false;
 				ReadToken(text, event.text);
 				if (event.text.color = '') then
 					event.text.color := ColorEventText;
 			end;
+			if token = TokenTexts then
+			begin
+				event.isMultiLine := true;
+				ReadTexts(text, event.texts);
+			end;			
 			if token = TokenCommands then
 				ReadCommands(text, event.commands);
 			if token = TokenEnd then
@@ -351,6 +364,35 @@ implementation
 		end;
 		ReadToken(text, token);
 		if token = TokenEnd then
+		begin
+			ReadToken(text, token);
+		end;
+	end;
+	
+	function ReadTexts(var text: TextFile; var texts: TMultiLineColorText): Boolean;
+	var
+		I: Integer;
+		LinesCount: Integer;
+		token: String;
+	begin
+		ReadToken(text, token);
+		LinesCount := StrToInt(token);
+		SetLength(texts, LinesCount);
+		for I := 0 to LinesCount - 1 do
+		begin
+			ReadToken(text, token);
+			
+			if token = tokenText then
+			begin
+				ReadToken(text, texts[I]);
+				if (texts[I].color = '') then
+				begin
+					texts[I].color := ColorEventText;
+				end;
+			end;
+		end;
+		ReadToken(text, token);
+		if (token = TokenEnd) then
 		begin
 			ReadToken(text, token);
 		end;

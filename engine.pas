@@ -15,6 +15,7 @@ interface
 	function ChooseCommand(commands: TCommands; cmd: String; var command: TCommand): Boolean;
 	procedure PrintEvent(event: TEvent);
 	procedure PrintStatsHero(hero: THero);
+	procedure PrintCommand(command: TCommand);
 	
 implementation
 	procedure PrintStatsHero(hero: THero);
@@ -44,7 +45,18 @@ implementation
 	procedure PrintEvent(event: TEvent);
 	var I: Integer;
 	begin
-		ColorWrite(event.text.text, event.text.color, 1);
+		if event.isMultiLine then
+		begin
+			for I := 0 to Length(event.texts) - 1 do
+			begin
+				ColorWrite(event.texts[I].text, event.texts[I].color, 1);
+			end;
+		end
+		else
+		begin
+			ColorWrite(event.text.text, event.text.color, 1);
+		end;
+		
 		for I := 0 to Length(event.commands) - 1 do
 		begin
 			ColorWrite(event.commands[I].cmd, ColorNumber);
@@ -63,12 +75,28 @@ implementation
 		begin
 			if commands[I].cmd = cmd then
 			begin
-				ColorWrite(commands[I].text.text, commands[I].text.color, 1);
 				command := commands[I];
 				Exit(True);
 			end;
 		end;
 		Exit(False);	
+	end;
+	
+	procedure PrintCommand(command: TCommand);
+	var
+		I: Integer;
+	begin
+		if command.isMultiLine then
+		begin
+			for I := 0 to Length(command.texts) - 1 do
+			begin
+				ColorWrite(command.texts[I].text, command.texts[I].color, 1);
+			end;
+		end
+		else
+		begin
+			ColorWrite(command.text.text, command.text.color, 1);
+		end;
 	end;
 	
 	function ChooseTransition(hero: THero; transitions: TTransitions; var transition: TTransition): Boolean;
@@ -137,6 +165,7 @@ implementation
 		PrintStatsHero(hero);
 		PrintEvent(event);
 		ChooseCommand(event.commands, cmd, command);
+		PrintCommand(command);
 		ChooseTransition(hero, command.transitions, transition);
 		Affect(hero, transition.effects);
 		ChangeLocation(locations, location, transition);
