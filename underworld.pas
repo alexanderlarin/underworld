@@ -15,7 +15,7 @@ uses
 	outputcolor,
 	engine;
 
-procedure Initialize(var hero: THero; var locations: TLocations; var location: TLocation; var event: TEvent);
+procedure Initialize(var hero: THero;  var antiHero: THero; var locations: TLocations; var location: TLocation; var event: TEvent);
 begin
 	{$IFDEF WINDOWS}
 	SetConsoleOutputCP(CP_UTF8);
@@ -43,22 +43,37 @@ begin
 	hero.reputationInGroup := 5;
 	hero.reputationInUnderworld := 3;
 	
+	antiHero.health := 10;
+	antiHero.energy := 9;
+	antiHero.alchohol := 3;
+	
+	antiHero.strength := 3;
+	antiHero.intelligence := 5;
+	antiHero.fortune := 5;
+	
+	antiHero.love := 4;
+	antiHero.happy := 7;
+	antiHero.reputationInGroup := 8;
+	antiHero.reputationInUnderworld := 5;
+	
+	
 	ColorWrite('[+] Hero', ColorDebug, 1);
 end;
 
-procedure Finalize(hero: THero);
+procedure Finalize(hero: THero; antiHero: THero);
 begin	
 	ColorWrite('[+] Finalization', ColorDebug);
 end;
 
 var
 	hero: THero;
+	antiHero: THero;
 	locations: TLocations;
 	location: TLocation;
 	event: TEvent;
 	
 begin
-	Initialize(hero, locations, location, event);
-	Playing(hero, locations, location, event);
-	Finalize(hero);
+	Initialize(hero, antiHero, locations, location, event);
+	Playing(hero, antiHero, locations, location, event);
+	Finalize(hero, antiHero);
 end.
