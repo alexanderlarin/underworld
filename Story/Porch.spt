@@ -1,0 +1,25 @@
+locations 1	
+	location 'Падик'
+		events 1
+		   event 'Что я тут делаю?'
+			text 'd'
+			commands 1
+				command 'q'
+				text 'q'
+				cmd '1'
+				transitions 1
+					transition ''
+					conditions 0
+					end conditions
+					effects 0
+					end effects
+					toLocation ''
+					toEvent ''
+					end transition
+				end transitions
+				end command
+			end commands
+			end event
+		end events
+	end location
+end locations

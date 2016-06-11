@@ -1,0 +1,255 @@
+locations 1	
+	location 'Дом'
+		events 4
+			event 'Утро понедельника'
+			texts 4
+			   text 'АХТУНГ, ПОНЕДЕЛЬНИК#Red'
+			   text 'Обычный день обычного студента'
+			   text 'Ничто не предвещало беды, кроме расписания...'
+			   text 'Предстоит встреча с одной особой... С первой парой!'
+			end texts
+			commands 2
+				command 'Пойти'
+				text 'Пересилив себя, ты зачем-то топаешь в универ'
+				cmd '1'
+				transitions 1
+					transition 'Пошёл(ла) на первую пару'
+					conditions 0
+					end conditions
+					effects 3
+						effect 'damage'
+						value '1'
+						end effect
+						effect 'decrease'
+						value '1'
+						end effect
+						effect 'upReputationInUniversity'
+						value '1'
+						end effect
+					end effects
+					toLocation 'Универ'
+					toEvent 'Первая пара понедельника'
+					end transition
+				end transitions
+				end command
+				command 'Спать'
+				text 'Ты проспал(а) 1 пару'
+				cmd '2'
+				transitions 1
+					transition 'Проспал(а) первую пару в понедельник'
+					conditions 0
+					end conditions
+					effects 2
+						effect 'heal'
+						value '1'
+						end effect
+						effect 'boost'
+						value '2'
+						end effect
+					end effects
+					toLocation 'Дом'
+					toEvent 'После сна и первой пары'
+					end transition
+				end transitions
+				end command
+			end commands
+			end event
+			event 'После сна и первой пары'
+			text 'Ну что ж, ты поспал(а). Что дальше?'
+			commands 3
+				command 'Пойти хотя бы на вторую пару'
+				text 'Как говорил кто-то:"Знания - это сила!"'
+				cmd '1'
+				transitions 1
+					transition 'Пошёл(ла) на вторую пару'
+					conditions 0
+					end conditions
+					effects 3
+						effect 'damage'
+						value '1'
+						end effect
+						effect 'decrease'
+						value '1'
+						end effect
+						effect 'upReputationInUniversity'
+						value '1'
+						end effect
+					end effects
+					toLocation 'Универ'
+					toEvent 'Вторая пара понедельника'
+					end transition
+				end transitions
+				end command
+				command '"Посплю-ка я ещё!"'
+				text 'Ты проспал(а) и 2 пару тоже'
+				cmd '2'
+				transitions 1
+					transition 'Проспал(а) вторую пару в понедельник'
+					conditions 0
+					end conditions
+					effects 2
+						effect 'heal'
+						value '1'
+						end effect
+						effect 'boost'
+						value '1'
+						end effect
+					end effects
+					toLocation 'Дом'
+					toEvent 'Досуг'
+					end transition
+				end transitions
+				end command
+				command 'Есть дела поважнее сна'
+				texts 2
+				   text 'Правильно! Ведь в закромах ещё лежат несобранные шариковые ручки, ожидающие отгрузки заказчику!'
+				   text 'Ты классный начинающий предприниматель, загребаешь деньги лопатой!'
+				end texts
+				cmd '3'
+				transitions 1
+					transition 'Предприниматель в понедельник'
+					conditions 0
+					end conditions
+					effects 2
+						effect 'increaseIntelligence'
+						value '1'
+						end effect
+						effect 'upReputationInGroup'
+						value '2'
+						end effect
+					end effects
+					toLocation 'Дом'
+					toEvent 'Досуг'
+					end transition
+				end transitions
+				end command
+			end commands
+			end event
+			event 'Досуг'
+			text 'День близится к концу. Чем займёшься?'
+			commands 4
+				command 'Решаешь заняться собой и идёшь в качалочку'
+				texts 2
+                    text 'Кудах-кудах'
+					text 'Вообще-то, знания - это сила, но ладно, качалка так качалка'
+			    end texts
+				cmd '1'
+				transitions 1
+					transition 'Качалочка понедельник'
+					conditions 0
+					end conditions
+					effects 3
+						effect 'pumpUp'
+						value '1'
+						end effect
+						effect 'decrease'
+						value '2'
+						end effect
+						effect 'reduceIntelligence'
+						value '1'
+						end effect
+					end effects
+					toLocation 'Дом'
+					toEvent 'Утро вторника'
+					end transition
+				end transitions
+				end command
+				command 'Покатать в дотку'
+				text 'До 4 утра сидишь в дотане, мда'
+				cmd '2'
+				transitions 1
+					transition 'Дотка до 4 утра'
+					conditions 0
+					end conditions
+					effects 3
+						effect 'damage'
+						value '2'
+						end effect
+						effect 'decrease'
+						value '3'
+						end effect
+						effect 'reduceIntelligence'
+						value '1'
+						end effect
+					end effects
+					toLocation 'Дом'
+					toEvent 'Утро вторника'
+					end transition
+				end transitions
+				end command
+				command '"Я устал днём, стоит поспать"'
+				text 'Подушку никто тебе не заменит'
+				cmd '3'
+				transitions 1
+					transition 'Подушка в понедельник'
+					conditions 0
+					end conditions
+					effects 2
+						effect 'heal'
+						value '9'
+						end effect
+						effect 'boost'
+						value '9'
+						end effect
+					end effects
+					toLocation 'Дом'
+					toEvent 'Утро вторника'
+					end transition
+				end transitions
+				end command
+				command 'Пойти гулять'
+				texts 2
+				   text 'Самое время подышать свежим воздухом!'
+				   text 'На улице встречаешь свою тайную "любовь" из группы'
+				end texts
+				cmd '4'
+				transitions 1
+					transition 'Прогулочка ночью'
+					conditions 0
+					end conditions
+					effects 2
+						effect 'happiness'
+						value '1'
+						end effect
+						effect 'damage'
+						value '1'
+						end effect
+					end effects
+					toLocation 'Улица'
+					toEvent 'Ночная встреча'
+					end transition
+				end transitions
+				end command
+			end commands
+			end event
+			event 'Утро вторника'
+			text ''
+			commands 1
+				command ''
+				text ''
+				cmd '1'
+				transitions 1
+					transition ''
+					conditions 0
+					end conditions
+					effects 3
+						effect 'pumpUp'
+						value '10'
+						end effect
+						effect 'decrease'
+						value '30'
+						end effect
+						effect 'reduceIntelligence'
+						value '5'
+						end effect
+					end effects
+					toLocation ''
+					toEvent ''
+					end transition
+				end transitions
+				end command
+			end commands
+			end event
+		end events
+	end location
+end locations

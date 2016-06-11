@@ -17,11 +17,14 @@ interface
 	function PumpDown(var hero: THero; effect: TEffect): Boolean;
 	function ReduceIntelligence(var hero: THero; effect: TEffect): Boolean;
 	function IncreaseIntelligence(var hero: THero; effect: TEffect): Boolean;
-	function Cheatter(var hero: THero; effect: TEffect): Boolean;
-	function Cheatless(var hero: THero; effect: TEffect): Boolean;
 	function Luckly(var hero: THero; effect: TEffect): Boolean;
 	function Luckless(var hero: THero; effect: TEffect): Boolean;
 	
+	function InLove(var hero: THero; effect: TEffect): Boolean;
+	function Lonely(var hero: THero; effect: TEffect): Boolean;
+	function Happiness(var hero: THero; effect: TEffect): Boolean;
+	function Misfortune(var hero: THero; effect: TEffect): Boolean;
+	 
 	function UpReputationInGroup(var hero: THero; effect: TEffect): Boolean;
 	function DownReputationInGroup(var hero: THero; effect: TEffect): Boolean;
 	function UpReputationInUniversity(var hero: THero; effect: TEffect): Boolean;
@@ -41,9 +44,9 @@ implementation
 	function Heal(var hero: THero; effect: TEffect): Boolean;
 	begin
 		hero.health := hero.health + effect.value;
-		if hero.health > 100 then
-			hero.health := 100;
-		if hero.health = 100 then
+		if hero.health > 10 then
+			hero.health := 10;
+		if hero.health = 10 then
 			Exit(True);
 		Exit(False);
 	end;
@@ -51,9 +54,9 @@ implementation
 	function Boost(var hero: THero; effect: TEffect): Boolean;
 	begin
 		hero.energy := hero.energy + effect.value;
-		if hero.energy > 100 then
-			hero.energy := 100;
-		if hero.energy = 100 then
+		if hero.energy > 10 then
+			hero.energy := 10;
+		if hero.energy = 10 then
 			Exit(True);
 		Exit(False);
 	end;
@@ -71,9 +74,9 @@ implementation
 	function TakeToDrink(var hero: THero; effect: TEffect): Boolean;
 	begin
 		hero.alchohol := hero.alchohol + effect.value;
-		if hero.alchohol > 100 then
-			hero.alchohol := 100;
-		if hero.alchohol = 100 then
+		if hero.alchohol > 10 then
+			hero.alchohol := 10;
+		if hero.alchohol = 10 then
 			Exit(False);
 		Exit(True);
 	end;
@@ -91,9 +94,9 @@ implementation
 	function PumpUp(var hero: THero; effect: TEffect): Boolean; 
 	begin
 		hero.strength := hero.strength + effect.value;
-		if hero.strength > 100 then
-			hero.strength := 100;
-		if hero.strength = 100 then
+		if hero.strength > 10 then
+			hero.strength := 10;
+		if hero.strength = 10 then
 			Exit(True);
 		Exit(False);
 	end;
@@ -121,39 +124,19 @@ implementation
 	function IncreaseIntelligence(var hero: THero; effect: TEffect): Boolean;
 	begin
 		hero.intelligence := hero.strength + effect.value;
-		if hero.intelligence > 100 then
-			hero.intelligence := 100;
-		if hero.intelligence = 100 then
+		if hero.intelligence > 10 then
+			hero.intelligence := 10;
+		if hero.intelligence = 10 then
 			Exit(True);
 		Exit(False);
-	end;
-	
-	function Cheatter(var hero: THero; effect: TEffect): Boolean;
-	begin
-		hero.agility := hero.agility + effect.value;
-		if hero.agility > 100 then
-			hero.agility := 100;
-		if hero.agility = 100 then
-			Exit(True);
-		Exit(False);
-	end;
-	
-	function Cheatless(var hero: THero; effect: TEffect): Boolean;
-	begin
-		hero.agility := hero.agility - effect.value;
-		if hero.agility < 0 then
-			hero.agility := 0;
-		if hero.agility = 0 then
-			Exit(False);
-		Exit(True);
 	end;
 	
 	function Luckly(var hero: THero; effect: TEffect): Boolean;
 	begin
 		hero.fortune := hero.fortune + effect.value;
-		if hero.fortune > 100 then
-			hero.fortune := 100;
-		if hero.fortune = 100 then
+		if hero.fortune > 10 then
+			hero.fortune := 10;
+		if hero.fortune = 10 then
 			Exit(True);
 		Exit(False);
 	end;
@@ -168,12 +151,52 @@ implementation
 		Exit(True);
 	end;
 	
+	function Lonely(var hero: THero; effect: TEffect): Boolean;
+	begin
+		hero.love := hero.love - effect.value;
+		if hero.love < 0 then
+			hero.love := 0;
+		if hero.love = 0 then
+			Exit(False);
+		Exit(True);
+	end;
+	
+	function InLove(var hero: THero; effect: TEffect): Boolean;
+	begin
+		hero.love := hero.love + effect.value;
+		if hero.love < 0 then
+			hero.love := 0;
+		if hero.love = 0 then
+			Exit(False);
+		Exit(True);
+	end;
+	
+  function Happiness(var hero: THero; effect: TEffect): Boolean;
+	begin
+		hero.happy := hero.happy + effect.value;
+		if hero.happy < 0 then
+			hero.happy := 0;
+		if hero.happy = 0 then
+			Exit(False);
+		Exit(True);
+	end;
+	
+	function Misfortune(var hero: THero; effect: TEffect): Boolean;
+	begin
+		hero.happy := hero.happy - effect.value;
+		if hero.happy < 0 then
+			hero.happy := 0;
+		if hero.happy = 0 then
+			Exit(False);
+		Exit(True);
+	end;
+	
 	function UpReputationInGroup(var hero: THero; effect: TEffect): Boolean;
 	begin
 		hero.reputationInGroup := hero.reputationInGroup + effect.value;
-		if hero.reputationInGroup > 100 then
-			hero.reputationInGroup := 100;
-		if hero.reputationInGroup = 100 then
+		if hero.reputationInGroup > 10 then
+			hero.reputationInGroup := 10;
+		if hero.reputationInGroup = 10 then
 			Exit(True);
 		Exit(False);
 	end;
@@ -191,9 +214,9 @@ implementation
 	function UpReputationInUniversity(var hero: THero; effect: TEffect): Boolean;
 	begin
 		hero.reputationInUnderworld := hero.reputationInUnderworld + effect.value;
-		if hero.reputationInUnderworld > 100 then
-			hero.reputationInUnderworld := 100;
-		if hero.reputationInUnderworld = 100 then
+		if hero.reputationInUnderworld > 10 then
+			hero.reputationInUnderworld := 10;
+		if hero.reputationInUnderworld = 10 then
 			Exit(True);
 		Exit(False);
 	end;
@@ -234,23 +257,29 @@ implementation
 		if effect.name = 'pumpDown' then
 			if not PumpDown(hero, effect) then
 				Exit(False);
-		if effect.name = 'ReduceIntelligence' then
+		if effect.name = 'reduceIntelligence' then
 			if not ReduceIntelligence(hero, effect) then
 				Exit(False);
 		if effect.name = 'inreaseIntelligence' then
 			if not IncreaseIntelligence(hero, effect) then
-				Exit(False);
-		if effect.name = 'cheatter' then
-			if not Cheatter(hero, effect) then
-				Exit(False);
-		if effect.name = 'cheatless' then
-			if not Cheatless(hero, effect) then
 				Exit(False);
 		if effect.name = 'luckly' then
 			if not Luckly(hero, effect) then
 				Exit(False);
 		if effect.name = 'luckless' then
 			if not Luckless(hero, effect) then
+				Exit(False);
+		if effect.name = 'happiness' then
+			if not Damage(hero, effect) then
+				Exit(False);
+		if effect.name = 'misfortune' then
+			if not Damage(hero, effect) then
+				Exit(False);
+		if effect.name = 'inLove' then
+			if not Damage(hero, effect) then
+				Exit(False);
+		if effect.name = 'lonely' then
+			if not Damage(hero, effect) then
 				Exit(False);
 		if effect.name = 'upReputationInGroup' then
 			if not UpReputationInGroup(hero, effect) then
@@ -277,4 +306,5 @@ implementation
 				Exit(False);
 		Exit(True);
 	end;
+	
 end.

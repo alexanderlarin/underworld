@@ -23,22 +23,23 @@ implementation
 		ColorWrite('=======ХАРАКТЕРИСТИКИ ПЕРСОНАЖА=======',ColorDefault,1);
 		ColorWrite('Здоровье: ', ColorAttribute);
 		ColorWrite(hero.health, ColorNumber);
-		ColorWrite('%', ColorNumber, 1);
+		ColorWrite('0%', ColorNumber, 1);
 		ColorWrite('Бодрость: ', ColorAttribute);
 		ColorWrite(hero.Energy, ColorNumber);
-		ColorWrite('%', ColorNumber, 1);
+		ColorWrite('0%', ColorNumber, 1);
 		ColorWrite('Содержание алкоголя: ', ColorAttribute);
 		ColorWrite(hero.Alchohol, ColorNumber);
-		ColorWrite('%', ColorNumber, 2);
+		ColorWrite('0%', ColorNumber, 2);
 
 		ColorWrite('Сила: ',ColorAttribute);
-		ColorWrite(hero.Strength, ColorNumber, 1);
-		ColorWrite('Ловкость: ', ColorAttribute);
-		ColorWrite(hero.Agility, ColorNumber, 1);
+		ColorWrite(hero.Strength, ColorNumber);
+		ColorWrite('0%', ColorNumber, 1);
 		ColorWrite('Интеллект: ',ColorAttribute);
-		ColorWrite(hero.Intelligence, ColorNumber, 1);
+		ColorWrite(hero.Intelligence, ColorNumber);
+		ColorWrite('0%', ColorNumber, 1);
 		ColorWrite('Удача: ',ColorAttribute);
-		ColorWrite(hero.Fortune, ColorNumber, 1);
+		ColorWrite(hero.Fortune, ColorNumber);
+		ColorWrite('0%', ColorNumber, 1);
 		ColorWrite('======================================', ColorDefault, 1);
 	end;
 	
@@ -55,8 +56,8 @@ implementation
 		else
 		begin
 			ColorWrite(event.text.text, event.text.color, 1);
-		end;
-		
+ 		end;
+ 
 		for I := 0 to Length(event.commands) - 1 do
 		begin
 			ColorWrite(event.commands[I].cmd, ColorNumber);
@@ -83,22 +84,22 @@ implementation
 	end;
 	
 	procedure PrintCommand(command: TCommand);
-	var
-		I: Integer;
-	begin
-		if command.isMultiLine then
-		begin
-			for I := 0 to Length(command.texts) - 1 do
-			begin
-				ColorWrite(command.texts[I].text, command.texts[I].color, 1);
-			end;
-		end
-		else
-		begin
-			ColorWrite(command.text.text, command.text.color, 1);
-		end;
-	end;
-	
+ 	var
+ 		I: Integer;
+ 	begin
+ 		if command.isMultiLine then
+ 		begin
+ 			for I := 0 to Length(command.texts) - 1 do
+ 			begin
+ 				ColorWrite(command.texts[I].text, command.texts[I].color, 1);
+ 			end;
+ 		end
+ 		else
+ 		begin
+ 			ColorWrite(command.text.text, command.text.color, 1);
+ 		end;
+ 	end;
+ 
 	function ChooseTransition(hero: THero; transitions: TTransitions; var transition: TTransition): Boolean;
 	var
 		I: Integer;

@@ -12,16 +12,17 @@ interface
 		TMultiLineColorText = array of TColorString;
 		
 		THero = record
-			depth: Integer;
 			
-			Health: Integer;
-			Energy: Integer;
-			Alchohol: Integer;
+			health: Integer;
+			energy: Integer;
+			alchohol: Integer;
 			
-			Strength: Integer;
-			Agility: Integer;
-			Intelligence: Integer;
-			Fortune: Integer;
+			strength: Integer;
+			intelligence: Integer;
+			fortune: Integer;
+			
+			love: Integer;
+			happy: Integer;
 		
 			ReputationInGroup: Integer;
 			ReputationInUnderworld: Integer;	
@@ -57,7 +58,7 @@ interface
 			name: TColorString;
 			text: TColorString;
 			texts: TMultiLineColorText;
-			isMultiLine: Boolean;
+ 			isMultiLine: Boolean;
 			cmd: String;
 			transitions: TTransitions;
 		end;
@@ -68,7 +69,7 @@ interface
 			name: TColorString;
 			text: TColorString;
 			texts: TMultiLineColorText;
-			isMultiLine: Boolean;
+ 			isMultiLine: Boolean;
 			commands: TCommands;
 		end;
 		

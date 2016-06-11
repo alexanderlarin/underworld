@@ -1,0 +1,65 @@
+locations 1	
+	location 'Улица'
+		events 1
+		   event 'Ночная встреча'
+			text 'Слишком неожиданно... Ты в ступоре'
+			commands 3
+				command 'Спросить, как дойти до библиотеки'
+				text 'И правда, как?'
+				cmd '1'
+				transitions 1
+					transition ''
+					conditions 0
+					end conditions
+					effects 2
+						effect 'increaseIntelligence'
+						value '1'
+						end effect
+						effect 'lonely'
+						value '1'
+						end effect
+					end effects
+					toLocation 'Падик'
+					toEvent 'Что я тут делаю?'
+					end transition
+				end transitions
+				end command
+				command 'Спросить, что он(а) тут делает в столь поздний час'
+				text 'Серьёзно? Ты сам(а)-то что тут делаешь??'
+				cmd '2'
+				transitions 1
+					transition ''
+					conditions 0
+					end conditions
+					effects 0
+					end effects
+					toLocation 'Падик'
+					toEvent 'Что я тут делаю?'
+					end transition
+				end transitions
+				end command
+				command 'Позвать её(его) погреться в твоей шикарной копейке'
+				text 'От такого предложения невозможно отказаться'
+				cmd '3'
+				transitions 1
+					transition ''
+					conditions 0
+					end conditions
+					effects 2
+					    effect ' inLove'
+						value '1'
+						end effect
+						effect 'happiness'
+						value '1'
+						end effect
+					end effects
+					toLocation 'Падик'
+					toEvent 'Что я тут делаю?'
+					end transition
+				end transitions
+				end command
+			end commands
+			end event
+		end events
+	end location
+end locations
