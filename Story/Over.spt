@@ -1,0 +1,11 @@
+locations 1	
+	location 'Game over'
+	    events 1
+		   event 'Game over'
+		   text 'Спасибо за игру!'
+		   commands 0
+		   end commands
+           end event
+        end events
+	end location
+end locations
