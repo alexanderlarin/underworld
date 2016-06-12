@@ -12,7 +12,7 @@ interface
 	function ChangeLocation(locations: TLocations; var location: TLocation; transition: TTransition): Boolean;
 	function ChangeEvent(events: TEvents; var event: TEvent; toEvent: String): Boolean;
 	function ChooseTransition(hero: THero; antiHero: THero; transitions: TTransitions; var transition: TTransition): Boolean;
-	function ChooseCommand(commands: TCommands; cmd: String; var command: TCommand): Boolean;
+	function ChooseCommand(commands: TCommands; var cmd: String; var command: TCommand): Boolean;
 	procedure PrintEvent(event: TEvent);
 	procedure PrintStatsHero(hero: THero);
 	procedure PrintCommand(command: TCommand);
@@ -67,7 +67,7 @@ implementation
 		ColorWrite('Введите команду: ', ColorDefault);
 	end;
 	
-	function ChooseCommand(commands: TCommands; cmd: String; var command: TCommand): Boolean;
+	function ChooseCommand(commands: TCommands; var cmd: String; var command: TCommand): Boolean;
 	var 
 		I: Integer;
 	begin
@@ -80,6 +80,7 @@ implementation
 				Exit(True);
 			end;
 		end;
+
 		Exit(False);	
 	end;
 	
@@ -162,10 +163,15 @@ implementation
 		command: TCommand;
 		transition: TTransition;
 		cmd: String;
-	begin
+	begin	
+		cmd := '';
 		PrintStatsHero(hero);
 		PrintEvent(event);
-		ChooseCommand(event.commands, cmd, command);
+		isFalling := ChooseCommand(event.commands, cmd, command);
+		if not isFalling then
+		begin
+			Exit(not (cmd = 'exit'));
+		end;
 		PrintCommand(command);
 		ChooseTransition(hero, antiHero, command.transitions, transition);
 		Affect(hero, antiHero, transition.effects);
