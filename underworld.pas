@@ -9,6 +9,7 @@ uses
 	{$ENDIF}
 	sysutils,
 	math,
+	finalizing,
 	effects,
 	storyparser,
 	types,
@@ -60,9 +61,17 @@ begin
 	ColorWrite('[+] Hero', ColorDebug, 1);
 end;
 
-procedure Finalize(hero: THero; antiHero: THero);
+procedure Finalize(var hero: THero;  var antiHero: THero; var locations: TLocations; var location: TLocation; var event: TEvent);
 begin	
-	ColorWrite('[+] Finalization', ColorDebug);
+	if DisposeResources(hero, antiHero, locations, location, event) then
+	begin
+		ColorWrite('[+] Finalization', ColorDebug);
+	end
+	else
+	begin
+		ColorWrite('[!] Finalization Error', ColorError);
+	end;
+	ReadLn;
 end;
 
 var
@@ -75,5 +84,5 @@ var
 begin
 	Initialize(hero, antiHero, locations, location, event);
 	Playing(hero, antiHero, locations, location, event);
-	Finalize(hero, antiHero);
+	Finalize(hero, antiHero, locations, location, event);
 end.

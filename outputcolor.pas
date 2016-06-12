@@ -9,6 +9,7 @@ interface
 	const
 		ColorDefault = 'LightGray';
 		ColorDebug = 'White';
+		ColorError = 'LightRed';
 		ColorFinish = 'Cyan';
 		ColorEventName = 'Green';
 		ColorEventText = 'Cyan';
