@@ -4,8 +4,7 @@ interface
 	uses
 		types,
 		sysutils,
-		outputcolor;
-		
+		outputcolor;		
 	function Affect(var hero: THero; var antiHero: THero; effect: TEffect): Boolean;
 	function Affect(var hero: THero; var antiHero: THero; effects: TEffects): Boolean;
 	
