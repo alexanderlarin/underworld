@@ -43,7 +43,7 @@ locations 1
 				end transitions
 				end command
 				command 'Притвориться мёртвым'
-				text 'Препод подумал, что ты не кот, а хлеб, и не заметил тебя'
+				text 'Препод подумол, что ты не кот, а хлеб, и не заметил тебя'
 				cmd '2'
 				transitions 1
 					transition 'Не кот, а хлеб'
@@ -120,7 +120,7 @@ locations 1
 				end transitions
 				end command
 				command 'Свалить'
-				text 'Деды воевали, но тебя это не колышит'
+				text 'Деды воевали, но тебя это не колышет'
 				cmd '2'
 				transitions 1
 					transition 'Ты решил(а) свалить, но тебя заметили и наорали.'
@@ -137,8 +137,8 @@ locations 1
 						value '1'
 						end effect
 					end effects
-					toLocation 'Падик'
-					toEvent 'Что я вообще тут делаю?'
+					toLocation 'Дом'
+					toEvent 'Досуг'
 					end transition
 				end transitions
 				end command
