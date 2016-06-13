@@ -1,6 +1,6 @@
 locations 1	
 	location 'Дом'
-		events 4
+		events 9
 			event 'Утро понедельника'
 			texts 4
 			   text 'АХТУНГ, ПОНЕДЕЛЬНИК#Red'
@@ -151,8 +151,8 @@ locations 1
 						value '1'
 						end effect
 					end effects
-					toLocation 'Дом'
-					toEvent 'Утро вторника'
+					toLocation 'Улица'
+					toEvent 'Встреча с гопниками'
 					end transition
 				end transitions
 				end command
@@ -175,7 +175,7 @@ locations 1
 						end effect
 					end effects
 					toLocation 'Дом'
-					toEvent 'Утро вторника'
+					toEvent 'Утро вторника6'
 					end transition
 				end transitions
 				end command
@@ -195,7 +195,7 @@ locations 1
 						end effect
 					end effects
 					toLocation 'Дом'
-					toEvent 'Утро вторника'
+					toEvent 'Утро вторника6'
 					end transition
 				end transitions
 				end command
@@ -224,29 +224,337 @@ locations 1
 				end command
 			end commands
 			end event
-			event 'Утро вторника'
-			text ''
-			commands 1
-				command ''
-				text ''
+			event 'Утро вторника1'
+			texts 4
+			   text 'Ого, вчера гопники сильно тебя испугались!'
+			   text 'Сегодня необычный день!'
+			   text 'У твоей бабули Клеопатры Константиновны сегодня др'
+			   text 'Не забудь поздравить старушку с юбилеем!'
+			end texts
+			commands 2
+				command 'Поздравить бабулю'
+				text 'Старушка наконец-то вписала тебя в завещание'
 				cmd '1'
 				transitions 1
 					transition ''
 					conditions 0
 					end conditions
 					effects 3
-						effect 'pumpUp'
+						effect 'heal'
 						value '10'
 						end effect
-						effect 'decrease'
-						value '30'
+						effect 'boost'
+						value '10'
 						end effect
-						effect 'reduceIntelligence'
-						value '5'
+						effect 'happiness'
+						value '1'
 						end effect
 					end effects
-					toLocation ''
-					toEvent ''
+					toLocation 'Универ'
+					toEvent 'Первая пара вторника'
+					end transition
+				end transitions
+				end command
+				command 'Забить на старую'
+				text 'Тебе не светит трёшка в центре Москвы :с'
+				cmd '2'
+				transitions 1
+					transition ''
+					conditions 0
+					end conditions
+					effects 3
+					    effect 'heal'
+						value '10'
+						end effect
+						effect 'boost'
+						value '10'
+						end effect
+						effect 'misfortune'
+						value '1'
+						end effect
+					end effects
+					toLocation 'Универ'
+					toEvent 'Первая пара вторника'
+					end transition
+				end transitions
+				end command
+			end commands
+			end event
+			event 'Утро вторника2'
+			texts 4
+			   text 'Ого, вчера гопники признали тебя за своего и отсыпали семок'
+			   text 'Сегодня необычный день!'
+			   text 'У твоей бабули Клеопатры Константиновны сегодня др'
+			   text 'Не забудь поздравить старушку с юбилеем!'
+			end texts
+			commands 2
+				command 'Поздравить бабулю'
+				text 'Старушка наконец-то вписала тебя в завещание'
+				cmd '1'
+				transitions 1
+					transition ''
+					conditions 0
+					end conditions
+					effects 3
+					    effect 'heal'
+						value '10'
+						end effect
+						effect 'boost'
+						value '10'
+						end effect
+						effect 'happiness'
+						value '1'
+						end effect
+					end effects
+					toLocation 'Универ'
+					toEvent 'Первая пара вторника'
+					end transition
+				end transitions
+				end command
+				command 'Забить на старую'
+				text 'Тебе не светит трёшка в центре Москвы :с'
+				cmd '2'
+				transitions 1
+					transition ''
+					conditions 0
+					end conditions
+					effects 3
+					    effect 'heal'
+						value '10'
+						end effect
+						effect 'boost'
+						value '10'
+						end effect
+						effect 'misfortune'
+						value '1'
+						end effect
+					end effects
+					toLocation 'Универ'
+					toEvent 'Первая пара вторника'
+					end transition
+				end transitions
+				end command
+			end commands
+			end event
+			event 'Утро вторника3'
+			texts 4
+			   text 'Ого, вчера ты отбил гопникам печень, так держать!'
+			   text 'Сегодня необычный день!'
+			   text 'У твоей бабули Клеопатры Константиновны сегодня др'
+			   text 'Не забудь поздравить старушку с юбилеем!'
+			end texts
+			commands 2
+				command 'Поздравить бабулю'
+				text 'Старушка наконец-то вписала тебя в завещание'
+				cmd '1'
+				transitions 1
+					transition ''
+					conditions 0
+					end conditions
+					effects 3
+					    effect 'heal'
+						value '10'
+						end effect
+						effect 'boost'
+						value '10'
+						end effect
+						effect 'happiness'
+						value '1'
+						end effect
+					end effects
+					toLocation 'Универ'
+					toEvent 'Первая пара вторника'
+					end transition
+				end transitions
+				end command
+				command 'Забить на старую'
+				text 'Тебе не светит трёшка в центре Москвы :с'
+				cmd '2'
+				transitions 1
+					transition ''
+					conditions 0
+					end conditions
+					effects 3
+					    effect 'heal'
+						value '10'
+						end effect
+						effect 'boost'
+						value '10'
+						end effect
+						effect 'misfortune'
+						value '1'
+						end effect
+					end effects
+					toLocation 'Универ'
+					toEvent 'Первая пара вторника'
+					end transition
+				end transitions
+				end command
+			end commands
+			end event
+			event 'Утро вторника4'
+			texts 4
+			   text 'Вчера ты был зверски избит гопниками, но мама отхиляла тебя куриным отваром'
+			   text 'Сегодня необычный день!'
+			   text 'У твоей бабули Клеопатры Константиновны сегодня др'
+			   text 'Не забудь поздравить старушку с юбилеем!'
+			end texts
+			commands 2
+				command 'Поздравить бабулю'
+				text 'Старушка наконец-то вписала тебя в завещание'
+				cmd '1'
+				transitions 1
+					transition ''
+					conditions 0
+					end conditions
+					effects 3
+					    effect 'heal'
+						value '10'
+						end effect
+						effect 'boost'
+						value '10'
+						end effect
+						effect 'happiness'
+						value '1'
+						end effect
+					end effects
+					toLocation 'Универ'
+					toEvent 'Первая пара вторника'
+					end transition
+				end transitions
+				end command
+				command 'Забить на старую'
+				text 'Тебе не светит трёшка в центре Москвы :с'
+				cmd '2'
+				transitions 1
+					transition ''
+					conditions 0
+					end conditions
+					effects 3
+					    effect 'heal'
+						value '10'
+						end effect
+						effect 'boost'
+						value '10'
+						end effect
+						effect 'misfortune'
+						value '1'
+						end effect
+					end effects
+					toLocation 'Универ'
+					toEvent 'Первая пара вторника'
+					end transition
+				end transitions
+				end command
+			end commands
+			end event
+			event 'Утро вторника5'
+			texts 4
+			   text 'Вчера ты мило пообщался(ась) с тянкой(куном), искра, буря, безумие'
+			   text 'Сегодня необычный день!'
+			   text 'У твоей бабули Клеопатры Константиновны сегодня др'
+			   text 'Не забудь поздравить старушку с юбилеем!'
+			end texts
+			commands 2
+				command 'Поздравить бабулю'
+				text 'Старушка наконец-то вписала тебя в завещание'
+				cmd '1'
+				transitions 1
+					transition ''
+					conditions 0
+					end conditions
+					effects 3
+					    effect 'heal'
+						value '10'
+						end effect
+						effect 'boost'
+						value '10'
+						end effect
+						effect 'happiness'
+						value '1'
+						end effect
+					end effects
+					toLocation 'Универ'
+					toEvent 'Первая пара вторника'
+					end transition
+				end transitions
+				end command
+				command 'Забить на старую'
+				text 'Тебе не светит трёшка в центре Москвы :с'
+				cmd '2'
+				transitions 1
+					transition ''
+					conditions 0
+					end conditions
+					effects 3
+					    effect 'heal'
+						value '10'
+						end effect
+						effect 'boost'
+						value '10'
+						end effect
+						effect 'misfortune'
+						value '1'
+						end effect
+					end effects
+					toLocation 'Универ'
+					toEvent 'Первая пара вторника'
+					end transition
+				end transitions
+				end command
+			end commands
+			end event
+			event 'Утро вторника6'
+			texts 4
+			   text 'Вчера ты классно позанимался(ась) фигнёй'
+			   text 'Сегодня необычный день!'
+			   text 'У твоей бабули Клеопатры Константиновны сегодня др'
+			   text 'Не забудь поздравить старушку с юбилеем!'
+			end texts
+			commands 2
+				command 'Поздравить бабулю'
+				text 'Старушка наконец-то вписала тебя в завещание'
+				cmd '1'
+				transitions 1
+					transition ''
+					conditions 0
+					end conditions
+					effects 3
+					    effect 'heal'
+						value '10'
+						end effect
+						effect 'boost'
+						value '10'
+						end effect
+						effect 'happiness'
+						value '1'
+						end effect
+					end effects
+					toLocation 'Универ'
+					toEvent 'Первая пара вторника'
+					end transition
+				end transitions
+				end command
+				command 'Забить на старую'
+				text 'Тебе не светит трёшка в центре Москвы :с'
+				cmd '2'
+				transitions 1
+					transition ''
+					conditions 0
+					end conditions
+					effects 3
+					    effect 'heal'
+						value '10'
+						end effect
+						effect 'boost'
+						value '10'
+						end effect
+						effect 'misfortune'
+						value '1'
+						end effect
+					end effects
+					toLocation 'Универ'
+					toEvent 'Первая пара вторника'
 					end transition
 				end transitions
 				end command
