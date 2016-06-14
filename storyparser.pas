@@ -158,6 +158,13 @@ implementation
 		begin
 			if token = TokenConditions then
 				ReadConditions(text, transition.conditions);
+			if token = TokenText then
+				ReadToken(text, transition.text);
+			if token = TokenTexts then
+			begin
+				transition.isMultiLine := true;
+				ReadTexts(text, transition.texts);
+			end;
 			if token = TokenEffects then
 				ReadEffects(text, transition.effects);
 			if token = TokenToLocation then

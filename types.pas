@@ -46,6 +46,9 @@ interface
 		
 		TTransition = record
 			name: String;
+			text: TColorString;
+			texts: TMultiLineColorText;
+			isMultiLine: Boolean;
 			conditions: TConditions;
 			effects: TEffects;
 			toLocation: String;
