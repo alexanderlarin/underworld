@@ -84,6 +84,10 @@ interface
 		end;
 		
 		TLocations = array of TLocation;
+		
+		TStory = String;
+		
+		TStories = array of TStory;
 implementation
 
 end.

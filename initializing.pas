@@ -40,12 +40,12 @@ implementation
 			begin
 				if (ParamStr(I + 1) <> '') then
 				begin
-					LoadStory(ParamStr(I + 1), locations, location, event);
+					LoadStories(ParamStr(I + 1), locations, location, event);
 					Exit();
 				end
 			end;
 		end;
-		LoadStory('default.spt', locations, location, event);
+		LoadStories('default.spt', locations, location, event);
 	end;
 	
 	procedure InitHeroes(var hero: THero; var antiHero: THero);
