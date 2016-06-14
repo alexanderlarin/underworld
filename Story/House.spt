@@ -14,6 +14,11 @@ locations 1
 				cmd '1'
 				transitions 1
 					transition 'Пошёл(ла) на первую пару'
+					texts 3
+						text 'Грустно. Хочется спать#DarkGray'
+						text 'Хочется сдать сессию#LightGray'
+						text 'И лечь спать#Cyan'
+					end texts
 					conditions 1
 						condition 'StrengthAntiMore'
 						end condition

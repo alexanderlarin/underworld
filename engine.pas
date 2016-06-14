@@ -16,6 +16,7 @@ interface
 	procedure PrintEvent(event: TEvent);
 	procedure PrintStatsHero(hero: THero);
 	procedure PrintCommand(command: TCommand);
+	procedure PrintTransition(transition: TTransition);
 	
 implementation
 	procedure PrintStatsHero(hero: THero);
@@ -115,6 +116,24 @@ implementation
 		end;
 	end;
 	
+	procedure PrintTransition(transition: TTransition);
+	var
+		I: Integer;
+	begin
+		if transition.isMultiLine then
+		begin
+			for I := 0 to Length(transition.texts) - 1 do
+ 			begin
+ 				ColorWrite(transition.texts[I].text, transition.texts[I].color, 1);
+ 			end;
+ 		end
+ 		else
+ 		begin
+			if transition.text.text <> '' then
+				ColorWrite(transition.text.text, transition.text.color, 1);
+ 		end;
+	end;
+	
 	function ChangeEvent(events: TEvents; var event: TEvent; toEvent: String): Boolean;
 	var
 		I: Integer;
@@ -174,6 +193,7 @@ implementation
 		end;
 		PrintCommand(command);
 		ChooseTransition(hero, antiHero, command.transitions, transition);
+		PrintTransition(transition);
 		Affect(hero, antiHero, transition.effects);
 		ChangeLocation(locations, location, transition);
 		isFalling := ChangeEvent(location.events, event, transition.toEvent);		
