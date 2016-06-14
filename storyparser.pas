@@ -24,6 +24,7 @@ interface
 		TokenAttribute = 'attribute';
 		TokenLocation = 'location';
 		TokenLocations = 'locations';
+		TokenStory = 'story';
 		
 	function ReadToken(var text: TextFile; var token: String): Boolean;
 	function ReadToken(var text: TextFile; var token: TColorString): Boolean;
@@ -40,7 +41,7 @@ interface
 	function ReadConditions(var text: TextFile; var conditions: TConditions): Boolean;
 	function ReadEffect(var text: TextFile; var effect: TEffect): Boolean;
 	function ReadEffects(var text: TextFile; var effects: TEffects): Boolean;
-	function LoadStory(folderName: UnicodeString; var locations: TLocations): Boolean;
+	function LoadStory(fileName: UnicodeString; var locations: TLocations; var location: TLocation; var event: TEvent): Boolean;
 
 implementation
 	function ReadEffect(var text: TextFile; var effect: TEffect): Boolean;
@@ -513,16 +514,15 @@ implementation
 		ReadToken := not EOF(text);
 	end;	
 	
-	function LoadStory(folderName: UnicodeString; var locations: TLocations): Boolean;
+	function LoadStory(fileName: UnicodeString; var locations: TLocations; var location: TLocation; var event: TEvent): Boolean;
 	var
 		text: TextFile;
 		token: String;
 		folderPath: UnicodeString;
-		fileName: String;
 		search: TUnicodeSearchRec;
 		searchResult: LongInt;
 	begin
-		folderPath := './' + folderName + '/';
+		folderPath := './Story/';
 		searchResult := FindFirst(folderPath + '*', 0, search);
 		while searchResult = 0 do
 		begin
@@ -534,5 +534,8 @@ implementation
 			Close(text);
 			searchResult := FindNext(search);
 		end;
+		location := locations[0];
+		event := location.events[0];
+		ColorWrite('[+] Events', ColorDebug, 1);
 	end;
 end.

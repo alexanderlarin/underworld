@@ -2,8 +2,10 @@ unit Finalizing;
 
 interface
 	uses
+		outputcolor,
 		types;
 	
+	function DisposeAll(var hero: THero;  var antiHero: THero; var locations: TLocations; var location: TLocation; var event: TEvent): Boolean;
 	function DisposeResources(var hero: THero;  var antiHero: THero; var locations: TLocations; var location: TLocation; var event: TEvent): Boolean;
 	function DisposeLocations(var locations: TLocations): Boolean;
 	function DisposeLocation(var location: TLocation): Boolean;
@@ -21,6 +23,18 @@ interface
 	function DisposeHero(var hero: THero): Boolean;
 	
 implementation
+	function DisposeAll(var hero: THero;  var antiHero: THero; var locations: TLocations; var location: TLocation; var event: TEvent): Boolean;
+	begin
+		if DisposeResources(hero, antiHero, locations, location, event) then
+		begin
+			ColorWrite('[+] Finalization', ColorDebug);
+		end
+		else
+		begin
+			ColorWrite('[!] Finalization Error', ColorError);
+		end;
+	end;
+	
 	function DisposeResources(var hero: THero;  var antiHero: THero; var locations: TLocations; var location: TLocation; var event: TEvent): Boolean;
 	begin
 		if not DisposeHero(hero) then
