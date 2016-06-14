@@ -24,12 +24,16 @@ interface
 		TokenAttribute = 'attribute';
 		TokenLocation = 'location';
 		TokenLocations = 'locations';
+		TokenStory = 'story';
+		TokenStories = 'stories';
 		
 	function ReadToken(var text: TextFile; var token: String): Boolean;
 	function ReadToken(var text: TextFile; var token: TColorString): Boolean;
 	function ReadTexts(var text: TextFile; var texts: TMultiLineColorText): Boolean;
 	function ReadLocation(var text: TextFile; var location: TLocation): Boolean;
 	function ReadLocations(var text: TextFile; var locations: TLocations): Boolean;
+	function ReadStory(var text: TextFile; var story: TStory): Boolean;
+	function ReadStories(var text: TextFile; var stories: TStories): Boolean;
 	function ReadEvent(var text: TextFile; var event: TEvent): Boolean;
 	function ReadEvents(var text: TextFile; var events: TEvents): Boolean;
 	function ReadCommand(var text: TextFile; var command: TCommand): Boolean;
@@ -40,7 +44,8 @@ interface
 	function ReadConditions(var text: TextFile; var conditions: TConditions): Boolean;
 	function ReadEffect(var text: TextFile; var effect: TEffect): Boolean;
 	function ReadEffects(var text: TextFile; var effects: TEffects): Boolean;
-	function LoadStory(folderName: UnicodeString; var locations: TLocations): Boolean;
+	function LoadStory(fileName: String; var locations: TLocations): Boolean;
+	function LoadStories(fileName: String; var locations: TLocations; var location: TLocation; var event: TEvent): Boolean;
 
 implementation
 	function ReadEffect(var text: TextFile; var effect: TEffect): Boolean;
@@ -376,6 +381,35 @@ implementation
 		end;
 	end;
 	
+	function ReadStory(var text: TextFile; var story: TStory): Boolean;
+	begin
+		ReadToken(text, story);
+		Exit(true);
+	end;
+	
+	function ReadStories(var text: TextFile; var stories: TStories): Boolean;
+	var
+		I: Integer;
+		StoryCount: Integer;
+		token: String;
+	begin
+		ReadToken(text, token);
+		StoryCount := StrToInt(token);
+		SetLength(stories, StoryCount);
+		for I := 0 to StoryCount - 1 do
+		begin
+			ReadToken(text, token);
+			if token = TokenStory then
+				ReadStory(text, stories[I]);
+		end;
+		ReadToken(text, token);
+		if token = TokenEnd then
+		begin
+			ReadToken(text, token);
+			Exit(true);
+		end;
+	end;
+	
 	function ReadTexts(var text: TextFile; var texts: TMultiLineColorText): Boolean;
 	var
 		I: Integer;
@@ -513,26 +547,49 @@ implementation
 		ReadToken := not EOF(text);
 	end;	
 	
-	function LoadStory(folderName: UnicodeString; var locations: TLocations): Boolean;
+	function LoadStory(fileName: String; var locations: TLocations): Boolean;
 	var
 		text: TextFile;
 		token: String;
-		folderPath: UnicodeString;
-		fileName: String;
-		search: TUnicodeSearchRec;
-		searchResult: LongInt;
+		folderPath: String;
 	begin
-		folderPath := './' + folderName + '/';
-		searchResult := FindFirst(folderPath + '*', 0, search);
-		while searchResult = 0 do
+		folderPath := './Story/';
+		fileName := fileName + '.spt';
+		Assign(text, folderPath + fileName);
+		Reset(text);
+		ReadToken(text, token);
+		if token = TokenLocations then
+			ReadLocations(text, locations);
+		Close(text);
+		
+		ColorWrite('[R+] ', ColorDebug);
+		ColorWrite(fileName, ColorDebug, 1);
+	end;
+	
+	function LoadStories(fileName: String; var locations: TLocations; var location: TLocation; var event: TEvent): Boolean;
+	var
+		I: Integer;
+		text: TextFile;
+		token: String;
+		folderPath: String;
+		stories: TStories;
+	begin
+		folderPath := './Story/';
+		Assign(text, folderPath + fileName);
+		Reset(text);
+		ReadToken(text, token);
+		if token = TokenStories then
+			ReadStories(text, stories);
+		Close(text);
+		ColorWrite('[+] Stories', ColorDebug, 1);
+		
+		for I := 0 to Length(stories) - 1 do
 		begin
-			Assign(text, folderPath + search.name);
-			Reset(text);
-			ReadToken(text, token);
-			if token = TokenLocations then
-				ReadLocations(text, locations);
-			Close(text);
-			searchResult := FindNext(search);
+			LoadStory(stories[I], locations);
 		end;
+		
+		location := locations[0];
+		event := location.events[0];
+		ColorWrite('[+] Locations', ColorDebug, 1);
 	end;
 end.
