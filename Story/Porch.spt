@@ -1,20 +1,53 @@
 locations 1	
 	location 'Падик'
 		events 1
-		   event 'Что я тут делаю?'
-			text 'd'
-			commands 1
-				command 'q'
-				text 'q'
+		    event 'Что я тут делаю?'
+		    texts 2
+			   text 'Ты сильно огрёб от гопников!'
+			   text 'Нужно любой ценой попасть домой!'
+		    end texts
+			commands 2
+				command 'Отлежаться и попробовать пойти'
+				text 'Ты попытался, но споткнулся и рассек бровь'
+				text 'Однако дополз до дома и мама отхиляла тебя куриным отваром'
 				cmd '1'
 				transitions 1
 					transition ''
 					conditions 0
 					end conditions
-					effects 0
+					effects 3
+					    effect 'pumpDown'
+						value '1'
+						end effect
+						effect 'decrease'
+						value '2'
+						end effect
+						effect 'damage'
+						value '2'
+						end effect
 					end effects
-					toLocation ''
-					toEvent ''
+					toLocation 'Дом'
+					toEvent 'Утро вторника'
+					end transition
+				end transitions
+				end command
+				command 'Аккуратно ползти на корячках'
+				text 'Ты переполз через бомжа Семена и попал домой'
+				cmd '2'
+				transitions 1
+					transition ''
+					conditions 0
+					end conditions
+					effects 2
+						effect 'decrease'
+						value '2'
+						end effect
+						effect 'damage'
+						value '2'
+						end effect
+					end effects
+					toLocation 'Дом'
+					toEvent 'Утро вторника'
 					end transition
 				end transitions
 				end command

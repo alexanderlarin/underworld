@@ -388,7 +388,7 @@ implementation
 	function UpReputationInGroup(var hero: THero; effect: TEffect): Boolean;
 	begin
 		hero.reputationInGroup := hero.reputationInGroup + effect.value;
-		effect.text := 'Проявляющих своё увОжение на ' + IntToStr(effect.value) + '0%';
+		effect.text := 'Проявляющих своё увОжение стало больше на ' + IntToStr(effect.value) + '0%';
 		if hero.reputationInGroup > 10 then
 			hero.reputationInGroup := 10;
 		if hero.reputationInGroup = 10 then
@@ -399,7 +399,7 @@ implementation
 	function UpReputationInGroupAnti(var antiHero: THero; effect: TEffect): Boolean;
 	begin
 		antiHero.reputationInGroup := antiHero.reputationInGroup + effect.value;
-		effect.text := 'Проявляющих своё увОжение на ' + IntToStr(effect.value) + '0%';
+		effect.text := 'Проявляющих своё увОжение стало больше на ' + IntToStr(effect.value) + '0%';
 		if antiHero.reputationInGroup > 10 then
 			antiHero.reputationInGroup := 10;
 		if antiHero.reputationInGroup = 10 then

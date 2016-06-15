@@ -64,12 +64,12 @@ implementation
 		hero.reputationInUnderworld := 3;
 		
 		antiHero.health := 10;
-		antiHero.energy := 9;
-		antiHero.alchohol := 3;
+		antiHero.energy := 10;
+		antiHero.alchohol := 2;
 		
-		antiHero.strength := 3;
-		antiHero.intelligence := 5;
-		antiHero.fortune := 5;
+		antiHero.strength := 8;
+		antiHero.intelligence := 8;
+		antiHero.fortune := 7;
 		
 		antiHero.love := 4;
 		antiHero.happy := 7;

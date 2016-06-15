@@ -1,20 +1,20 @@
 locations 1	
 	location 'Универ'
-		events 4
+		events 7
 		    event 'Первая пара понедельника'
 			texts 2
-			   text 'Ты всё же пришёл(ла) на первую пару...'
+			   text 'Ты всё же пришёл на первую пару...'
 			   text 'Именно на ней именно тебя спрашивает препод'
 			end texts
 			commands 3
 				command 'Ответить'
 				texts 2
-				   text 'Ты попытался(ась) ответить, но тупанул(а)'
+				   text 'Ты попытался ответить, но тупанул'
 				   text 'Препода взорвало, а тебя задело ударной волной'
 				end texts
 				cmd '1'
 				transitions 1
-					transition 'Тупанул(а) на первой паре в понедельник'
+					transition 'Тупанул на первой паре в понедельник'
 					conditions 0
 					end conditions
 					effects 6
@@ -43,17 +43,14 @@ locations 1
 				end transitions
 				end command
 				command 'Притвориться мёртвым'
-				text 'Препод подумал, что ты не кот, а хлеб, и не заметил тебя'
+				text 'Препод подумол, что ты не кот, а хлеб, и не заметил тебя'
 				cmd '2'
 				transitions 1
 					transition 'Не кот, а хлеб'
 					conditions 0
 					end conditions
-					effects 3
+					effects 2
 						effect 'luckly'
-						value '1'
-						end effect
-						effect 'decrease'
 						value '1'
 						end effect
 						effect 'reduceIntelligence'
@@ -72,11 +69,8 @@ locations 1
 					transition 'Ты - аки Саня'
 					conditions 0
 					end conditions
-					effects 4
+					effects 3
 						effect 'increaseIntelligence'
-						value '1'
-						end effect
-						effect 'decrease'
 						value '1'
 						end effect
 						effect 'upReputationInGroup'
@@ -120,10 +114,10 @@ locations 1
 				end transitions
 				end command
 				command 'Свалить'
-				text 'Деды воевали, но тебя это не колышит'
+				text 'Деды воевали, но тебя это не колышет'
 				cmd '2'
 				transitions 1
-					transition 'Ты решил(а) свалить, но тебя заметили и наорали.'
+					transition 'Ты решил свалить, но тебя заметили и наорали.'
 					conditions 0
 					end conditions
 					effects 3
@@ -137,8 +131,8 @@ locations 1
 						value '1'
 						end effect
 					end effects
-					toLocation 'Падик'
-					toEvent 'Что я вообще тут делаю?'
+					toLocation 'Дом'
+					toEvent 'Досуг'
 					end transition
 				end transitions
 				end command
@@ -222,7 +216,7 @@ locations 1
 				end transitions
 				end command
 				command 'Поиграть в бесконечное лето'
-				text 'За перемену ты склеил(а) Алису Двачевскую'
+				text 'За перемену ты склеил Алису Двачевскую'
 				cmd '4'
 				transitions 1
 					transition ''
@@ -256,10 +250,7 @@ locations 1
 					transition 'Довн'
 					conditions 0
 					end conditions
-					effects 2
-						effect 'decrease'
-						value '1'
-						end effect
+					effects 1
 						effect 'downReputationInGroup'
 						value '1'
 						end effect
@@ -283,7 +274,7 @@ locations 1
 					end transition
 				end transitions
 				end command
-				command 'Помолчать'
+				command 'Помалкиваешь'
 				text 'Как говорится, молчи - за умного сойдёшь'
 				cmd '3'
 				transitions 1
@@ -300,6 +291,283 @@ locations 1
 					end effects
 					toLocation 'Дом'
 					toEvent 'Досуг'
+					end transition
+				end transitions
+				end command
+			end commands
+			end event
+			event 'Первая пара вторника'
+			texts 5
+			   text 'Ничего себе!'
+			   text 'Ты и не предполагал, что первой парой будет контрольная работа по математике'
+			   text 'От результатов контрольной зависит, останишься ты учиться в универе или вылетишь с позором'
+			   text 'Тебе попалось задание решить интеграл от:'
+			   text '((x+2)/(x-1))dx'
+			end texts
+			commands 4
+				command 'Ответить: 3+x(log(x+2))+const'
+				texts 2
+		            text 'Поздравляем, ты вылетел из универа!'
+		            text 'Иди подметай улицу!'
+		        end texts
+				cmd '1'
+				transitions 1
+					transition ''
+					conditions 0
+					end conditions
+					effects 0
+					end effects
+					toLocation 'Game over'
+					toEvent 'Game over'
+					end transition
+				end transitions
+				end command
+				command 'Ответить: x+3(log(x-1))'
+				texts 2
+		               text 'Поздравляем, ты вылетел из универа!'
+		               text 'Иди подметай улицу!'
+		            end texts
+				cmd '2'
+				transitions 1
+					transition ''
+					conditions 0
+					end conditions
+					effects 0
+					end effects
+					toLocation 'Game over'
+					toEvent 'Game over'
+					end transition
+				end transitions
+				end command
+				command 'Ответить: x+3(log(x-1))+const'
+				text ''
+				cmd '3'
+				transitions 1
+					transition ''
+					conditions 0
+					end conditions
+					effects 4
+						effect 'increaseIntelligence'
+						value '3'
+						end effect
+						effect 'decrease'
+						value '1'
+						end effect
+						effect 'upReputationInGroup'
+						value '2'
+						end effect
+						effect 'upReputationInUniversity'
+						value '2'
+						end effect
+					end effects
+					toLocation 'Универ'
+					toEvent 'После первой пары вторника'
+					end transition
+				end transitions
+				end command
+				command 'Сдать листок с текстом: "Хз, как это решается, поставьте тройку!"'
+				texts 2
+		               text 'Поздравляем, ты вылетел из универа!'
+		               text 'Иди подметай улицу!'
+		        end texts
+				cmd '4'
+				transitions 1
+					transition ''
+					conditions 0
+					end conditions
+					effects 0
+					end effects
+					toLocation 'Game over'
+					toEvent 'Game over'
+					end transition
+				end transitions
+				end command
+			end commands
+			end event
+			event 'После первой пары вторника'
+			texts 2
+			   text 'Фууух...Ты пережил хардовую контрольную!'
+			   text 'Можешь дальше заняться чем-нибудь'
+			end texts
+			commands 3
+				command 'Пойти на вторую пару'
+				text ''
+				cmd '1'
+				transitions 1
+					transition ''
+					conditions 0
+					end conditions
+					effects 2
+						effect 'damage'
+						value '1'
+						end effect
+						effect 'decrease'
+						value '1'
+						end effect
+					end effects
+					toLocation 'Универ'
+					toEvent 'Вторая пара вторника'
+					end transition
+				end transitions
+				end command
+				command 'Свалить домой'
+				text ''
+				cmd '2'
+				transitions 1
+					transition ''
+					conditions 0
+					end conditions
+					effects 4
+						effect 'luckly'
+						value '2'
+						end effect
+						effect 'boost'
+						value '2'
+						end effect
+						effect 'reduceIntelligence'
+						value '1'
+						end effect
+						effect 'downReputationInGroup'
+						value '1'
+						end effect
+					end effects
+					toLocation 'Дом'
+					toEvent 'Дома во вторник'
+					end transition
+				end transitions
+				end command
+				command 'Прогулять вторую пару'
+				text ''
+				cmd '3'
+				transitions 1
+					transition ''
+					conditions 0
+					end conditions
+					effects 4
+						effect 'luckly'
+						value '2'
+						end effect
+						effect 'boost'
+						value '1'
+						end effect
+						effect 'reduceIntelligence'
+						value '1'
+						end effect
+						effect 'downReputationInGroup'
+						value '1'
+						end effect
+					end effects
+					toLocation 'Улица'
+					toEvent 'Прогуливание'
+					end transition
+				end transitions
+				end command
+			end commands
+			end event
+			event 'Вторая пара вторника'
+			texts 4
+			   text 'Так-с, ты решил пойти на вторую пару'
+			   text 'Ну что же, молодец, ты попал на пару географии'
+			   text 'Препод говорит:'
+			   text '"Назовите столицу Перу, чья первая поднимется рука..."'
+			   text 'Не даёшь договорить преподу и отвечаешь:""
+			end texts
+			commands 4
+				command '"Айякучо"'
+				text 'Эмммм, ну почти...'
+				cmd '1'
+				transitions 1
+					transition ''
+					conditions 0
+					end conditions
+					effects 5
+						effect 'damage'
+						value '1'
+						end effect
+						effect 'decrease'
+						value '1'
+						end effect
+						effect 'reduceIntelligence'
+						value '1'
+						end effect
+						effect 'downReputationInGroup'
+						value '1'
+						end effect
+						effect 'downReputationInUniversity'
+						value '1'
+						end effect
+					end effects
+					toLocation 'Дом'
+					toEvent 'Дома во вторник'
+					end transition
+				end transitions
+				end command
+				command '"Хульяка"'
+				text 'Ты удачно подколол(а) препода'
+				cmd '2'
+				transitions 1
+					transition ''
+					conditions 0
+					end conditions
+					effects 3
+						effect 'luckly'
+						value '1'
+						end effect
+						effect 'decrease'
+						value '1'
+						end effect
+						effect 'upReputationInUniversity'
+						value '1'
+						end effect
+					end effects
+					toLocation 'Дом'
+					toEvent 'Дома во вторник'
+					end transition
+				end transitions
+				end command
+				command '"Лима"'
+				text 'Молодец! Ты угадал(а)!'
+				cmd '3'
+				transitions 1
+					transition ''
+					conditions 0
+					end conditions
+					effects 3
+						effect 'increaseIntelligence'
+						value '1'
+						end effect
+						effect 'decrease'
+						value '1'
+						end effect
+						effect 'upReputationInGroup'
+						value '1'
+						end effect
+					end effects
+					toLocation 'Дом'
+					toEvent 'Дома во вторник'
+					end transition
+				end transitions
+				end command
+				command '"Пуэрто-Мальдонадо"'
+				text 'Эмммм, ну почти...'
+				cmd '4'
+				transitions 1
+					transition ''
+					conditions 0
+					end conditions
+					effects 3
+						effect 'reduceIntelligence'
+						value '1'
+						end effect
+						effect 'decrease'
+						value '1'
+						end effect
+						effect 'downReputationInGroup'
+						value '1'
+						end effect
+					end effects
+					toLocation 'Дом'
+					toEvent 'Дома во вторник'
 					end transition
 				end transitions
 				end command
