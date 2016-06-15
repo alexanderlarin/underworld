@@ -2,7 +2,7 @@ locations 1
 	location 'Game over'
 	    events 1
 		   event 'Game over'
-		   text 'Спасибо за игру!'
+		   text 'Игра окончена. Введите в текстовое поле "exit" и дважды нажмите Enter.'
 		   commands 0
 		   end commands
            end event

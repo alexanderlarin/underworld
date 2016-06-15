@@ -1,7 +1,8 @@
-stories 5
+stories 6
 	story House
 	story University
 	story Porch
 	story Street
 	story Over
+	story Park
 end stories
