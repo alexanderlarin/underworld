@@ -1,0 +1,130 @@
+locations 1	
+	location 'Гараж'
+		events 1
+		    event 'Ремонт ласточки'
+		    texts 6
+			   text 'Роскошный гараж!'
+			   text 'Тут даже можно собираться с друганами'
+			   text 'Но не отвлекайся!'
+			   text 'Ты не за этим сюда пришёл!'
+			   text 'Кстати, ты знал, что твой дед, в прошлом стрит-рейсер?'
+			   text 'Посмотрим, что можно сделать с твоей ласточкой'
+		    end texts
+			commands 6
+				command 'Поставить турбину'
+			texts 2                                
+				text 'Поздравляем!!!'
+				text 'Теперь твоя ласточка будет первой пулять со световора'
+			end texts
+				cmd '1'
+				transitions 1
+					transition ''
+					conditions 0
+					end conditions
+					effects 1
+					    effect 'tuning'
+						value '1'
+						end effect
+					end effects
+					toLocation 'Дом'
+					toEvent 'Досуг в среду'
+					end transition
+				end transitions
+				end command
+				command 'Поставить прямоточный глушитель'
+			texts 3
+				text 'Поздравляем!!!'
+				text 'Теперь твою ласточку слышно издалека'
+				text 'Ну, и лошадок прибавилось... Наверное'
+			end texts
+				cmd '2'
+				transitions 1
+					transition ''
+					conditions 0
+					end conditions
+					effects 0
+					end effects
+					toLocation 'Дом'
+					toEvent 'Досуг в среду'
+					end transition
+				end transitions
+				end command
+				command 'Поставить мощные динамики'
+			texts 3
+				text 'Поздравляем!!!'
+				text 'Теперь твою ласточку слышно издалека'
+				text 'Будет, где послушать музончик'
+			end texts
+				cmd '3'
+				transitions 1
+					transition ''
+					conditions 0
+					end conditions
+					effects 0
+					end effects
+					toLocation 'Дом'
+					toEvent 'Досуг в среду'
+					end transition
+				end transitions
+				end command
+				command 'Поставить мощный сабвуфер'
+			texts 5
+				text 'Поздравляем!!!'
+				text 'Теперь твою ласточку слышно издалека'
+				text 'Качества звука никакого...'
+				text 'Зато вах как дребезжит пластик и стекла!'
+				text 'Аж уши закладывает >_<'
+			end texts
+				cmd '4'
+				transitions 1
+					transition ''
+					conditions 0
+					end conditions
+					effects 0
+					end effects
+					toLocation 'Дом'
+					toEvent 'Досуг в среду'
+					end transition
+				end transitions
+				end command
+				command 'Поставить двадцатые китайские воссаны'
+			texts 3
+				text 'Поздравляем!!!'
+				text 'Теперь твоя ласточка на стиле'
+				text 'А что, литьё не может испортить тачку!'
+			end texts
+				cmd '5'
+				transitions 1
+					transition ''
+					conditions 0
+					end conditions
+					effects 0
+					end effects
+					toLocation 'Дом'
+					toEvent 'Досуг в среду'
+					end transition
+				end transitions
+				end command
+				command 'Спилить пружины'
+			texts 3
+				text 'Поздравляем!!! Можешь смело клеить наклейку БПАН'
+				text 'Теперь твоя ласточка прилегла'
+				text 'А что, выглядит спортивно'
+			end texts
+				cmd '6'
+				transitions 1
+					transition ''
+					conditions 0
+					end conditions
+					effects 0
+					end effects
+					toLocation 'Дом'
+					toEvent 'Досуг в среду'
+					end transition
+				end transitions
+				end command
+			end commands
+			end event
+		end events
+	end location
+end locations

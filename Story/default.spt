@@ -1,8 +1,11 @@
-stories 6
+stories 9
 	story House
 	story University
 	story Porch
 	story Street
 	story Over
 	story Park
+	story Garage
+	story Cinema
+	story Trap
 end stories

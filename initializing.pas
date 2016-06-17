@@ -52,9 +52,10 @@ implementation
 	begin		
 		hero.health := 9;
 		hero.energy := 7;
-		hero.alchohol := 1;
+		hero.alchohol := 0;
+		hero.vape := 0;
 		
-		hero.strength := 6;
+		hero.strength := 5;
 		hero.intelligence := 6;
 		hero.fortune := 0;
 		
@@ -67,7 +68,7 @@ implementation
 		antiHero.energy := 10;
 		antiHero.alchohol := 2;
 		
-		antiHero.strength := 8;
+		antiHero.strength := 6;
 		antiHero.intelligence := 8;
 		antiHero.fortune := 7;
 		

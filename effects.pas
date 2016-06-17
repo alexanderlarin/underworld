@@ -26,6 +26,9 @@ interface
 	function Lonely(var hero: THero; effect: TEffect): Boolean;
 	function Happiness(var hero: THero; effect: TEffect): Boolean;
 	function Misfortune(var hero: THero; effect: TEffect): Boolean;
+	
+	function Tuning(var hero: THero; effect: TEffect): Boolean;
+	function TakeToVape(var hero: THero; effect: TEffect): Boolean;
 	 
 	function UpReputationInGroup(var hero: THero; effect: TEffect): Boolean;
 	function DownReputationInGroup(var hero: THero; effect: TEffect): Boolean;
@@ -41,8 +44,8 @@ implementation
 		if hero.health = 0 then
 			Exit(False);
 		Exit(True);
-	end;
-	
+	end;	
+		
 	function DamageAnti(var antiHero: THero; effect: TEffect): Boolean;
 	begin
 		antiHero.health := antiHero.health - effect.value;
@@ -296,9 +299,9 @@ implementation
 	function InLove(var hero: THero; effect: TEffect): Boolean;
 	begin
 		hero.love := hero.love + effect.value;
-		if hero.love < 0 then
-			hero.love := 0;
-		if hero.love = 0 then
+		if hero.love > 10 then
+			hero.love := 10;
+		if hero.love = 10 then
 			Exit(True);
 		Exit(True);
 	end;
@@ -306,9 +309,9 @@ implementation
 	function InLoveAnti(var antiHero: THero; effect: TEffect): Boolean;
 	begin
 		antiHero.love := antiHero.love + effect.value;
-		if antiHero.love < 0 then
-			antiHero.love := 0;
-		if antiHero.love = 0 then
+		if antiHero.love > 10 then
+			antiHero.love := 10;
+		if antiHero.love = 10 then
 			Exit(True);
 		Exit(True);
 	end;
@@ -316,9 +319,9 @@ implementation
   function Happiness(var hero: THero; effect: TEffect): Boolean;
 	begin
 		hero.happy := hero.happy + effect.value;
-		if hero.happy < 0 then
-			hero.happy := 0;
-		if hero.happy = 0 then
+		if hero.happy > 10 then
+			hero.happy := 10;
+		if hero.happy = 10 then
 			Exit(True);
 		Exit(True);
 	end;
@@ -326,9 +329,9 @@ implementation
 	function HappinessAnti(var antiHero: THero; effect: TEffect): Boolean;
 	begin
 		antiHero.happy := antiHero.happy + effect.value;
-		if antiHero.happy < 0 then
-			antiHero.happy := 0;
-		if antiHero.happy = 0 then
+		if antiHero.happy > 10 then
+			antiHero.happy := 10;
+		if antiHero.happy = 10 then
 			Exit(True);
 		Exit(True);
 	end;
@@ -351,6 +354,20 @@ implementation
 		if antiHero.happy = 0 then
 			Exit(True);
 		Exit(True);
+	end;
+	
+	function Tuning(var hero: THero; effect: TEffect): Boolean;
+	begin
+		hero.tune := hero.tune + effect.value;
+	end;
+	
+	function TakeToVape(var hero: THero; effect: TEffect): Boolean;
+	begin
+		hero.vape := hero.vape + effect.value;
+		if hero.vape > 10 then
+			hero.vape := 10;
+		if hero.vape = 10 then
+			Exit(True);
 	end;
 	
 	function UpReputationInGroup(var hero: THero; effect: TEffect): Boolean;
@@ -486,50 +503,38 @@ implementation
 		if effect.name = 'reduceIntelligence' then
 			if not ReduceIntelligence(hero, effect) then
 				Exit(False);
-		if effect.name = 'reduceIntelligenceAnti' then
-			if not ReduceIntelligence(antiHero, effect) then
-				Exit(False);
 		if effect.name = 'inreaseIntelligence' then
 			if not IncreaseIntelligence(hero, effect) then
-				Exit(False);
-		if effect.name = 'inreaseIntelligenceAnti' then
-			if not IncreaseIntelligence(antiHero, effect) then
 				Exit(False);
 		if effect.name = 'luckly' then
 			if not Luckly(hero, effect) then
 				Exit(False);
-		if effect.name = 'lucklyAnti' then
-			if not Luckly(antiHero, effect) then
-				Exit(False);
 		if effect.name = 'luckless' then
 			if not Luckless(hero, effect) then
 				Exit(False);
-		if effect.name = 'lucklessAnti' then
-			if not Luckless(antiHero, effect) then
-				Exit(False);
 		if effect.name = 'happiness' then
-			if not Damage(hero, effect) then
+			if not Happiness(hero, effect) then
 				Exit(False);
 		if effect.name = 'happinessAnti' then
-			if not Damage(antiHero, effect) then
+			if not Happiness(antiHero, effect) then
 				Exit(False);
 		if effect.name = 'misfortune' then
-			if not Damage(hero, effect) then
+			if not Misfortune(hero, effect) then
 				Exit(False);
 		if effect.name = 'misfortuneAnti' then
-			if not Damage(antiHero, effect) then
+			if not Misfortune(antiHero, effect) then
+				Exit(False);
+		if effect.name = 'tuning' then
+			if not Tuning(hero, effect) then
+				Exit(False);
+		if effect.name = 'takeToVape' then
+			if not TakeToVape(hero, effect) then
 				Exit(False);
 		if effect.name = 'inLove' then
-			if not Damage(hero, effect) then
-				Exit(False);
-		if effect.name = 'inLoveAnti' then
-			if not Damage(antiHero, effect) then
+			if not InLove(hero, effect) then
 				Exit(False);
 		if effect.name = 'lonely' then
-			if not Damage(hero, effect) then
-				Exit(False);
-		if effect.name = 'lonelyAnti' then
-			if not Damage(antiHero, effect) then
+			if not Lonely(hero, effect) then
 				Exit(False);
 		if effect.name = 'upReputationInGroup' then
 			if not UpReputationInGroup(hero, effect) then

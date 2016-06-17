@@ -1,6 +1,6 @@
 locations 1	
 	location 'Дом'
-		events 5
+		events 10
 			event 'Утро понедельника'
 			texts 4
 			   text 'АХТУНГ, ПОНЕДЕЛЬНИК#Red'
@@ -163,7 +163,7 @@ locations 1
 					end conditions
 					effects 3
 						effect 'damage'
-						value '2'
+						value '1'
 						end effect
 						effect 'decrease'
 						value '1'
@@ -283,7 +283,7 @@ locations 1
 			event 'Дома во вторник'
 			texts 4
 			   text 'Дом, милый дом...'
-			   text 'Как проведещь унылый вторник дальше?'
+			   text 'Как проведешь унылый вторник дальше?'
 			   text 'Решать только тебе!'
 			   text 'Действуй!'
 			end texts
@@ -310,7 +310,7 @@ locations 1
 						end effect
 					end effects
 					toLocation 'Дом'
-					toEvent 'Утро среды1'
+					toEvent 'Утро среды'
 					end transition
 				end transitions
 				end command
@@ -336,7 +336,323 @@ locations 1
 						end effect
 					end effects
 					toLocation 'Дом'
-					toEvent 'Утро среды2'
+					toEvent 'Утро среды'
+					end transition
+				end transitions
+				end command
+			end commands
+			end event
+			event 'Утро среды'
+			texts 2
+			   text 'Прозвенел будильник'
+			   text 'Пора собираться в любимый университет'
+			end texts
+			commands 2
+				command 'Спать'
+				text 'Правильный выбор! Здоровье дороже...Наверное'
+				cmd '1'
+				transitions 1
+					transition 'Проспал первую пару в среду'
+					conditions 0
+					end conditions
+					effects 2
+						effect 'heal'
+						value '1'
+						end effect
+						effect 'boost'
+						value '2'
+						end effect
+					end effects
+					toLocation 'Дом'
+					toEvent 'После сна'
+					end transition
+				end transitions
+				end command
+				command 'Пойти в универ'
+				text 'Ну, как знаешь... Я бы на твоем месте поспал'
+				cmd '2'
+				transitions 1
+					transition ''
+					conditions 0
+					end conditions
+					effects 2
+						effect 'damage'
+						value '1'
+						end effect
+						effect 'decrease'
+						value '1'
+						end effect
+					end effects
+					toLocation 'Универ'
+					toEvent 'Первая пара в среду'
+					end transition
+				end transitions
+				end command
+			end commands
+			end event
+			event 'После сна'
+			text 'И опять ты поспал' 
+			commands 3
+				command 'Пойти хотя бы на вторую пару'
+				text 'Ну, как знаешь... Я бы на твоем месте ещё поспал'
+				cmd '1'
+				transitions 1
+					transition 'Пошёл на вторую пару в среду'
+					conditions 0
+					end conditions
+					effects 3
+						effect 'damage'
+						value '1'
+						end effect
+						effect 'decrease'
+						value '1'
+						end effect
+						effect 'upReputationInUniversity'
+						value '1'
+						end effect
+					end effects
+					toLocation 'Универ'
+					toEvent 'Вторая пара в среду'
+					end transition
+				end transitions
+				end command
+				command 'Поспать'
+				text 'И снова поспал'
+				cmd '2'
+				transitions 1
+					transition 'Проспал вторую пару в среду'
+					conditions 0
+					end conditions
+					effects 2
+						effect 'heal'
+						value '1'
+						end effect
+						effect 'boost'
+						value '1'
+						end effect
+					end effects
+					toLocation 'Дом'
+					toEvent 'Быть или не быть'
+					end transition
+				end transitions
+				end command
+				command 'Поднять денег'
+				texts 3
+				   text 'Разводишь лохов на сайтах знакомств'
+				   text 'Азаза, ну как можно быть такими доверчивыми?'
+				   text 'Накопил на мерин'
+				end texts
+				cmd '3'
+				transitions 1
+					transition ''
+					conditions 0
+					end conditions
+					effects 2
+						effect 'increaseIntelligence'
+						value '1'
+						end effect
+						effect 'upReputationInGroup'
+						value '2'
+						end effect
+					end effects
+					toLocation 'Дом'
+					toEvent 'Досуг в среду'
+					end transition
+				end transitions
+				end command
+			end commands
+			end event
+			event 'Досуг в среду'
+			text 'Ну что ж, оставил универ в покое, чем планируешь заняться?'
+			commands 4
+				command 'Надо-надо подкачаться'
+                    text '"Качаю вечером, качаю днём..."'
+				cmd '1'
+				transitions 1
+					transition 'Качалочка в среду'
+					conditions 0
+					end conditions
+					effects 3
+						effect 'pumpUp'
+						value '1'
+						end effect
+						effect 'decrease'
+						value '2'
+						end effect
+						effect 'reduceIntelligence'
+						value '1'
+						end effect
+					end effects
+					toLocation 'Дом'
+					toEvent 'Досуг в среду продолжение'
+					end transition
+				end transitions
+				end command
+				command 'Покатать в дотку'
+				cmd '2'
+				transitions 2
+					transition 'Слил катку'
+					text 'Ну ты и рачила... Слил катку (мало интеллекта)' 
+					conditions 1
+					    condition 'IntelligenceLess'
+						value '7'
+						end condition
+					end conditions
+					effects 2
+						effect 'misfortune'
+						value '1'
+						end effect
+						effect 'decrease'
+						value '2'
+						end effect
+					end effects
+					toLocation 'Дом'
+					toEvent 'Досуг в среду продолжение'
+					end transition
+					transition 'Затащил катку'
+					text 'Красава, йоло-гейминг тащит!'
+					conditions 0
+					end conditions
+					effects 2
+						effect 'happiness'
+						value '1'
+						end effect
+						effect 'decrease'
+						value '1'
+						end effect
+					end effects
+					toLocation 'Дом'
+					toEvent 'Досуг в среду продолжение'
+					end transition
+				end transitions
+				end command
+				command '"Посплю-ка я ещё!"'
+				text ''
+				cmd '3'
+				transitions 1
+					transition ''
+					conditions 0
+					end conditions
+					effects 2
+						effect 'heal'
+						value '9'
+						end effect
+						effect 'boost'
+						value '9'
+						end effect
+					end effects
+					toLocation 'Дом'
+					toEvent 'Досуг в среду продолжение'
+					end transition
+				end transitions
+				end command
+				command 'Пойти гулять'
+				   text '"Что-то я засиделся..."'
+				cmd '4'
+				transitions 1
+					transition ''
+					conditions 0
+					end conditions
+					effects 0
+					end effects
+					toLocation 'Улица'
+					toEvent 'Встреча с одноклассниками'
+					end transition
+				end transitions
+				end command
+			end commands
+			end event
+			event 'Досуг в среду продолжение'
+			texts 4
+				text 'Впереди ещё целый день!'
+				text 'Как планируешь провести досуг?'
+				text 'Кстати, у Ромы намечается вписка...'
+				text 'Не желаешь сходить?'
+			end texts
+			commands 2
+				command 'Пойти на вписку'
+				texts 2
+                    text 'Оторвись по полной!'
+					text 'Ни в чем себе не отказывай!'
+			    end texts
+				cmd '1'
+				transitions 1
+					transition ''
+					conditions 0
+					end conditions
+					effects 0
+					end effects
+					toLocation 'Улица'
+					toEvent 'Добраться на вписку'
+					end transition
+				end transitions
+				end command
+				command 'Погулять с тянкой'
+			texts 3
+				text 'Ммм... Свидание'
+				text 'Не веди себя, как сыч'
+				text 'Ей нравятся дерзкие'
+			end texts
+				cmd '2'
+				transitions 1
+					transition ''
+					conditions 0
+					end conditions
+					effects 1
+						effect 'inLove'
+						value '1'
+						end effect
+					end effects
+					toLocation 'Улица'
+					toEvent 'Свидание'
+					end transition
+				end transitions
+				end command
+			end commands
+			end event
+			event 'Быть или не быть'
+			texts 4
+			   text 'Ладно, давай к делу'
+			   text 'Твоя ласточка требует внимания к себе'
+			   text 'Если не пойдешь чинить её сейчас'
+			   text 'Останешься без колёс до лета'
+			end texts
+			commands 2
+				command 'Пойти крутить гайки в гараж'
+				texts 2
+				   text 'Правильный выбор!'
+				   text 'Ты же не хочешь, как лох, топтать башмаки!'
+				end texts
+				cmd '1'
+				transitions 1
+					transition ''
+					conditions 0
+					end conditions
+					effects 1
+						effect 'pumpUp'
+						value '1'
+						end effect
+					end effects
+					toLocation 'Гараж'
+					toEvent 'Ремонт ласточки'
+					end transition
+				end transitions
+				end command
+				command 'Сходить на третью пару'
+				texts 3
+				   text 'Нет, ты серьёзно?'
+				   text 'Ну дело твоё...'
+				   text 'Ты странный...'
+				end texts
+				cmd '2'
+				transitions 1
+					transition ''
+					conditions 0
+					end conditions
+					effects 0
+					end effects
+					toLocation 'Универ'
+					toEvent 'Третья пара в среду'
 					end transition
 				end transitions
 				end command

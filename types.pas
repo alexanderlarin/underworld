@@ -16,6 +16,8 @@ interface
 			health: Integer;
 			energy: Integer;
 			alchohol: Integer;
+			tune: Integer;
+			vape: Integer;
 			
 			strength: Integer;
 			intelligence: Integer;

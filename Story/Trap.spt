@@ -1,0 +1,325 @@
+locations 1	
+	location 'Трэп-хата'
+		events 3
+		    event 'Вписка у Ромы'
+		    texts 2
+			   text 'Вот ты и на долгожданной вписке'
+			   text 'Будешь творить всё, что захочешь?'
+		    end texts
+			commands 3
+				command 'Курнуть спайсухи'
+				texts 9
+					text 'Куришь'
+					text '...'
+					text 'Пробил потолок'
+					text '...'
+					text 'Побывал на небесах'
+					text '...'
+					text 'Слетал в космос'
+					text '...'
+					text 'Спустился с небес в хату'
+				end texts
+				cmd '1'
+				transitions 1
+					transition ''
+					conditions 0
+					end conditions
+					effects 3
+						effect 'pumpUpAnti'
+						value '1'
+						end effect
+					    effect 'happiness'
+						value '1'
+						end effect
+						effect 'takeToVape'
+						value '2'
+						end effect
+					end effects
+					toLocation 'Трэп-хата'
+					toEvent 'Спустя час'
+					end transition
+				end transitions
+				end command
+				command 'Выпить бутылку водки залпом'
+				texts 4
+					text 'Носишься, как сумасшедший!!!'
+					text 'Тебя тошнит'
+					text '...'
+					text 'Приуныл в ванной комнате'
+				end texts
+				cmd '2'
+				transitions 1
+					transition ''
+					conditions 0
+					end conditions
+					effects 4
+						effect 'pumpUpAnti'
+						value '1'
+						end effect
+						effect 'decrease'
+						value '1'
+						end effect
+						effect 'damage'
+						value '2'
+						end effect
+						effect 'takeToDrink'
+						value '4'
+						end effect
+					end effects
+					toLocation 'Трэп-хата'
+					toEvent 'Спустя час'
+					end transition
+				end transitions
+				end command
+				command 'Подкатить к тянке'
+				cmd '3'
+				transitions 2
+					transition 'Отвергла'
+					texts 4
+						text 'Она уже хмельная...'
+						text 'Ты подкатил...'                    
+						text 'Она отвергла тебя'
+						text 'Ты немного расстроен'
+					end texts
+					conditions 1
+					   condition 'InLoveLess'
+					   value '4'
+					   end condition  
+					end conditions
+					effects 2
+						effect 'pumpUpAnti'
+						value '1'
+						end effect
+						effect 'misfortune'
+						value '1'
+						end effect
+					end effects
+					toLocation 'Трэп-хата'
+					toEvent 'Спустя час'
+					end transition
+					transition 'Не отвергла'
+					texts 3
+						text 'Она уже хмельная'
+						text 'Ты подкатил'                  
+						text 'У вас с ней был незабываемый...'
+					end texts
+					conditions 0
+					end conditions
+					effects 3
+						effect 'pumpUpAnti'
+						value '1'
+						end effect
+						effect 'inLove'
+						value '2'
+						end effect
+						effect 'happiness'
+						value '10'
+						end effect
+					end effects
+					toLocation 'Трэп-хата'
+					toEvent 'Спустя час'
+					end transition
+				end transitions
+				end command
+			end commands
+			end event
+			event 'Спустя час'
+		    texts 2
+			   text 'Кажется, отпустило'
+			   text 'Будешь продолжать в том же духе?'
+		    end texts
+			commands 3
+				command 'Накуриться спайсухой в хлам'
+				texts 9
+					text 'Куришь'
+					text '...'
+					text 'Пробил потолок'
+					text '...'
+					text 'Побывал на небесах'
+					text '...'
+					text 'Слетал в космос'
+					text '...'
+					text 'Почти спустился с небес в хату'
+				end texts
+				cmd '1'
+				transitions 1
+					transition ''
+					text 'Остался навсегда со спайсухой в нирване'
+					conditions 0
+					end conditions
+					toLocation 'Game over'
+					toEvent 'Game over'
+					end transition
+				end transitions
+				end command
+				command 'Выпить две бутылки водки залпом'
+				texts 2
+					text 'Ты словил белочку!!!'
+					text 'Не понимаешь, что происходит'
+				end texts
+				cmd '2'
+				transitions 2
+					transition 'Перепил'
+					text 'Ты слишком много выпил. Прости, но на этом всё.'
+					conditions 1
+					   condition 'AlchoholMore'
+					   value '0'
+					   end condition 
+					end conditions
+					effects 0
+					end effects
+					toLocation 'Game over'
+					toEvent 'Game over'
+					end transition
+					transition 'Ещё чувствуешь себя'
+					text 'Ты напился в хлам'
+					conditions 0
+					end conditions
+					effects 0
+					end effects
+					toLocation 'Трэп-хата'
+					toEvent 'Путь домой'
+					end transition
+				end transitions
+				end command
+				command 'Подраться с Анисом'
+				end texts
+				cmd '3'
+				transitions 2
+					transition 'Вырубил Аниса'
+					text 'Красава, ты вырубил Аниса'
+					conditions 1
+					   condition 'StrengthAntiMore'
+					   end condition
+					end conditions
+					effects 1
+						effect 'decrease'
+						value '1'
+						end effect
+					end effects
+					toLocation 'Трэп-хата'
+					toEvent 'Путь домой'
+					end transition
+					transition 'Анис вырубил тебя'
+					text 'Ты не смог вырубить Аниса. Однако, он смог умножить тебя на ноль'
+					conditions 0
+					end conditions
+					effects 2
+						effect 'decrease'
+						value '10'
+						end effect
+						effect 'damage'
+						value '10'
+						end effect
+					end effects
+					toLocation 'Game over'
+					toEvent 'Game over'
+					end transition
+				end transitions
+				end command
+			end commands
+			end event
+			event 'Путь домой'
+		    texts 3
+			   text 'Ура!'
+			   text 'Тебе удалось дожить до конца вписки!'
+			   text 'Как будешь добираться до дома?'
+		    end texts
+			commands 3
+				command 'Остаться с ночёвкой'
+				texts 2
+					text '"Ой, я лучше останусь здесь..."'
+					text 'Мало ли что...'
+				end texts
+				cmd '1'
+				transitions 1
+					transition ''
+					text 'Заночевал у Ромы, вернулся домой'
+					conditions 0
+					end conditions
+					effects 2
+					    effect 'heal'
+						value '9'
+						end effect
+						effect 'boost'
+						value '9'
+						end effect
+					end effects
+					toLocation 'Дом'
+					toEvent 'Утро четверга'
+					end transition
+				end transitions
+				end command
+				command 'Пойти пешком домой'
+			texts 2
+				text 'Надеешься дойти?'
+				text 'Ну удачи...'
+			end texts
+				cmd '2'
+				transitions 1
+					transition ''
+					text 'Дошел домой без происшествий'
+					conditions 0
+					end conditions
+					effects 2
+						effect 'heal'
+						value '9'
+						end effect
+						effect 'boost'
+						value '9'
+						end effect
+					end effects
+					toLocation 'Дом'
+					toEvent 'Утро четверга'
+					end transition
+				end transitions
+				end command
+				command 'Поехать на машине'
+			texts 2
+				text 'Надеешься доехать?'   
+				text 'Ну удачи...'
+			end texts
+				cmd '3'
+				transitions 2
+				    transition 'Доехал'
+					conditions 0
+					end conditions
+					effects 2
+						effect 'decrease'
+						value '1'
+						end effect
+						effect 'damage'
+						value '2'
+						end effect
+						effect 'happiness'
+						value '1'
+						end effect
+					end effects
+					toLocation 'Дом'
+					toEvent 'Утро четверга'
+					end transition
+					transition 'Не доехал'
+				    text 2
+						text 'Ты был пьян и вмазался в бетонный столб'
+						text 'К сожалению, перелом 100 костей из 206 несовместим с жизнью'
+					end texts
+					conditions 0
+					end conditions
+					effects 2
+						effect 'decrease'
+						value '10'
+						end effect
+						effect 'damage'
+						value '10'
+						end effect
+					end effects
+					toLocation 'Game over'
+					toEvent 'Game over'
+					end transition
+				end transitions
+				end command
+			end commands
+			end event
+		end events
+	end location
+end locations

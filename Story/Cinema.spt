@@ -1,0 +1,59 @@
+locations 1	
+	location 'Кинотеатр'
+		events 1
+		    event 'В кино с одноклассниками'
+		    texts 3
+			   text 'Твои друганы взяли с собой Blazer'
+			   text 'Как в старые добрые...'
+			   text 'Выпьешь с ними?'
+		    end texts
+			commands 2
+				command 'Выпить'
+				texts 2
+					text 'Пьешь блейзуху...'
+					text 'Вспоминаешь 2007...'
+				end texts
+				cmd '1'
+				transitions 1
+					transition ''
+					conditions 0
+					end conditions
+					effects 2
+					    effect 'happiness'
+						value '1'
+						end effect
+						effect 'takeToDrink'
+						value '1'
+						end effect
+					end effects
+					toLocation 'Дом'
+					toEvent 'Досуг в среду продолжение'
+					end transition
+				end transitions
+				end command
+				command 'Отказаться'
+				texts 3
+					text 'Твои друганы обиделись на тебя!'
+					text 'Как будто от бутылочки эликсира что-то изменилось...'
+					text 'Зато понял, о чем фильм'
+				end texts
+				cmd '2'
+				transitions 1
+					transition ''
+					conditions 0
+					end conditions
+					effects 1
+						effect 'misfortune'
+						value '1'
+						end effect
+					end effects
+					toLocation 'Дом'
+					toEvent 'Досуг в среду продолжение'
+					end transition
+				end transitions
+				end command
+			end commands
+			end event
+		end events
+	end location
+end locations

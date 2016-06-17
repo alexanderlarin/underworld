@@ -31,6 +31,9 @@ implementation
 		ColorWrite('Содержание алкоголя: ', ColorAttribute);
 		ColorWrite(hero.alchohol, ColorNumber);
 		ColorWrite('0%', ColorNumber, 1);
+		ColorWrite('Накуренность: ', ColorAttribute);
+		ColorWrite(hero.vape, ColorNumber);
+		ColorWrite('0%', ColorNumber, 1);
 		ColorWrite('Сила: ',ColorAttribute);
 		ColorWrite(hero.strength, ColorNumber);
 		ColorWrite('0%', ColorNumber, 1);
