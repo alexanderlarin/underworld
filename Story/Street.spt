@@ -1,6 +1,6 @@
 locations 1	
 	location 'Улица'
-		events 3
+		events 7
 		   event 'Ночная встреча'
 			text 'Слишком неожиданно... Ты в ступоре'
 			commands 3
@@ -75,7 +75,7 @@ locations 1
 					transition 'Встреча с гопниками'
 					conditions 1
 						condition 'StrengthLess'
-						value '7'
+						value '6'
 						end condition
 					end conditions
 					effects 3
@@ -113,7 +113,7 @@ locations 1
 					transition 'Встреча с гопниками'
 					conditions 1
 						condition 'StrengthLess'
-						value '7'
+						value '6'
 						end condition
 					end conditions
 					effects 3
@@ -146,7 +146,7 @@ locations 1
 					transition 'Встреча с гопниками'
 					conditions 1
 						condition 'StrengthLess'
-						value '7'
+						value '6'
 						end condition
 					end conditions
 					effects 3
@@ -205,6 +205,286 @@ locations 1
 					end effects
 					toLocation 'Дом'
 					toEvent 'Дома во вторник'
+					end transition
+				end transitions
+				end command
+			end commands
+			end event
+			event 'Встреча с одноклассниками'
+			texts 3
+			   text 'Ты гуляешь'
+			   text 'Навстречу тебе идут какие-то типки'
+			   text 'Да это же твои бывшие одноклассники!'
+			end texts
+			commands 3
+				command 'Проигнорить их'
+			texts 3
+			   text 'Ну что ж ты так...'
+			   text 'Они, между прочем, были бы рады встрече!'
+			   text 'Сыч ты, фу!'
+			end texts
+				cmd '1'
+				transitions 1
+					transition ''
+					conditions 0
+					end conditions
+					effects 1
+						effect 'lonely'
+						value '1'
+						end effect
+					end effects
+					toLocation 'Дом'
+					toEvent 'Досуг в среду продолжение'
+					end transition
+				end transitions
+				end command
+				command 'Спрятаться за ближайшим кустом'
+			texts 3 
+				text 'Ты точно сыч!'
+				text 'Прячешься от своих одноклассников'
+				text 'А они, между прочем, были бы рады с тобой повидаться!'
+			end texts
+				cmd '2'
+				transitions 1
+					transition ''
+					conditions 0
+					end conditions
+					effects 1
+						effect 'lonely'
+						value '2'
+						end effect
+					end effects
+					toLocation 'Дом'
+					toEvent 'Досуг в среду продолжение'
+					end transition
+				end transitions
+				end command
+				command 'Пойти вмести с ними в кино'
+			texts 3 
+				text 'Правильно!'
+				text 'Не будь сычом!'
+				text 'Посмотришь четкий фильмец с одноклассниками'
+			end texts
+				cmd '3'
+				transitions 1
+					transition ''
+					conditions 0
+					end conditions
+					effects 1
+						effect 'happiness'
+						value '1'
+						end effect
+					end effects
+					toLocation 'Кинотеатр'
+					toEvent 'В кино с одноклассниками'
+					end transition
+				end transitions
+				end command
+			end commands
+			end event
+			event 'Свидание'
+		    texts 3
+		    	text 'Гуляешь с тян'
+			    text 'Всё очень лампово'
+			    text 'Вдруг вспоминаешь про вписку'
+			    text 'Позовешь её?'
+		    end texts
+			commands 3
+				command 'Позвать на вписку'
+				texts 2
+					text 'Странно...'
+					text 'Тебе повезло и она согласилась'
+				end texts
+				cmd '1'
+				transitions 1
+					transition ''
+					conditions 0
+					end conditions
+					effects 2
+					    effect 'happiness'
+						value '1'
+						end effect
+						effect 'inLove'
+						value '1'
+						end effect
+					end effects
+					toLocation 'Улица'
+					toEvent 'Добраться на вписку'
+					end transition
+				end transitions
+				end command
+				command 'Не звать'
+				texts 3
+					text 'Хм... Странно...'
+					text 'Она сама предложила пойти тебе на эту вписку'
+					text 'Это что-то значит'
+				end texts
+				cmd '2'
+				transitions 1
+					transition ''
+					conditions 0
+					end conditions
+					effects 2
+					    effect 'happiness'
+						value '1'
+						end effect
+						effect 'inLove'
+						value '1'
+						end effect
+					end effects
+					toLocation 'Улица'
+					toEvent 'Добраться на вписку'
+					end transition
+				end transitions
+				end command
+				command 'Предложить сходить в кино'
+			texts 4
+				text 'Сидите в кино...'
+				text 'И вдруг она сама предлагает тебе пойти с ней на вписку'
+				text '...'
+				text 'Это что-то значит'
+			end texts
+				cmd '3'
+				transitions 1
+					transition ''
+					conditions 0
+					end conditions
+					effects 2
+					    effect 'happiness'
+						value '1'
+						end effect
+						effect 'inLove'
+						value '1'
+						end effect
+					end effects
+					toLocation 'Улица'
+					toEvent 'Добраться на вписку'
+					end transition
+				end transitions
+				end command
+			end commands
+			end event
+			event 'Добраться на вписку'
+			text 'Как планируешь добираться?'
+			commands 2
+				command 'Пойти пешком'
+                    text 'Не стопчи башмаки...'
+				cmd '1'
+				transitions 1
+					transition ''
+					conditions 0
+					end conditions
+					effects 1
+						effect 'decrease'
+						value '2'
+						end effect
+					end effects
+					toLocation 'Трэп-хата'
+					toEvent 'Вписка у Ромы'
+					end transition
+				end transitions
+				end command
+				command 'Поехать на машине'
+				texts 3
+                    text 'Не советовал бы тебе ехать на машине...'
+					text 'Ты ведь успел где-то немного выпить'
+					text 'Дело, конечно, твоё!'
+			    end texts
+				cmd '2'
+				transitions 2
+					transition 'Нетрезвый'
+					conditions 1
+						condition 'AlchoholMore'
+						value '0'
+						end condition 
+					end conditions
+					effects 0
+					end effects
+					toLocation 'Улица'
+					toEvent 'Вождение в нетрезвом виде'
+					end transition
+					transition 'Трезвый'
+					conditions 0
+					end conditions
+					effects 0
+					end effects
+					toLocation 'Трэп-хата'
+					toEvent 'Вписка у Ромы'
+					end transition
+				end transitions
+				end command
+			end commands
+			end event
+			event 'Вождение в нетрезвом виде'
+		    texts 5
+			   text 'Вот дела...'
+			   text 'Тебя останавливают гайцы!'        
+			   text 'Если остановишься, они заберут права...'
+			   text 'Сможешь свалить - будешь красавчиком!'
+			   text 'Принимай решение быстрее!'
+		    end texts
+			commands 2
+				command 'Газ в пол'
+				cmd '1'
+				transitions 2
+					transition 'Свалил'
+					texts 2
+				       text 'Красава!'
+				       text 'Ушел от гайцев!'
+					end texts
+					conditions 1
+					   condition 'TuningMore'
+					   value '0'
+					   end condition
+					end conditions
+					effects 1
+					    effect 'happiness'
+						value '2'
+						end effect
+					end effects
+					toLocation 'Трэп-хата'
+					toEvent 'Вписка у Ромы'
+					end transition
+					transition 'Не свалил'
+					texts 5
+					   text 'Ты не смог оторваться :с'
+				       text 'Остался без прав'
+				       text 'А автор ведь тебе говорил, что не стоило садиться за руль!'
+					   text 'Четвероюродный дядя из Англии оставляет тебе наследство'
+					   text 'Тратишь всё на взятку копам и выкуп прав'
+					end texts
+					conditions 0
+					end conditions
+					effects 1
+					    effect 'misfortune'
+						value '2'
+						end effect
+					end effects
+					toLocation 'Дом'
+					toEvent 'Утро четверга'
+					end transition
+				end transitions
+				end command
+				command 'Остановиться'
+				texts 5
+					text 'Ты не смог от них оторваться :с'
+					text 'Остался без прав'
+					text 'А я ведь тебе говорил, что не стоило садиться за руль!'
+					text 'Четвероюродный дядя из Англии оставляет тебе наследство'
+					text 'Тратишь всё на взятку копам и выкуп прав'
+				end texts
+				cmd '2'
+				transitions 1
+					transition ''
+					conditions 0
+					end conditions
+					effects 1
+						effect 'misfortune'
+						value '2'
+						end effect
+					end effects
+					toLocation 'Дом'
+					toEvent 'Утро четверга'
 					end transition
 				end transitions
 				end command

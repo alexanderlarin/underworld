@@ -19,11 +19,11 @@ locations 1
 					    effect 'pumpDown'
 						value '1'
 						end effect
-						effect 'decrease'
-						value '2'
+						effect 'heal'
+						value '9'
 						end effect
-						effect 'damage'
-						value '2'
+						effect 'boost'
+						value '10'
 						end effect
 					end effects
 					toLocation 'Дом'

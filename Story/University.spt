@@ -1,6 +1,6 @@
 locations 1	
 	location 'Универ'
-		events 7
+		events 10
 		    event 'Первая пара понедельника'
 			texts 2
 			   text 'Ты всё же пришёл на первую пару...'
@@ -165,14 +165,11 @@ locations 1
 					transition ''
 					conditions 0
 					end conditions
-					effects 3
+					effects 2
 						effect 'damage'
 						value '1'
 						end effect
 						effect 'decrease'
-						value '1'
-						end effect
-						effect 'pumpDown'
 						value '1'
 						end effect
 					end effects
@@ -300,7 +297,7 @@ locations 1
 			texts 5
 			   text 'Ничего себе!'
 			   text 'Ты и не предполагал, что первой парой будет контрольная работа по математике'
-			   text 'От результатов контрольной зависит, останишься ты учиться в универе или вылетишь с позором'
+			   text 'От результатов контрольной зависит, останешься ты учиться в универе или вылетишь с позором'
 			   text 'Тебе попалось задание решить интеграл от:'
 			   text '((x+2)/(x-1))dx'
 			end texts
@@ -470,7 +467,7 @@ locations 1
 			   text 'Ну что же, молодец, ты попал на пару географии'
 			   text 'Препод говорит:'
 			   text '"Назовите столицу Перу, чья первая поднимется рука..."'
-			   text 'Не даёшь договорить преподу и отвечаешь:""
+			   text 'Не даёшь договорить преподу и отвечаешь:'
 			end texts
 			commands 4
 				command '"Айякучо"'
@@ -568,6 +565,212 @@ locations 1
 					end effects
 					toLocation 'Дом'
 					toEvent 'Дома во вторник'
+					end transition
+				end transitions
+				end command
+			end commands
+			end event
+			event 'Первая пара в среду'
+			texts 4
+			   text 'Добро пожаловать на твою любимую пару!'
+			   text 'Инженерная графика - любимый предмет'
+			   text 'Ведь его преподает жаркая Полина Андреевна'
+			   text 'Держи себя в руках!'
+			end texts
+			commands 3
+				command 'Сделать ей комплимент'
+				text 'Она улыбнулась тебе'
+				cmd '1'
+				transitions 1
+					transition ''
+					conditions 0
+					end conditions
+					effects 1
+						effect 'happiness'
+						value '1'
+						end effect
+					end effects
+					toLocation 'Универ'
+					toEvent 'Вторая пара в среду'
+					end transition
+				end transitions
+				end command
+				command 'Шуткануть на тему предмета'
+				text 'Она застенчиво посмеялась...'
+				cmd '2'
+				transitions 1
+					transition ''
+					conditions 0
+					end conditions
+					effects 1
+						effect 'luckly'
+						value '2'
+						end effect
+					end effects
+					toLocation 'Универ'
+					toEvent 'Вторая пара в среду'
+					end transition
+				end transitions
+				end command
+				command 'Шлёпнуть её по попке'
+				text 'Она дала тебе пощечину и выгнала с пары'
+				cmd '3'
+				transitions 1
+					transition ''
+					conditions 0
+					end conditions
+					effects 3
+						effect 'damage'
+						value '1'
+						end effect
+						effect 'downReputationInUniversity'
+						value '2'
+						end effect
+						effect 'downReputationInGroup'
+						value '2'
+						end effect
+					end effects
+					toLocation 'Универ'
+					toEvent 'Вторая пара в среду'
+					end transition
+				end transitions
+				end command
+			end commands
+			end event
+			event 'Вторая пара в среду'
+				texts 4
+				   text 'Смотри, кто пришел!'
+				   text 'Это же Анис, твой одногруппник'
+				   text 'Тупой качок-мажор...'
+				   text 'Ух, как же ты его ненавидишь!'
+				end texts
+			commands 3
+				command 'Задеть зазнайку плечом'
+				text ''
+				cmd '1'
+				transitions 2
+				    transition 'Он задел тебя'
+					texts 3
+						text 'Ты пытаешься задеть его плечом'
+						text 'Он задевает тебя в ответ'
+						text 'Ты отлетел, споткнулся и упал головой на арматуру'
+					end texts
+					conditions 1
+						condition 'StrengthAntiLess'
+						end condition
+					end conditions
+					effects 2
+						effect 'damage'
+						value '10'
+						end effect
+						effect 'decrease'
+						value '10'
+						end effect
+					end effects
+					toLocation 'Game over'                         
+					toEvent 'Game over'
+					end transition
+					transition 'Ты задел его'
+					text 'Вы задорно пободались и разошлись'
+					conditions 0
+					end conditions
+					effects 1
+						effect 'decrease'
+						value '1'
+						end effect
+					end effects
+					toLocation 'Дом'                           
+					toEvent 'Быть или не быть'
+					end transition
+				end transitions
+				end command
+				command 'Пошутить на тему Анис-Кумыс'        
+				text ''
+				cmd '2'
+				transitions 2
+					transition 'Неудача'
+					texts 2
+						text 'Анис не оценил твоего юмора и продел твою голову через дырку в заборе'
+						text 'Голова пролезла не с первого раза'
+					end texts
+					conditions 1
+						condition 'StrengthAntiLess'
+						end condition
+					end conditions
+					effects 2
+						effect 'damage'
+						value '10'
+						end effect
+						effect 'decrease'
+						value '10'
+						end effect
+					end effects
+					toLocation 'Game over'                 
+					toEvent 'Game over'
+					end transition
+					transition 'Удачно' 
+					text 'Он оценил твой тонкий английский юмор'
+					conditions 0
+					end conditions
+					effects 3
+						effect 'luckly'
+						value '2'
+						end effect
+						effect 'boost'
+						value '1'
+						end effect
+						effect 'upReputationInGroup'
+						value '1'
+						end effect
+					end effects
+					toLocation 'Дом'                     
+					toEvent 'Быть или не быть'
+					end transition
+				end transitions
+				end command
+				command 'Прописать ему с вертухи в щи'
+				texts 2
+					text 'Никто не ожидал такого поворота'
+					text 'Анис тоже. Ты классно прописал ему!'
+				end texts
+				cmd '3'
+				transitions 1
+					transition ''
+					conditions 0
+					end conditions
+					effects 1
+						effect 'upReputationInGroup'
+						value '1'
+						end effect
+					end effects
+					toLocation 'Дом' 
+					toEvent 'Быть или не быть'
+					end transition
+				end transitions
+				end command
+			end commands
+			end event
+			event 'Третья пара в среду'
+			texts 4
+			   text 'Заходишь в аудиторию...'
+			   text 'Никого нет :/'
+			   text 'Неудачник!'
+			   text 'Всех отпустили, а ты, как всегда, не в курсе'
+			end texts
+			commands 1
+				command 'Пойти домой'
+				cmd '1'
+				transitions 1
+					transition ''
+					conditions 0
+					end conditions
+					effects 1
+						effect 'luckless'
+						value '2'
+						end effect
+					end effects
+					toLocation 'Дом'
+					toEvent 'Досуг в среду'
 					end transition
 				end transitions
 				end command
