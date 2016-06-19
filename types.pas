@@ -41,7 +41,10 @@ interface
 		TCondition = record
 			name: String;
 			attribute: String;
-			value: Integer;			
+			value: Integer;		
+			text: TColorString;
+			texts: TMultiLineColorText;
+			isMultiLine: Boolean;
 		end;
 		
 		TConditions = array of TCondition;
@@ -65,6 +68,7 @@ interface
 			texts: TMultiLineColorText;
  			isMultiLine: Boolean;
 			cmd: String;
+			conditions: TConditions;
 			transitions: TTransitions;
 		end;
 		

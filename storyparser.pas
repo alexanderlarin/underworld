@@ -116,7 +116,17 @@ implementation
 				ReadToken(text, token);
 				condition.value := StrToInt(token);
 			end;
-				
+			if token = TokenText then
+			begin
+				ReadToken(text, condition.text);
+				if (condition.text.color = '') then
+					condition.text.color := ColorConditionText;
+			end;
+			if token = TokenTexts then
+			begin
+				condition.isMultiLine := true;
+				ReadTexts(text, condition.texts);
+			end;
 			if token = TokenEnd then
 			begin
 				ReadToken(text, token);
@@ -231,6 +241,8 @@ implementation
 				command.isMultiLine := true;
 				ReadTexts(text, command.texts);
 			end;
+			if token = TokenConditions then
+				ReadConditions(text, command.conditions);
 			if token = TokenCmd then
 				ReadToken(text, command.cmd);
 			if token = TokenTransitions then
@@ -364,7 +376,7 @@ implementation
 		ReadToken(text, token);
 		locationsCount := StrToInt(token);
 		preLength := Length(locations);
-		setLength(locations, locationsCount + Length(locations));
+		SetLength(locations, locationsCount + Length(locations));
 		for I := (preLength) to (locationsCount + preLength - 1) do
 		begin
 			ReadToken(text, token);
