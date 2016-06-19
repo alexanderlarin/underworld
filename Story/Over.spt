@@ -1,11 +1,119 @@
 locations 1	
 	location 'Game over'
-	    events 1
-		   event 'Game over'
-		   text 'Игра окончена. Введите в текстовое поле "exit" и дважды нажмите Enter.'
-		   commands 0
-		   end commands
-           end event
+	    events 2
+			event 'Game over'
+			text 'На этом сюжет игры окончен'
+			commands 1
+				command 'Узнать характеристики своего героя'
+				cmd '1'
+				conditions 20
+					condition 'HealthMore'
+					text 'Твой герой здоров, как бык!'
+					value '9'
+					end condition
+					condition 'HealthLess'
+					text 'Следует подлечиться!'
+					value '3'
+					end condition
+					condition 'InLoveMore'
+					text 'С тянкой у вас всё может получиться в будущем :3'
+					value '6'
+					end condition
+					condition 'InLoveLess'
+					text 'Ты как был сычом, так им и останешься'
+					value '3'
+					end condition
+					condition 'IntelligenceMore'
+					text ''Ты способен победить в "Своей игре"!'
+					value '7'
+					end condition
+					condition 'IntelligenceLess'
+					text 'Твой мозг развит на уровне мозга табуретки'
+					value '2'
+					end condition
+					condition 'FortuneMore'
+					text 'Фортуна всегда на твоей стороне!'
+					value '8'
+					end condition
+					condition 'FortuneLess'
+					text 'Ты по жизни неудачник, кек'
+					value '3'
+					end condition
+					condition 'StrengthMore'
+					text 'Ты настоящий качара-бычара'
+					value '8'
+					end condition
+					condition 'StrengthLess'
+					text 'Даже ветер тебя сдувает, дрищ!'
+					value '3'
+					end condition
+					condition 'AlchoholMore'
+					text 'Ты запущенный алкаш!'
+					value '7'
+					end condition
+					condition 'AlchoholLess'
+					text 'Ты трезвее стёклышка!'
+					value '1'
+					end condition
+					condition 'ReputationInGroupMore'
+					text 'Ты самый классный в группе!'
+					value '8'
+					end condition
+					condition 'ReputationInGroupLess'
+					text 'Тебя никто не замечает!'
+					value '3'
+					end condition
+					condition 'ReputationInUniversityMore'
+					text 'Ты известен на весь универ!'
+					value '8'
+					end condition
+					condition 'ReputationInUniversityLess'
+					text 'Тебя даже в универе не замечают'
+					value '2'
+					end condition
+					condition 'VapeMore'
+					text 'Ты обкурен в хлам!'
+					value '7'
+					end condition
+					condition 'VapeLess'
+					text 'Используешь только пар, ведь он на 95% безопаснее'
+					value '2'
+					end condition
+					condition 'HappyMore'
+					text 'Ты очень счастлив ^^'
+					value '8'
+					end condition
+					condition 'HappyLess'
+					text 'Несчастнее тебя только мёртвые'
+					value '2'
+					end condition
+				end conditions
+				transitions 1
+					conditions 0
+					end conditions
+					effects 0
+					end effects
+					toLocation 'Game over'
+					toEvent 'Конец'
+					end transition
+				end transitions
+				end command
+			end commands
+			end event
+			event 'Конец'
+			texts 8
+			   text 'На этом игра окончена'
+			   text 'Но не её разработка!'
+			   text 'В будущем ожидаются глобальные изменения!'
+			   text 'Если у вас имеются идеи для сценария продолжения игры'
+			   text 'Присылайте их на адрес: underworld.association@gmail.com'
+			   text 'Самые интересные из них будут использованы в DLC!'
+			   text 'Для закрытия введите "exit" и дважды нажмите Enter'
+			   text 'Для перезапуска введите "restart" и дважды нажмите Enter'
+			end texts
+			commands 1
+			end commands
+			end event
         end events
 	end location
 end locations

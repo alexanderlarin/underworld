@@ -1,4 +1,4 @@
-stories 9
+stories 10
 	story House
 	story University
 	story Porch
@@ -8,4 +8,5 @@ stories 9
 	story Garage
 	story Cinema
 	story Trap
+	story Fight
 end stories

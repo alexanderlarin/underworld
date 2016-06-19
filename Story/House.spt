@@ -1,12 +1,12 @@
 locations 1	
 	location 'Дом'
-		events 10
+		events 11
 			event 'Утро понедельника'
 			texts 4
 			   text 'АХТУНГ, ПОНЕДЕЛЬНИК#Red'
 			   text 'Обычный день обычного студента'
 			   text 'Ничто не предвещало беды, кроме расписания...'
-			   text 'Предстоит встреча с одной особой... С первой парой!'
+			   text 'Предстоит встреча с одной особой...С первой парой!'
 			end texts
 			commands 2
 				command 'Пойти'
@@ -653,6 +653,39 @@ locations 1
 					end effects
 					toLocation 'Универ'
 					toEvent 'Третья пара в среду'
+					end transition
+				end transitions
+				end command
+			end commands
+			end event
+			event 'Утро четверга'
+			texts 5
+			   text 'Вчера был непростой и очень насыщенный день'
+			   text 'Но не стоит забывать про универ!'
+			   text 'И про аспирин, конечно же'
+			   text 'Ты собираешь волю в кулак, идёшь на пару'
+			   text 'Ведь она сегодня только одна :3'
+			end texts
+			commands 1
+				command 'Пойти'
+				texts 1
+				   text ''
+				end texts
+				cmd '1'
+				transitions 1
+					transition ''
+					conditions 0
+					end conditions
+					effects 1
+						effect 'upReputationInGroup'
+						value '1'
+						end effect
+						effect 'increaseIntelligence'
+						value '1'
+						end effect
+					end effects
+					toLocation 'Универ'
+					toEvent 'Первая пара четверга'
 					end transition
 				end transitions
 				end command
