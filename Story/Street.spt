@@ -61,7 +61,7 @@ locations 1
 			end commands
 			end event
 			event 'Встреча с гопниками'
-			texts 3
+			texts 4
 			   text 'Слышишь в свой адрес'
 			   text 'Слышь пацанчик, а есть чёнить? А? А если найду?'
 			   text 'Опа-на! Чики-брики и в дамки!'

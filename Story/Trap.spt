@@ -7,7 +7,7 @@ locations 1
 			   text 'Будешь творить всё, что захочешь?'
 		    end texts
 			commands 3
-				command 'Курнуть спайсухи'
+				command 'Курнуть неведомую зелень'
 				texts 9
 					text 'Куришь'
 					text '...'
@@ -129,7 +129,7 @@ locations 1
 			   text 'Будешь продолжать в том же духе?'
 		    end texts
 			commands 3
-				command 'Накуриться спайсухой в хлам'
+				command 'Накуриться зелёной фигнёй в хламидомонаду'
 				texts 9
 					text 'Куришь'
 					text '...'
@@ -144,7 +144,7 @@ locations 1
 				cmd '1'
 				transitions 1
 					transition ''
-					text 'Остался навсегда со спайсухой в нирване'
+					text 'Остался навсегда в нирване'
 					conditions 0
 					end conditions
 					toLocation 'Game over'
@@ -175,7 +175,10 @@ locations 1
 					text 'Ты напился в хлам'
 					conditions 0
 					end conditions
-					effects 0
+					effects 1
+						effect 'takeToDrink'
+						value '8'
+						end effect 
 					end effects
 					toLocation 'Трэп-хата'
 					toEvent 'Путь домой'
@@ -303,7 +306,10 @@ locations 1
 						text 'Ты был пьян и вмазался в бетонный столб'
 						text 'К сожалению, перелом 100 костей из 206 несовместим с жизнью'
 					end texts
-					conditions 0
+					conditions 1
+					   condition 'AlchoholMore'
+					   value '0'
+					   end condition 
 					end conditions
 					effects 2
 						effect 'decrease'

@@ -1,0 +1,452 @@
+locations 1	
+	location 'Битва'
+		events 6
+			event 'Стрелка'
+			texts 2
+			   text 'Подходишь к месту события'
+			   text 'Анис уже ждёт тебя'
+			end texts
+			commands 3
+				command 'Тихо обойти, сорвать гриб и кинуть в Аниса'
+				cmd '1'
+				transitions 1
+					transition ''
+					conditions 0
+					end conditions
+					effects 1
+						effect 'luckly'
+						value '2'
+						end effect
+					end effects
+					toLocation 'Битва'
+					toEvent 'Первый этап'
+					end transition
+				end transitions
+				end command
+				command 'Подкрасться и ударить под колено'
+				text 'А это боольно'
+				cmd '2'
+				transitions 1
+					transition ''
+					conditions 0
+					end conditions
+					effects 1
+						effect 'pumpDownAnti'
+						value '1'
+						end effect
+					end effects
+					toLocation 'Битва'
+					toEvent 'Первый этап'
+					end transition
+				end transitions
+				end command
+				command 'Свистнуть:"Эй!" *фиить*'
+				cmd '3'
+				transitions 1
+					transition ''
+					conditions 0
+					end conditions
+					effects 1
+						effect 'pumpUpAnti'
+						value '1'
+						end effect
+					end effects
+					toLocation 'Битва'
+					toEvent 'Первый этап'
+					end transition
+				end transitions
+				end command
+			end commands
+			end event
+			event 'Первый этап'
+			text 'Не можете решить,кто вступит в открытый бой первым'
+			commands 3
+				command 'Попытаться решить мирным путём'
+				cmd '1'
+				transitions 2
+					transition 'Решил мирно'
+					texts 2
+						text 'Ты - талантливый дипломат!'
+						text 'Сумел убедить Аниса перейти на твою сторону'
+					end texts
+					conditions 1
+						condition 'IntelligenceMore'
+						value '9'
+						end condition
+					end conditions
+					effects 1
+						effect 'increaseIntelligence'
+						value '10'
+						end effect
+					end effects
+					toLocation 'Game over'
+					toEvent 'Game over'
+					end transition
+					transition 'Не убедил'
+					texts 2
+						text 'Твоего красноречия недостаточно'
+						text 'Битвы не миновать'
+					end texts
+					conditions 0
+					end conditions
+					effects 2
+						effect 'reduceIntelligence'
+						value '2'
+						end effect
+						effect 'damage'
+						value '1'
+						end effect
+					end effects
+					toLocation 'Битва'
+					toEvent 'Второй этап'
+					end transition
+				end transitions
+				end command
+				command 'Ударить первым'
+				cmd '2'
+				transitions 1
+					transition ''
+					conditions 0
+					end conditions
+					effects 1
+						effect 'damageAnti'
+						value '1'
+						end effect
+					end effects
+					toLocation 'Битва'
+					toEvent 'Второй этап'
+					end transition
+				end transitions
+				end command
+				command 'Попытаться увернуться от его удара'
+				cmd '3'
+				transitions 1
+					transition ''
+					conditions 0
+					end conditions
+					effects 0
+					end effects
+					toLocation 'Битва'
+					toEvent 'Второй этап'
+					end transition
+				end transitions
+				end command
+			end commands
+			end event
+			event 'Второй этап'
+			text 'Махач в самом разгаре!'
+			commands 3
+				command 'Хукнуть с правой'
+				cmd '1'
+				transitions 2
+					transition 'Хук прошёл'
+					text 'Ты достаточно силён и смог удачно хукнуть'
+					conditions 1
+						condition 'StrengthAntiMore'
+						end condition
+					end conditions
+					effects 1
+						effect 'damageAnti'
+						value '2'
+						end effect
+					end effects
+					toLocation 'Битва'
+					toEvent 'Третий этап'
+					end transition
+					transition 'Хук не прошёл'
+					texts 2
+						text 'Ты попытался хукнуть с правой'
+						text 'Но Анис успел прописать тебе с левой'
+					end texts
+					conditions 0
+					end conditions
+					effects 1
+						effect 'damage'
+						value '2'
+						end effect
+					end effects
+					toLocation 'Битва'
+					toEvent 'Третий этап'
+					end transition
+				end transitions
+				end command
+				command 'Ударить с ноги'
+				cmd '2'
+				transitions 2
+					transition 'Ударил с ноги'
+					text 'Твоя растяжка позволила втрепать пяткой в нос'
+					conditions 1
+						condition 'StrengthAntiMore'
+						end condition
+					end conditions
+					effects 1
+						effect 'damageAnti'
+						value '3'
+						end effect
+					end effects
+					toLocation 'Битва'
+					toEvent 'Третий этап'
+					end transition
+					transition 'Не ударил с ноги'
+					texts 2
+						text 'Ты замахнулся, но ногу свело'
+						text 'И ты рухнул носом в муравейник'
+					end texts
+					conditions 0
+					end conditions
+					effects 1
+						effect 'damage'
+						value '3'
+						end effect
+					end effects
+					toLocation 'Битва'
+					toEvent 'Третий этап'
+					end transition
+				end transitions
+				end command
+				command 'Увернуться от удара'
+				cmd '3'
+				transitions 2
+					transition 'Увернулся'
+					texts 3
+						text 'Твоя ловкость позволила избежать удара в челюсть'
+						text 'Ты освоил приёмы бесконтактного боя'
+						text 'Анис оставил в стене хорошую вмятину!
+					end texts
+					conditions 1
+						condition 'FortuneMore'
+						value '5'
+						end condition
+					end conditions
+					effects 1
+						effect 'damageAnti'
+						value '1'
+						end effect
+					end effects
+					toLocation 'Битва'
+					toEvent 'Третий этап'
+					end transition
+					transition 'Не увернулся'
+					text 'Ты не читаешь противника!'
+					conditions 0
+					end conditions
+					effects 1
+						effect 'damage'
+						value '1'
+						end effect
+					end effects
+					toLocation 'Битва'
+					toEvent 'Третий этап'
+					end transition
+				end transitions
+				end command
+			end commands
+			end event
+			event 'Третий этап'
+			texts 3
+			   text 'Решаете отдохнуть, но продолжаете батл'
+			   text 'Пытаетесь задизморалить друг друга'
+			   text 'У кого острее язычок?'
+			end texts
+			commands 3
+				command 'Пошутить про мамку'
+				text 'Анис словил печальку'
+				cmd '1'
+				transitions 1
+					transition ''
+					conditions 0
+					end conditions
+					effects 1
+						effect 'damageAnti'
+						value '2'
+						end effect
+					end effects
+					toLocation 'Битва'
+					toEvent 'Четвёртый этап'
+					end transition
+				end transitions
+				end command
+				command 'Подколоть за пирамиды'
+				texts 2
+					text 'Скёр,скёр,скёр!'
+					text 'Ремнём по жопе дал!'
+				end texts
+				cmd '2'
+				transitions 1
+					transition ''
+					conditions 0
+					end conditions
+					effects 1
+						effect 'damageAnti'
+						value '2'
+						end effect
+					end effects
+					toLocation 'Битва'
+					toEvent 'Четвёртый этап'
+					end transition
+				end transitions
+				end command
+				command 'Отдышаться'
+				text 'Анис поймал момент и подколол тебя шилом'
+				cmd '3'
+				transitions 1
+					transition ''
+					conditions 0
+					end conditions
+					effects 1
+						effect 'damage'
+						value '3'
+						end effect
+					end effects
+					toLocation 'Битва'
+					toEvent 'Четвёртый этап'
+					end transition
+				end transitions
+				end command
+			end commands
+			end event
+			event 'Четвёртый этап'
+			text 'Пора кончать!'
+			commands 3
+				command 'Достать заточку'
+				texts 3
+					text 'Сзади слышишь мамин голос'
+                    text '"Сына-корзина!"'
+					text '"А ну быстро домой!"'
+					text 'Ты не можешь не отвлечься от боя'
+				end texts
+				cmd '1'
+				transitions 1
+					transition 'Увернулся'
+					texts 4
+						text 'Оборачиваешься на голос'
+						text 'Анис внезапно достаёт ствол и стреляет в тебя'
+						text 'Но паучье чутьё тебя не подвело!'
+						text 'Ты увернулся от маслины'
+					end texts
+					conditions 1
+						condition 'FortuneMore'
+						value '5'
+						end condition
+					end conditions
+					effects 0
+					end effects
+					toLocation 'Битва'
+					toEvent 'Итог'
+					end transition
+					transition 'Не увернулся'
+					texts 4
+						text 'Оборачиваешься на голос'
+						text 'Анис внезапно достаёт ствол и стреляет в тебя'
+						text 'Паучье чутьё подвело тебя!'
+						text 'Ты словил маслину :с'
+				    end texts
+					conditions 0
+					end conditions
+					effects 1
+						effect 'damage'
+						value '10'
+						end effect
+					end effects
+					toLocation 'Game over'
+					toEvent 'Game over'
+					end transition
+				end transitions
+				end command
+				command 'Облить Аниса кумысом'
+				text 'Тебе удалось опрокинуть на него бочку кумысика'
+				cmd '2'
+				transitions 1
+					transition ''
+					conditions 0
+					end conditions
+					effects 1
+						effect 'damageAnti'
+						value '2'
+						end effect
+					end effects
+					toLocation 'Битва'
+					toEvent 'Итог'
+					end transition
+				end transitions
+				end command
+				command 'Плюнуть в лицо Анису'
+				text 'Это плевок не в лицо, а в самую душу!'
+				cmd '3'
+				transitions 1
+					transition ''
+					conditions 0
+					end conditions
+					effects 1
+						effect 'damageAnti'
+						value '2'
+						end effect
+					end effects
+					toLocation 'Битва'
+					toEvent 'Итог'
+					end transition
+				end transitions
+				end command
+			end commands
+			end event
+			event 'Итог'
+			text 'Это могло бы продолжаться ещё очень долго'
+			text 'Но самое время заканчивать!'
+			commands 1
+				command 'Закончить'
+				cmd '1'
+				transitions 3
+					transition 'Анис сдох'
+					texts 2
+						text 'Приложив все свои усилия, ты ушатал своего врага!'
+						text 'Твой долг перед Родиной выполнен!'
+					end texts
+					conditions 1
+						condition 'HealthAntiLess'
+						value '2'
+						end condition
+					end conditions
+					effects 0
+					end effects
+					toLocation 'Game over'
+					toEvent 'Game over'
+					end transition
+					transition 'Ты сдох'
+					texts 4
+						text 'Ты еле держишься на ногах'
+						text 'АНИС УЛЬТУЕТ!'
+						text '"Ахаха, свеежеее мясо!"'
+						text 'Ты пал жертвой своего врага'
+					end texts
+					conditions 1
+						condition 'HealthLess'
+						value '2'
+						end condition
+					end conditions
+					effects 1
+						effect 'damage'
+						value '10'
+						end effect
+					end effects
+					toLocation 'Game over'
+					toEvent 'Game over'
+					end transition
+					transition 'Никто не сдох'
+					texts 2
+						text 'Вы знатно помахались, но оба выжили'
+						text 'Никто не забудет эту стрелку'
+					end texts
+					conditions 0
+					end conditions
+					effects 0
+					end effects
+					toLocation 'Game over'
+					toEvent 'Game over'
+					end transition
+				end transitions
+				end command
+			end commands
+			end event
+		end events
+	end location
+end locations

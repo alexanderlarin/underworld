@@ -197,7 +197,7 @@ implementation
 	
 	function ReduceIntelligence(var hero: THero; effect: TEffect): Boolean;
 	begin
-		hero.intelligence := hero.strength - effect.value;
+		hero.intelligence := hero.intelligence - effect.value;
 		if hero.intelligence < 0 then
 			hero.intelligence := 0;
 		if hero.intelligence = 0 then
@@ -207,7 +207,7 @@ implementation
 	
 	function ReduceIntelligenceAnti(var antiHero: THero; effect: TEffect): Boolean;
 	begin
-		antiHero.intelligence := antiHero.strength - effect.value;
+		antiHero.intelligence := antiHero.intelligence - effect.value;
 		if antiHero.intelligence < 0 then
 			antiHero.intelligence := 0;
 		if antiHero.intelligence = 0 then
@@ -217,7 +217,7 @@ implementation
 	
 	function IncreaseIntelligence(var hero: THero; effect: TEffect): Boolean;
 	begin
-		hero.intelligence := hero.strength + effect.value;
+		hero.intelligence := hero.intelligence + effect.value;
 		if hero.intelligence > 10 then
 			hero.intelligence := 10;
 		if hero.intelligence = 10 then
@@ -227,7 +227,7 @@ implementation
 	
 	function IncreaseIntelligenceAnti(var antiHero: THero; effect: TEffect): Boolean;
 	begin
-		antiHero.intelligence := antiHero.strength + effect.value;
+		antiHero.intelligence := antiHero.intelligence + effect.value;
 		if antiHero.intelligence > 10 then
 			antiHero.intelligence := 10;
 		if antiHero.intelligence = 10 then
@@ -503,7 +503,7 @@ implementation
 		if effect.name = 'reduceIntelligence' then
 			if not ReduceIntelligence(hero, effect) then
 				Exit(False);
-		if effect.name = 'inreaseIntelligence' then
+		if effect.name = 'increaseIntelligence' then
 			if not IncreaseIntelligence(hero, effect) then
 				Exit(False);
 		if effect.name = 'luckly' then

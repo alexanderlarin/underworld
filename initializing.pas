@@ -65,18 +65,9 @@ implementation
 		hero.reputationInUnderworld := 3;
 		
 		antiHero.health := 10;
-		antiHero.energy := 10;
-		antiHero.alchohol := 2;
 		
 		antiHero.strength := 6;
-		antiHero.intelligence := 8;
-		antiHero.fortune := 7;
-		
-		antiHero.love := 4;
-		antiHero.happy := 7;
-		antiHero.reputationInGroup := 8;
-		antiHero.reputationInUnderworld := 5;
-				
+		antiHero.intelligence := 9;
 		ColorWrite('[+] Heroes', ColorDebug, 1);
 	end;
 end.
