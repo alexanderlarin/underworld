@@ -757,12 +757,6 @@ locations 1
 			commands 1
 				command 'Пойти домой'
 				cmd '1'
-				conditions 1
-					condition ''
-					text ''
-					value ''
-					end condition
-				end conditions
 				transitions 1
 					transition ''
 					conditions 0

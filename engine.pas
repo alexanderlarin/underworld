@@ -113,6 +113,28 @@ implementation
  		end;
  	end;
  
+	procedure PrintConditionText(condition: TCondition);
+	var
+		I: Integer;
+	begin
+		if condition.isMultiLine then
+ 			for I := 0 to Length(condition.texts) - 1 do
+ 				ColorWrite(condition.texts[I].text, condition.texts[I].color, 1)
+ 		else
+			ColorWrite(condition.text.text, condition.text.color, 1);
+	end;
+	
+	procedure PrintCommandConditions(hero, antiHero: THero; conditions: TConditions);
+	var
+		I: Integer;
+	begin
+		for I := 0 to Length(conditions) - 1 do
+		begin
+			if CheckCondition(hero, antiHero, conditions[I]) then
+				PrintConditionText(conditions[I]);
+		end;
+	end;
+		
 	function ChooseTransition(hero: THero; antiHero: THero; transitions: TTransitions; var transition: TTransition): Boolean;
 	var
 		I: Integer;
@@ -203,6 +225,7 @@ implementation
 			Exit(not (cmd = 'exit'));
 		end;
 		PrintCommand(command);
+		PrintCommandConditions(hero, antiHero, command.conditions);
 		ChooseTransition(hero, antiHero, command.transitions, transition);
 		PrintTransition(transition);
 		Affect(hero, antiHero, transition.effects);

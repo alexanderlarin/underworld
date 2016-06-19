@@ -15,6 +15,7 @@ interface
 		ColorEventText = 'Cyan';
 		ColorCommandName = 'White';
 		ColorCommandText = 'LightGreen';
+		ColorConditionText = 'White';
 		ColorAttribute = 'Yellow';
 		ColorNumber = 'LightCyan';
 		ColorTransLocation = 'White';
