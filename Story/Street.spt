@@ -395,7 +395,7 @@ locations 1
 					transition 'Нетрезвый'
 					conditions 1
 						condition 'AlchoholMore'
-						value '0'
+						value '1'
 						end condition 
 					end conditions
 					effects 0

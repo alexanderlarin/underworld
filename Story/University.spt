@@ -703,7 +703,7 @@ locations 1
 						end effect
 					end effects
 					toLocation 'Game over'                 
-					toEvent 'Game over'
+					toEvent 'Конец'
 					end transition
 					transition 'Удачно' 
 					text 'Он оценил твой тонкий английский юмор'
@@ -827,7 +827,7 @@ locations 1
 						end effect
 					end effects
 					toLocation 'Game over'
-					toEvent 'Game over'
+					toEvent 'Конец'
 					end transition
 				end transitions
 				end command
@@ -850,7 +850,7 @@ locations 1
 						end effect
 					end effects
 					toLocation 'Game over'
-					toEvent 'Game over'
+					toEvent 'Конец'
 					end transition
 				end transitions
 				end command
