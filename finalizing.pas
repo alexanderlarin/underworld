@@ -27,11 +27,11 @@ implementation
 	begin
 		if DisposeResources(hero, antiHero, locations, location, event) then
 		begin
-			ColorWrite('[+] Finalization', ColorDebug);
+			//ColorWrite('[+] Finalization', ColorDebug);
 		end
 		else
 		begin
-			ColorWrite('[!] Finalization Error', ColorError);
+			//ColorWrite('[!] Finalization Error', ColorError);
 		end;
 	end;
 	

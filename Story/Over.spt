@@ -24,7 +24,7 @@ locations 1
 					value '3'
 					end condition
 					condition 'IntelligenceMore'
-					text ''Ты способен победить в "Своей игре"!'
+					text 'Ты способен победить в "Своей игре"!'
 					value '7'
 					end condition
 					condition 'IntelligenceLess'
@@ -116,15 +116,13 @@ locations 1
 			end commands
 			end event
 			event 'Конец'
-			texts 8
+			texts 6
 			   text 'На этом игра окончена'
 			   text 'Но не её разработка!'
 			   text 'В будущем ожидаются глобальные изменения!'
 			   text 'Если у вас имеются идеи для сценария продолжения игры'
 			   text 'Присылайте их на адрес: underworld.association@gmail.com'
 			   text 'Самые интересные из них будут использованы в DLC!'
-			   text 'Для закрытия введите "exit" и дважды нажмите Enter'
-			   text 'Для перезапуска введите "restart" и дважды нажмите Enter'
 			end texts
 			commands 0
 			end commands

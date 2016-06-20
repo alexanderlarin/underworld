@@ -77,123 +77,123 @@ implementation
 	
 	function ConditionReputationInGroupMore(hero: THero; value: Integer): Boolean;
 	begin
-		Exit(hero.ReputationInGroup >= value);			
+		Exit(hero.ReputationInGroup.value >= value);			
 	end;
 	
 		function ConditionReputationInGroupLess(hero: THero; value: Integer): Boolean;
 	begin
-		Exit(hero.ReputationInGroup < value);			
+		Exit(hero.ReputationInGroup.value < value);			
 	end;
 	
 	function ConditionReputationInUniversityMore(hero: THero; value: Integer): Boolean;
 	begin
-		Exit(hero.ReputationInUnderworld >= value);			
+		Exit(hero.ReputationInUnderworld.value >= value);			
 	end;
 	
 	function ConditionReputationInUniversityLess(hero: THero; value: Integer): Boolean;
 	begin
-		Exit(hero.ReputationInUnderworld < value);			
+		Exit(hero.ReputationInUnderworld.value < value);			
 	end;
 	
 	function ConditionVapeMore(hero: THero; value: Integer): Boolean;
 	begin
-		Exit(hero.vape >= value);			
+		Exit(hero.vape.value >= value);			
 	end;
 	
 	function ConditionVapeLess(hero: THero; value: Integer): Boolean;
 	begin
-		Exit(hero.vape < value);			
+		Exit(hero.vape.value < value);			
 	end;
 	
 	function ConditionHappyMore(hero: THero; value: Integer): Boolean;
 	begin
-		Exit(hero.happy >= value);			
+		Exit(hero.happy.value >= value);			
 	end;
 	
 	function ConditionHappyLess(hero: THero; value: Integer): Boolean;
 	begin
-		Exit(hero.happy < value);			
+		Exit(hero.happy.value < value);			
 	end;
 	
 	function ConditionTuningMore(hero: THero; value: Integer): Boolean;
 	begin
-		Exit(hero.tune > value);			
+		Exit(hero.tune.value > value);			
 	end;
 	
 	function ConditionInLoveLess(hero: THero; value: Integer): Boolean;
 	begin
-		Exit(hero.love < value);			
+		Exit(hero.love.value < value);			
 	end;
 	
 	function ConditionInLoveMore(hero: THero; value: Integer): Boolean;
 	begin
-		Exit(hero.love >= value);			
+		Exit(hero.love.value >= value);			
 	end;
 	
 	function ConditionFortuneMore(hero: THero; value: Integer): Boolean;
 	begin
-		Exit(hero.fortune >= value);			
+		Exit(hero.fortune.value >= value);			
 	end;
 	
 	function ConditionFortuneLess(hero: THero; value: Integer): Boolean;
 	begin
-		Exit(hero.fortune < value);			
+		Exit(hero.fortune.value < value);			
 	end;
 	
 	function ConditionIntelligenceMore(hero: THero; value: Integer): Boolean;
 	begin
-		Exit(hero.intelligence >= value);			
+		Exit(hero.intelligence.value >= value);			
 	end;
 	
 	function ConditionIntelligenceLess(hero: THero; value: Integer): Boolean;
 	begin
-		Exit(hero.intelligence < value);			
+		Exit(hero.intelligence.value < value);			
 	end;
 	
 	function ConditionStrengthMore(hero: THero; value: Integer): Boolean;
 	begin
-		Exit(hero.strength >= value);			
+		Exit(hero.strength.value >= value);			
 	end;
 	
 	function ConditionStrengthLess(hero: THero; value: Integer): Boolean;
 	begin
-		Exit(hero.strength < value);
+		Exit(hero.strength.value < value);
 	end;
 	
 	
 	function ConditionStrengthAntiMore(hero: THero; antiHero: THero): Boolean;
 	begin
-		Exit(hero.strength >= antiHero.strength);
+		Exit(hero.strength.value >= antiHero.strength.value);
 	end;
 	
 	function ConditionStrengthAntiLess(hero: THero; antiHero: THero): Boolean;
 	begin
-		Exit(hero.strength < antiHero.strength);
+		Exit(hero.strength.value < antiHero.strength.value);
 	end;
 	
 	function ConditionAlchoholMore(hero: THero; value: Integer): Boolean;
 	begin
-		Exit(hero.alchohol >= value);			
+		Exit(hero.alchohol.value >= value);			
 	end;
 	
 	function ConditionAlchoholLess(hero: THero; value: Integer): Boolean;
 	begin
-		Exit(hero.alchohol < value);			
+		Exit(hero.alchohol.value < value);			
 	end;
 	
 	function ConditionHealthMore(hero: THero; value: Integer): Boolean;
 	begin
-		Exit(hero.health > value);
+		Exit(hero.health.value > value);
 	end;
 	
 	function ConditionHealthLess(hero: THero; value: Integer): Boolean;
 	begin
-		Exit(hero.health <= value);
+		Exit(hero.health.value <= value);
 	end;
 	
 	function ConditionHealthAntiLess(antiHero: THero; value: Integer): Boolean;
 	begin
-		Exit(antiHero.health <= value);
+		Exit(antiHero.health.value <= value);
 	end;
 
 end.

@@ -15,16 +15,20 @@ interface
 		ColorEventText = 'Cyan';
 		ColorCommandName = 'White';
 		ColorCommandText = 'LightGreen';
+		ColorTransitionText = 'White';
 		ColorConditionText = 'White';
 		ColorAttribute = 'Yellow';
 		ColorNumber = 'LightCyan';
 		ColorTransLocation = 'White';
 		ColorLocation = 'LightMagenta';
+		ColorPositiveChanging = 'LightGreen';
+		ColorNegativeChanging = 'LightRed';
+		ColorLocationChanging = 'LightGreen';
 	
 	procedure TextColor(color: Integer);
 	procedure ColorWrite(normalText: String);	
 	procedure ColorWrite(normalText: String; chosenColor: String);
-	procedure ColorWrite(normalText: String; chosenColor: String; newLine: Integer);
+	function ColorWrite(normalText: String; chosenColor: String; newLine: Integer): Integer;
 	procedure ColorWrite(normalText: Integer; chosenColor: String);
 	procedure ColorWrite(normalText: Integer; chosenColor: String; newLine: Integer);
 	procedure ColorWrite(normalText: Real; chosenColor: String);
@@ -71,7 +75,27 @@ implementation
 		TextColor(15);
 	end;
 	
-	procedure ColorWrite(normalText: String; chosenColor: String; newLine: Integer);
+	function PrintLargeText(normalText: String): Integer;
+	var
+		I: Integer;
+	begin
+		if Length(normalText) <= 85 then
+		begin
+			Write(normalText);
+			Exit(1);
+		end
+		else
+		begin
+			I := 85;
+			while normalText[I] <> ' ' do
+				I := I - 1;
+			Writeln(Copy(normalText, 1, I));
+			Exit(PrintLargeText(Copy(normalText, I + 1, Length(normalText) - 1)) + 1);
+			
+		end;
+	end;
+	
+	function ColorWrite(normalText: String; chosenColor: String; newLine: Integer): Integer;
 	var newLineCounter: Integer;
 	begin
 		case chosenColor of 
@@ -95,7 +119,8 @@ implementation
 			else 
 				TextColor(15);
 		end;
-		Write(normalText);
+				
+		ColorWrite := PrintLargeText(normalText);
 		TextColor(15);
 		for newLineCounter := 1 to newLine do 
 		begin
