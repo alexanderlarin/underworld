@@ -148,7 +148,7 @@ locations 1
 					conditions 0
 					end conditions
 					toLocation 'Game over'
-					toEvent 'Game over'
+					toEvent 'Конец'
 					end transition
 				end transitions
 				end command
@@ -169,7 +169,7 @@ locations 1
 					effects 0
 					end effects
 					toLocation 'Game over'
-					toEvent 'Game over'
+					toEvent 'Конец'
 					end transition
 					transition 'Ещё чувствуешь себя'
 					text 'Ты напился в хлам'
@@ -216,7 +216,7 @@ locations 1
 						end effect
 					end effects
 					toLocation 'Game over'
-					toEvent 'Game over'
+					toEvent 'Конец'
 					end transition
 				end transitions
 				end command
@@ -320,7 +320,7 @@ locations 1
 						end effect
 					end effects
 					toLocation 'Game over'
-					toEvent 'Game over'
+					toEvent 'Конец'
 					end transition
 				end transitions
 				end command

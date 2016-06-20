@@ -211,7 +211,7 @@ locations 1
 					texts 3
 						text 'Твоя ловкость позволила избежать удара в челюсть'
 						text 'Ты освоил приёмы бесконтактного боя'
-						text 'Анис оставил в стене хорошую вмятину!
+						text 'Анис оставил в стене хорошую вмятину!'
 					end texts
 					conditions 1
 						condition 'FortuneMore'
@@ -349,7 +349,7 @@ locations 1
 						end effect
 					end effects
 					toLocation 'Game over'
-					toEvent 'Game over'
+					toEvent 'Конец'
 					end transition
 				end transitions
 				end command
@@ -429,7 +429,7 @@ locations 1
 						end effect
 					end effects
 					toLocation 'Game over'
-					toEvent 'Game over'
+					toEvent 'Конец'
 					end transition
 					transition 'Никто не сдох'
 					texts 2

@@ -3,7 +3,7 @@ locations 1
 	    events 2
 			event 'Game over'
 			text 'На этом сюжет игры окончен'
-			commands 1
+			commands 2
 				command 'Узнать характеристики своего героя'
 				cmd '1'
 				conditions 20
@@ -73,11 +73,11 @@ locations 1
 					end condition
 					condition 'VapeMore'
 					text 'Ты обкурен в хлам!'
-					value '7'
+					value '2'
 					end condition
 					condition 'VapeLess'
 					text 'Используешь только пар, ведь он на 95% безопаснее'
-					value '2'
+					value '1'
 					end condition
 					condition 'HappyMore'
 					text 'Ты очень счастлив ^^'
@@ -89,6 +89,21 @@ locations 1
 					end condition
 				end conditions
 				transitions 1
+				    transition '1'
+					text 'Остальные характеристики - в средних пределах'
+					conditions 0
+					end conditions
+					effects 0
+					end effects
+					toLocation 'Game over'
+					toEvent 'Конец'
+					end transition
+				end transitions
+				end command
+				command 'Тебе без разницы, какие там характеристики'
+				cmd '2'
+				transitions 1
+					transition ''
 					conditions 0
 					end conditions
 					effects 0
@@ -111,7 +126,7 @@ locations 1
 			   text 'Для закрытия введите "exit" и дважды нажмите Enter'
 			   text 'Для перезапуска введите "restart" и дважды нажмите Enter'
 			end texts
-			commands 1
+			commands 0
 			end commands
 			end event
         end events
