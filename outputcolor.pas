@@ -26,9 +26,12 @@ interface
 		ColorLocationChanging = 'LightGreen';
 	
 	procedure TextColor(color: Integer);
+	procedure SetBackColor(backColor: Integer);
 	procedure ColorWrite(normalText: String);	
 	procedure ColorWrite(normalText: String; chosenColor: String);
 	function ColorWrite(normalText: String; chosenColor: String; newLine: Integer): Integer;
+	function ColorWrite(normalText: String; chosenColor: String; newLine: Integer; lineSize: Integer): Integer;
+	function ColorWrite(normalText: String; chosenColor: String; backColor: Integer; newLine: Integer; lineSize: Integer): Integer;
 	procedure ColorWrite(normalText: Integer; chosenColor: String);
 	procedure ColorWrite(normalText: Integer; chosenColor: String; newLine: Integer);
 	procedure ColorWrite(normalText: Real; chosenColor: String);
@@ -39,6 +42,13 @@ implementation
 	begin
 		{$IFDEF WINDOWS}
 		SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), color);
+		{$ENDIF}
+	end;
+	
+	procedure SetBackColor(backColor: Integer);
+	begin
+		{$IFDEF WINDOWS}
+		SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), BACKGROUND_RED or BACKGROUND_GREEN or BACKGROUND_INTENSITY);
 		{$ENDIF}
 	end;
 	
@@ -67,7 +77,7 @@ implementation
 			'LightMagenta': TextColor(13);
 			'Yellow': TextColor(14);
 			'White': TextColor(15);
-			'Blinck': TextColor(128);
+			'Blink': TextColor(128);
 			else 
 				TextColor(15);
 		end;
@@ -75,23 +85,23 @@ implementation
 		TextColor(15);
 	end;
 	
-	function PrintLargeText(normalText: String): Integer;
+	function PrintLargeText(normalText: String; lineSize: Integer): Integer;
 	var
 		I: Integer;
 	begin
-		if Length(UTF8Decode(normalText)) <= 50 then
+		if Length(UTF8Decode(normalText)) <= lineSize then
 		begin
 			Write(UTF8Decode(normalText));
 			Exit(1);
 		end
 		else
 		begin
-			I := 50;
+			I := lineSize;
 			while UTF8Decode(normalText)[I] <> ' ' do
 				I := I - 1;
 				
 			Writeln(Copy(UTF8Decode(normalText), 1, I));
-			Exit(PrintLargeText(UTF8Encode(Copy(UTF8Decode(normalText), I + 1, Length(UTF8Decode(normalText)) - I))) + 1);
+			Exit(PrintLargeText(UTF8Encode(Copy(UTF8Decode(normalText), I + 1, Length(UTF8Decode(normalText)) - I)), lineSize) + 1);
 			
 		end;
 	end;
@@ -116,12 +126,79 @@ implementation
 			'LightMagenta': TextColor(13);
 			'Yellow': TextColor(14);
 			'White': TextColor(15);
-			'Blinck': TextColor(128);
+			'Blink': TextColor(128);
 			else 
 				TextColor(15);
 		end;
 				
-		ColorWrite := PrintLargeText(normalText);
+		ColorWrite := PrintLargeText(normalText, 50);
+		TextColor(15);
+		for newLineCounter := 1 to newLine do 
+		begin
+			WriteLn();
+		end;
+	end;
+	
+	function ColorWrite(normalText: String; chosenColor: String; newLine: Integer; lineSize: Integer): Integer;
+	var newLineCounter: Integer;
+	begin
+		case chosenColor of 
+			'Black': TextColor(0);
+			'Blue': TextColor(1);
+			'Green': TextColor(2);
+			'Cyan': TextColor(3);
+			'Red': TextColor(4);
+			'Magenta': TextColor(5);
+			'Brown': TextColor(6);
+			'LightGray': TextColor(7);
+			'DarkGray': TextColor(8);
+			'LightBlue': TextColor(9);
+			'LightGreen': TextColor(10);
+			'LightCyan': TextColor(11);
+			'LightRed': TextColor(12);
+			'LightMagenta': TextColor(13);
+			'Yellow': TextColor(14);
+			'White': TextColor(15);
+			'Blink': TextColor(128);
+			else 
+				TextColor(15);
+		end;
+				
+		ColorWrite := PrintLargeText(normalText, lineSize);
+		TextColor(15);
+		for newLineCounter := 1 to newLine do 
+		begin
+			WriteLn();
+		end;
+	end;
+	
+	function ColorWrite(normalText: String; chosenColor: String; backColor: Integer; newLine: Integer; lineSize: Integer): Integer;
+	var newLineCounter: Integer;
+	begin
+		case chosenColor of 
+			'Black': TextColor(0);
+			'Blue': TextColor(1);
+			'Green': TextColor(2);
+			'Cyan': TextColor(3);
+			'Red': TextColor(4);
+			'Magenta': TextColor(5);
+			'Brown': TextColor(6);
+			'LightGray': TextColor(7);
+			'DarkGray': TextColor(8);
+			'LightBlue': TextColor(9);
+			'LightGreen': TextColor(10);
+			'LightCyan': TextColor(11);
+			'LightRed': TextColor(12);
+			'LightMagenta': TextColor(13);
+			'Yellow': TextColor(14);
+			'White': TextColor(15);
+			'Blink': TextColor(128);
+			else 
+				TextColor(15);
+		end;
+		
+		SetBackColor(backColor);
+		ColorWrite := PrintLargeText(normalText, lineSize);
 		TextColor(15);
 		for newLineCounter := 1 to newLine do 
 		begin
@@ -148,7 +225,7 @@ implementation
 			'LightMagenta': TextColor(13);
 			'Yellow': TextColor(14);
 			'White': TextColor(15);
-			'Blinck': TextColor(128);
+			'Blink': TextColor(128);
 			else 
 				TextColor(15);
 		end;
@@ -176,7 +253,7 @@ implementation
 			'LightMagenta': TextColor(13);
 			'Yellow': TextColor(14);
 			'White': TextColor(15);
-			'Blinck': TextColor(128);
+			'Blink': TextColor(128);
 			else 
 				TextColor(15);
 		end;
@@ -207,7 +284,7 @@ implementation
 			'LightMagenta': TextColor(13);
 			'Yellow': TextColor(14);
 			'White': TextColor(15);
-			'Blinck': TextColor(128);
+			'Blink': TextColor(128);
 			else 
 				TextColor(15);
 		end;
@@ -235,7 +312,7 @@ implementation
 			'LightMagenta': TextColor(13);
 			'Yellow': TextColor(14);
 			'White': TextColor(15);
-			'Blinck': TextColor(128);
+			'Blink': TextColor(128);
 			else 
 				TextColor(15);
 		end;

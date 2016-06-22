@@ -8,8 +8,8 @@ interface
 		conditions,
 		types;
 		
-	procedure Playing(locations: TLocations; var status: TStatus);
-	function Fall(locations: TLocations; var status: TStatus): Boolean;
+	function Playing(locations: TLocations; var status: TStatus): Boolean;
+	function Fall(locations: TLocations; var status: TStatus; var isPlaying: Boolean): Boolean;
 	function ChangeLocation(locations: TLocations; var location: TLocation; transition: TTransition; lineTransition: Integer): Boolean;
 	function ChangeEvent(var currentPosition: TPosition; toEvent: String): Boolean;
 	function ChooseTransition(hero: THero; antiHero: THero; transitions: TTransitions; var transition: TTransition): Boolean;
@@ -128,9 +128,10 @@ implementation
 	procedure PrintLocation(locationName: TColorString);
 	begin
 		GotoXY(62, 21);
-		LineChar(62, 21, 20, ' ');
+		LineChar(52, 21, 25, ' ');
 		if (locationName.color = '') then
 			locationName.color := ColorLocation;
+		GotoXY(PosStatsX + ((ConsoleWidth - PosStatsX) div 2) - (Length(UTF8Decode(locationName.text)) div 2), 21);
 		ColorWrite(locationName.text, locationName.color);
 		GotoXY(0, 0);
 	end;
@@ -189,7 +190,7 @@ implementation
 		begin
 			ColorWrite(commands[I].cmd, ColorNumber);
 			ColorWrite(': ', ColorDefault);
-			ColorWrite(commands[I].name.text, commands[I].name.color, 1);
+			ColorWrite(commands[I].name.text, commands[I].name.color, 1, 46);
 		end;
 	end;
 	
@@ -362,7 +363,7 @@ implementation
 		Exit(False);
 	end;
 	
-	function Fall(locations: TLocations; var status: TStatus): Boolean;
+	function Fall(locations: TLocations; var status: TStatus; var isPlaying: Boolean): Boolean;
 	var
 		isFalling: Boolean;
 		command: TCommand;
@@ -380,7 +381,11 @@ implementation
 		begin
 			if cmd = 'exit' then
 				Exit(False);
-			
+			if cmd = 'restart' then
+			begin
+				isPlaying := true;
+				Exit(False);
+			end;
 		end;
 		CanvasFlush();
 		PrintCommand(command, line);
@@ -401,6 +406,8 @@ implementation
 			ReadLn;
 			Exit(False);
 		end;
+		if transition.name = 'GoodOver' then
+			isCredits := true;
 		PrintTransition(transition, line);
 		Affect(status.hero, status.antiHero, transition.effects);
 		ChangeLocation(locations, status.currentPosition.location, transition, lineTransition);	
@@ -411,12 +418,15 @@ implementation
 		Exit(isFalling);
 	end;
 	
-	procedure Playing(locations: TLocations; var status: TStatus);
+	function Playing(locations: TLocations; var status: TStatus): Boolean;
 	var
 		isFalling: Boolean;
+		isPlaying: Boolean;
 	begin		
+		isPlaying := false;
 		repeat
-			isFalling := Fall(locations, status);
+			isFalling := Fall(locations, status, isPlaying);
 		until (not isFalling);
+		Exit(isPlaying);
 	end;
 end.
