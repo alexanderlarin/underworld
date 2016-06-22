@@ -64,7 +64,7 @@ locations 1
 				command 'Попытаться решить мирным путём'
 				cmd '1'
 				transitions 2
-					transition 'Решил мирно'
+					transition 'GoodOver'
 					texts 2
 						text 'Ты - талантливый дипломат!'
 						text 'Сумел убедить Аниса перейти на твою сторону'
@@ -396,7 +396,7 @@ locations 1
 				command 'Закончить'
 				cmd '1'
 				transitions 3
-					transition 'Анис сдох'
+					transition 'GoodOver'
 					texts 2
 						text 'Приложив все свои усилия, ты ушатал своего врага!'
 						text 'Твой долг перед Родиной выполнен!'
@@ -431,7 +431,7 @@ locations 1
 					toLocation 'Game over'
 					toEvent 'Конец'
 					end transition
-					transition 'Никто не сдох'
+					transition 'GoodOver'
 					texts 2
 						text 'Вы знатно помахались, но оба выжили'
 						text 'Никто не забудет эту стрелку'

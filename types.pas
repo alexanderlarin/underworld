@@ -110,6 +110,8 @@ interface
 			antiHero: THero;
 			currentPosition: TPosition;
 		end;
+	var
+		isCredits: Boolean;
 implementation
 
 end.

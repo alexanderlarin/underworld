@@ -61,14 +61,15 @@ implementation
 		y := csbi.dwCursorPosition.y;
 	end;
 	
-	procedure LineChar(x, y: Integer; Length: Integer; ch: Char);
+	procedure LineChar(x, y: Integer; length: Integer; ch: Char);
 	var
 		pos: TCoord;
-		LUnused: LongWord;
+		lUnused: LongWord;
 	begin
 		pos.x := x;
 		pos.y := y;
-		FillConsoleOutputCharacter(GetStdHandle(STD_OUTPUT_HANDLE), ch, Length, pos, LUnused);
+		FillConsoleOutputAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 0, length, pos, lUnused);
+		FillConsoleOutputCharacter(GetStdHandle(STD_OUTPUT_HANDLE), ch, length, pos, lUnused);
 	end;
 	
 	procedure CanvasClear();
@@ -168,7 +169,7 @@ implementation
 	
 	procedure CanvasAddLocation();
 	begin
-		GotoXY(61, 19);
+		GotoXY(62, 19);
 		ColorWrite('Локация', ColorTransLocation);
 	end;
 	
@@ -293,8 +294,8 @@ implementation
 			ColorWrite(' ',ColorDefault);
 		end;
 		
-		LineChar(61, 19, 7, ' ');
-		LineChar(62, 21, 20, ' ');
+		LineChar(52, 19, 20, ' ');
+		LineChar(52, 21, 20, ' ');
 		
 		for I := 1 to 10 do
 			LineChar(51, I, 28, ' ');
