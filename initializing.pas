@@ -15,7 +15,7 @@ interface
 	procedure InitEncoding();
 	procedure InitCanvas();
 	procedure InitSettings();
-	procedure InitLocations(var locations: TLocations; var location: TLocation; var event: TEvent);
+	procedure InitLocations(var locations: TLocations; var currentPosition: TPosition);
 	procedure InitHeroes(var hero: THero; var antiHero: THero);
 implementation
 	procedure InitEncoding();
@@ -52,7 +52,7 @@ implementation
 		//ColorWrite('[+] Settings', ColorDebug, 1);
 	end;
 	
-	procedure InitLocations(var locations: TLocations; var location: TLocation; var event: TEvent);
+	procedure InitLocations(var locations: TLocations; var currentPosition: TPosition);
 	var
 		I: Integer;
 	begin
@@ -62,12 +62,12 @@ implementation
 			begin
 				if (ParamStr(I + 1) <> '') then
 				begin
-					LoadStories(ParamStr(I + 1), locations, location, event);
+					LoadStories(ParamStr(I + 1), locations, currentPosition);
 					Exit();
 				end
 			end;
 		end;
-		LoadStories('default.spt', locations, location, event);
+		LoadStories('default.spt', locations, currentPosition);
 	end;
 	
 	procedure InitHeroes(var hero: THero; var antiHero: THero);

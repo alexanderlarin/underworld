@@ -253,15 +253,14 @@ implementation
 			LineChar(0, PosTransitionBeginY + I, ConsoleWidth, ' ');
 	end;
 	
-	procedure CanvasForseFlush();
+	procedure CanvasForseFlush(); // Erase full screen except event's text
 	var
 		I: Integer;
 		pos: TCoord;
 	begin
 		GetXY(pos.x, pos.y);
 		
-		for I := PosCommandsBeginY to ConsoleHeight - 1 do
-			LineChar(0, I, 50, ' ');
+		LineChar(0, ConsoleHeight, 50, ' ');
 			
 		for I := PosStatBeginY to StatsHeight do			
 			LineChar(PosStatX + 3, I, 5, ' ');

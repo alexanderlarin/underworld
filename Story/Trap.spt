@@ -143,7 +143,7 @@ locations 1
 				end texts
 				cmd '1'
 				transitions 1
-					transition ''
+					transition 'Over'
 					text 'Остался навсегда в нирване'
 					conditions 0
 					end conditions
@@ -159,7 +159,7 @@ locations 1
 				end texts
 				cmd '2'
 				transitions 2
-					transition 'Перепил'
+					transition 'Over'
 					text 'Ты слишком много выпил. Прости, но на этом всё.'
 					conditions 1
 					   condition 'AlchoholMore'
@@ -203,7 +203,7 @@ locations 1
 					toLocation 'Трэп-хата'
 					toEvent 'Путь домой'
 					end transition
-					transition 'Анис вырубил тебя'
+					transition 'Over'
 					text 'Ты не смог вырубить Аниса. Однако, он смог умножить тебя на ноль'
 					conditions 0
 					end conditions
@@ -301,7 +301,7 @@ locations 1
 					toLocation 'Дом'
 					toEvent 'Утро четверга'
 					end transition
-					transition 'Не доехал'
+					transition 'Over'
 				    text 2
 						text 'Ты был пьян и вмазался в бетонный столб'
 						text 'К сожалению, перелом 100 костей из 206 несовместим с жизнью'

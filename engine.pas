@@ -8,10 +8,10 @@ interface
 		conditions,
 		types;
 		
-	procedure Playing(var hero: THero; var antiHero: THero; locations: TLocations; location: TLocation; event: TEvent);
-	function Fall(var hero: THero; var antiHero: THero; locations: TLocations; var location: TLocation; var event: TEvent): Boolean;
+	procedure Playing(locations: TLocations; var status: TStatus);
+	function Fall(locations: TLocations; var status: TStatus): Boolean;
 	function ChangeLocation(locations: TLocations; var location: TLocation; transition: TTransition; lineTransition: Integer): Boolean;
-	function ChangeEvent(events: TEvents; var event: TEvent; toEvent: String): Boolean;
+	function ChangeEvent(var currentPosition: TPosition; toEvent: String): Boolean;
 	function ChooseTransition(hero: THero; antiHero: THero; transitions: TTransitions; var transition: TTransition): Boolean;
 	function ChooseCommand(commands: TCommands; var cmd: String; var command: TCommand): Boolean;
 	procedure PrintEvent(event: TEvent; line: Integer; fullLine: Boolean);
@@ -188,20 +188,24 @@ implementation
 		I: Integer;
 	begin
 		GotoXY(0, ConsoleHeight);
-		
+		if Length(commands) = 0 then
+		begin
+			readln;
+			cmd := 'game_over';
+			Exit(False);
+		end;
+
 		ColorWrite('Введите команду: ', ColorDefault);
 		ReadLn(cmd);
+		if cmd = '' then
+			Exit(True);
 		LineChar(17, ConsoleHeight, 4, ' ');
 		for I := 0 to Length(commands) - 1 do
 		begin
 			if commands[I].cmd = cmd then
 			begin
 				command := commands[I];
-				if ((command.name.text = 'Узнать характеристики своего героя') or (command.name.text = 'Тебе без разницы, какие там характеристики')) then
-				begin
-					cmd := 'game_over';
-					Exit(False);
-				end;
+
 				Exit(True);
 			end;
 		end;
@@ -295,22 +299,35 @@ implementation
  		end;
 	end;
 	
-	function ChangeEvent(events: TEvents; var event: TEvent; toEvent: String): Boolean;
+	function ChangeEvent(var currentPosition: TPosition; toEvent: String): Boolean;
 	var
 		I: Integer;
 	begin
 		if toEvent <> '' then
 		begin
-			for I := 0 to Length(events) - 1 do
+			for I := 0 to Length(currentPosition.location.events) - 1 do
 			begin
-				if events[I].name.text = toEvent then
+				if currentPosition.location.events[I].name.text = toEvent then
 				begin	
-					event := events[I];
+					currentPosition.event := currentPosition.location.events[I];
 					Exit(True);
 				end;	
 			end;	
 		end;
 		Exit(False);
+	end;
+	
+	procedure PrintTransLocation(transition: TTransition; lineTransition: Integer);
+	begin
+		GotoXY(0, PosTransitionBeginY + lineTransition);
+		ColorWrite(' --> ', ColorLocationChanging);
+		ColorWrite('Переход на локацию "', ColorTransLocation);
+		ColorWrite(transition.toLocation, ColorLocation);
+		ColorWrite('" ', ColorTransLocation);
+		ColorWrite('к событию "', ColorTransLocation);
+		ColorWrite(transition.toEvent, ColorEventName);
+		ColorWrite('" ', ColorTransLocation, 1);
+		lineTransition := lineTransition + 1;
 	end;
 	
 	function ChangeLocation(locations: TLocations; var location: TLocation; transition: TTransition; lineTransition: Integer): Boolean;
@@ -324,15 +341,9 @@ implementation
 				if locations[I].name.text = transition.toLocation then
 				begin	
 					location := locations[I];
-					GotoXY(0, PosTransitionBeginY + lineTransition);
-					ColorWrite(' --> ', ColorLocationChanging);
-					ColorWrite('Переход на локацию "', ColorTransLocation);
-					ColorWrite(transition.toLocation, ColorLocation);
-					ColorWrite('" ', ColorTransLocation);
-					ColorWrite('к событию "', ColorTransLocation);
-					ColorWrite(transition.toEvent, ColorEventName);
-					ColorWrite('" ', ColorTransLocation, 1);
-					lineTransition := lineTransition + 1;
+					
+					if transition.name <> 'Over' then
+						PrintTransLocation(transition, lineTransition);
 					PrintLocation(location.name);
 					Exit(True);
 				end;	
@@ -341,7 +352,7 @@ implementation
 		Exit(False);
 	end;
 	
-	function Fall(var hero: THero; var antiHero: THero; locations: TLocations; var location: TLocation; var event: TEvent): Boolean;
+	function Fall(locations: TLocations; var status: TStatus): Boolean;
 	var
 		isFalling: Boolean;
 		command: TCommand;
@@ -351,47 +362,51 @@ implementation
 		lineTransition: Integer;
 	begin	
 		cmd := '';
+		transition.toEvent := status.currentPosition.event.name.text;
 		line := 0;
 		lineTransition := 0;
-		isFalling := ChooseCommand(event.commands, cmd, command);
+		isFalling := ChooseCommand(status.currentPosition.event.commands, cmd, command);
 		if not isFalling then
 		begin
 			if cmd = 'exit' then
 				Exit(False);
-			if cmd = 'game_over' then
-			begin
-				CanvasClear();
-				PrintCommandConditions(hero, antiHero, command.conditions, line);
-				ChooseTransition(hero, antiHero, command.transitions, transition);
-				PrintTransition(transition, line);
-				Affect(hero, antiHero, transition.effects);		
-				isFalling := ChangeEvent(location.events, event, transition.toEvent);
-				PrintEvent(event, line, True);				
-				ColorWrite('Нажмите Enter для выхода ', ColorDefault);
-				Read;
-				ReadLn;
-				Exit(False);
-			end;
+			
 		end;
 		CanvasFlush();
 		PrintCommand(command, line);
-		ChooseTransition(hero, antiHero, command.transitions, transition);
+		ChooseTransition(status.hero, status.antiHero, command.transitions, transition);
+		if transition.name = 'Over' then
+		begin
+			CanvasForseFlush();
+			//CanvasClear();
+			PrintCommandConditions(status.hero, status.antiHero, command.conditions, line);
+			//ChooseTransition(status.hero, status.antiHero, command.transitions, transition);
+			PrintTransition(transition, line);
+			//Affect(status.hero, status.antiHero, transition.effects);		
+			ChangeLocation(locations, status.currentPosition.location, transition, lineTransition);	
+			isFalling := ChangeEvent(status.currentPosition, transition.toEvent);
+			PrintEvent(status.currentPosition.event, line, True);				
+			ColorWrite('Нажмите Enter для выхода ', ColorDefault);
+			Read;
+			ReadLn;
+			Exit(False);
+		end;
 		PrintTransition(transition, line);
-		Affect(hero, antiHero, transition.effects);
-		ChangeLocation(locations, location, transition, lineTransition);		
-		isFalling := ChangeEvent(location.events, event, transition.toEvent);		
-		PrintStatsChangingHero(hero);
-		PrintEvent(event, line);
-		PrintCommands(event.commands);
+		Affect(status.hero, status.antiHero, transition.effects);
+		ChangeLocation(locations, status.currentPosition.location, transition, lineTransition);	
+		isFalling := ChangeEvent(status.currentPosition, transition.toEvent);		
+		PrintStatsChangingHero(status.hero);
+		PrintEvent(status.currentPosition.event, line);
+		PrintCommands(status.currentPosition.event.commands);
 		Exit(isFalling);
 	end;
 	
-	procedure Playing(var hero: THero; var antiHero: THero; locations: TLocations; location: TLocation; event: TEvent);
+	procedure Playing(locations: TLocations; var status: TStatus);
 	var
 		isFalling: Boolean;
 	begin		
 		repeat
-			isFalling := Fall(hero, antiHero, locations, location, event);
+			isFalling := Fall(locations, status);
 		until (not isFalling);
 	end;
 end.

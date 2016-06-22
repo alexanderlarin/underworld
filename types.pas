@@ -99,6 +99,17 @@ interface
 		TStory = String;
 		
 		TStories = array of TStory;
+		
+		TPosition = record
+			location: TLocation;
+			event: TEvent;
+		end;
+		
+		TStatus = record
+			hero: THero;
+			antiHero: THero;
+			currentPosition: TPosition;
+		end;
 implementation
 
 end.

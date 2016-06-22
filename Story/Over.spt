@@ -89,7 +89,7 @@ locations 1
 					end condition
 				end conditions
 				transitions 1
-				    transition '1'
+				    transition 'Over'
 					text 'Остальные характеристики - в средних пределах'
 					conditions 0
 					end conditions
@@ -103,7 +103,7 @@ locations 1
 				command 'Тебе без разницы, какие там характеристики'
 				cmd '2'
 				transitions 1
-					transition ''
+					transition 'Over'
 					conditions 0
 					end conditions
 					effects 0

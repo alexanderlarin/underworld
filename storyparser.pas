@@ -45,7 +45,7 @@ interface
 	function ReadEffect(var text: TextFile; var effect: TEffect): Boolean;
 	function ReadEffects(var text: TextFile; var effects: TEffects): Boolean;
 	function LoadStory(fileName: String; var locations: TLocations): Boolean;
-	function LoadStories(fileName: String; var locations: TLocations; var location: TLocation; var event: TEvent): Boolean;
+	function LoadStories(fileName: String; var locations: TLocations; var currentPosition: TPosition): Boolean;
 
 implementation
 	function ReadEffect(var text: TextFile; var effect: TEffect): Boolean;
@@ -583,7 +583,7 @@ implementation
 		//ColorWrite(fileName, ColorDebug, 1);
 	end;
 	
-	function LoadStories(fileName: String; var locations: TLocations; var location: TLocation; var event: TEvent): Boolean;
+	function LoadStories(fileName: String; var locations: TLocations; var currentPosition: TPosition): Boolean;
 	var
 		I: Integer;
 		text: TextFile;
@@ -605,8 +605,8 @@ implementation
 			LoadStory(stories[I], locations);
 		end;
 		
-		location := locations[0];
-		event := location.events[0];
+		currentPosition.location := locations[0];
+		currentPosition.event := currentPosition.location.events[0];
 		//ColorWrite('[+] Locations', ColorDebug, 1);
 	end;
 end.

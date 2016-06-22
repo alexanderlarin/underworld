@@ -685,7 +685,7 @@ locations 1
 				text ''
 				cmd '2'
 				transitions 2
-					transition 'Неудача'
+					transition 'Over'
 					texts 2
 						text 'Анис не оценил твоего юмора и продел твою голову через дырку в заборе'
 						text 'Голова пролезла не с первого раза'
@@ -818,7 +818,7 @@ locations 1
 				end texts
 				cmd '2'
 				transitions 1
-					transition ''
+					transition 'Over'
 					conditions 0
 					end conditions
 					effects 1
@@ -841,7 +841,7 @@ locations 1
 				end texts
 				cmd '3'
 				transitions 1
-					transition ''
+					transition 'Over'
 					conditions 0
 					end conditions
 					effects 1
@@ -884,11 +884,9 @@ locations 1
 			end commands
 			end event
 			event 'Записка'
-			texts 9
-			   text 'Пора уходить'
-			   text 'В куртке что-то лишнее -_-'
-			   text 'Ощупываешь - находишь записку'
-			   text 'Что же там?'
+			texts 7
+			   text 'Пора уходить. В куртке что-то лишнее -_-'
+			   text 'Ощупываешь - находишь записку. Что же там?'
 	           text '=================================='
 			   text '=        ЗАПИСКА ОТ АНИСА        ='
 			   text '= Жду тибя сиводня в 3 за Спаром ='

@@ -8,35 +8,32 @@ uses
 	outputcolor,
 	types;	
 
-procedure Initialize(var hero: THero;  var antiHero: THero; var locations: TLocations; var location: TLocation; var event: TEvent);
+procedure Initialize(var locations: TLocations; var status: TStatus);
 begin
 	//ColorWrite('[+] Initizlization', ColorDebug, 1);
 	InitEncoding();
 	InitCanvas();
 	InitSettings();
-	InitLocations(locations, location, event);
-	InitHeroes(hero, antiHero);
+	InitLocations(locations, status.currentPosition);
+	InitHeroes(status.hero, status.antiHero);
 	
-	PrintLocation(location.name);
-	PrintCurrentStatsHero(hero);
-	PrintEvent(event, 0, true);
-	PrintCommands(event.commands);
+	PrintLocation(status.currentPosition.location.name);
+	PrintCurrentStatsHero(status.hero);
+	PrintEvent(status.currentPosition.event, 0, true);
+	PrintCommands(status.currentPosition.event.commands);
 end;
 
-procedure Finalize(var hero: THero;  var antiHero: THero; var locations: TLocations; var location: TLocation; var event: TEvent);
+procedure Finalize(var locations: TLocations; var status: TStatus);
 begin	
-	DisposeAll(hero, antiHero, locations, location, event);
+	DisposeAll(locations, status);
 end;
 
 var
-	hero: THero;
-	antiHero: THero;
+	status: TStatus;	
 	locations: TLocations;
-	location: TLocation;
-	event: TEvent;
 	
 begin
-	Initialize(hero, antiHero, locations, location, event);
-	Playing(hero, antiHero, locations, location, event);
-	Finalize(hero, antiHero, locations, location, event);
+	Initialize(locations, status);
+	Playing(locations, status);
+	Finalize(locations, status);
 end.
