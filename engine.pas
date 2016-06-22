@@ -189,7 +189,7 @@ implementation
 		begin
 			ColorWrite(commands[I].cmd, ColorNumber);
 			ColorWrite(': ', ColorDefault);
-			ColorWrite(commands[I].name.text, commands[I].name.color, 1);
+			ColorWrite(commands[I].name.text, commands[I].name.color, 1, 46);
 		end;
 	end;
 	
