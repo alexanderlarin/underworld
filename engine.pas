@@ -137,19 +137,29 @@ implementation
 	
 	procedure PrintEvent(event: TEvent; line: Integer; fullLine: Boolean);
 	var I: Integer;
-	begin
+	begin		
 		GotoXY(0, line);
 		if event.isMultiLine then
 		begin
 			for I := 0 to Length(event.texts) - 1 do
 			begin
-				ColorWrite(event.texts[I].text, event.texts[I].color);
-				ColorWrite('', ColorDefault, 1);
+				if fullLine then
+				begin
+					ColorWrite(event.texts[I].text, event.texts[I].color);
+					ColorWrite('', ColorDefault, 1);
+				end
+				else
+				begin
+					ColorWrite(event.texts[I].text, event.texts[I].color, 1);
+				end;
 			end;
 		end
 		else
 		begin
-			ColorWrite(event.text.text, event.text.color);
+			if fullLine then
+				ColorWrite(event.text.text, event.text.color)
+			else
+				ColorWrite(event.text.text, event.text.color, 1);
  		end;		
 	end;
 	

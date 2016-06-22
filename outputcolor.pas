@@ -79,18 +79,19 @@ implementation
 	var
 		I: Integer;
 	begin
-		if Length(normalText) <= 85 then
+		if Length(UTF8Decode(normalText)) <= 50 then
 		begin
-			Write(normalText);
+			Write(UTF8Decode(normalText));
 			Exit(1);
 		end
 		else
 		begin
-			I := 85;
-			while normalText[I] <> ' ' do
+			I := 50;
+			while UTF8Decode(normalText)[I] <> ' ' do
 				I := I - 1;
-			Writeln(Copy(normalText, 1, I));
-			Exit(PrintLargeText(Copy(normalText, I + 1, Length(normalText) - 1)) + 1);
+				
+			Writeln(Copy(UTF8Decode(normalText), 1, I));
+			Exit(PrintLargeText(UTF8Encode(Copy(UTF8Decode(normalText), I + 1, Length(UTF8Decode(normalText)) - I))) + 1);
 			
 		end;
 	end;

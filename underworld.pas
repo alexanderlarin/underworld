@@ -19,7 +19,7 @@ begin
 	
 	PrintLocation(status.currentPosition.location.name);
 	PrintCurrentStatsHero(status.hero);
-	PrintEvent(status.currentPosition.event, 0, true);
+	PrintEvent(status.currentPosition.event, 0, false);
 	PrintCommands(status.currentPosition.event.commands);
 end;
 
