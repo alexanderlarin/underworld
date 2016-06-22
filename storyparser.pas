@@ -29,7 +29,7 @@ interface
 		
 	function ReadToken(var text: TextFile; var token: String): Boolean;
 	function ReadToken(var text: TextFile; var token: TColorString): Boolean;
-	function ReadTexts(var text: TextFile; var texts: TMultiLineColorText): Boolean;
+	function ReadTexts(var text: TextFile; var texts: TMultiLineColorText; defaultColor: String): Boolean;
 	function ReadLocation(var text: TextFile; var location: TLocation): Boolean;
 	function ReadLocations(var text: TextFile; var locations: TLocations): Boolean;
 	function ReadStory(var text: TextFile; var story: TStory): Boolean;
@@ -45,7 +45,7 @@ interface
 	function ReadEffect(var text: TextFile; var effect: TEffect): Boolean;
 	function ReadEffects(var text: TextFile; var effects: TEffects): Boolean;
 	function LoadStory(fileName: String; var locations: TLocations): Boolean;
-	function LoadStories(fileName: String; var locations: TLocations; var location: TLocation; var event: TEvent): Boolean;
+	function LoadStories(fileName: String; var locations: TLocations; var currentPosition: TPosition): Boolean;
 
 implementation
 	function ReadEffect(var text: TextFile; var effect: TEffect): Boolean;
@@ -118,6 +118,7 @@ implementation
 			end;
 			if token = TokenText then
 			begin
+				condition.isMultiLine := false;
 				ReadToken(text, condition.text);
 				if (condition.text.color = '') then
 					condition.text.color := ColorConditionText;
@@ -125,7 +126,7 @@ implementation
 			if token = TokenTexts then
 			begin
 				condition.isMultiLine := true;
-				ReadTexts(text, condition.texts);
+				ReadTexts(text, condition.texts, ColorConditionText);
 			end;
 			if token = TokenEnd then
 			begin
@@ -174,11 +175,16 @@ implementation
 			if token = TokenConditions then
 				ReadConditions(text, transition.conditions);
 			if token = TokenText then
+			begin				
+				transition.isMultiLine := false;
 				ReadToken(text, transition.text);
+				if (transition.text.color = '') then
+					transition.text.color := ColorTransitionText;
+			end;
 			if token = TokenTexts then
 			begin
 				transition.isMultiLine := true;
-				ReadTexts(text, transition.texts);
+				ReadTexts(text, transition.texts, ColorTransitionText);
 			end;
 			if token = TokenEffects then
 				ReadEffects(text, transition.effects);
@@ -211,18 +217,12 @@ implementation
 		for I:= 0 to transitionsCount - 1 do
 		begin
 			if (ReadToken(text, token)) then
-			begin
 				if (token = TokenTransition) then
-				begin
 					ReadTransition(text, transitions[I]);
-				end;
-			end;
 		end;
 		ReadToken(text, token);
 		if token = TokenEnd then
-		begin
-			ReadToken(text, token);			
-		end;
+			ReadToken(text, token);	
 	end;
 	
 	function ReadCommand(var text: TextFile; var command: TCommand): Boolean;
@@ -235,11 +235,16 @@ implementation
 		while ReadToken(text, token) do
 		begin
 			if token = TokenText then
+			begin
+				command.isMultiLine := false;
 				ReadToken(text, command.text);
+				if command.text.color = '' then
+					command.text.color := ColorCommandText;
+			end;
 			if token = TokenTexts then
 			begin
 				command.isMultiLine := true;
-				ReadTexts(text, command.texts);
+				ReadTexts(text, command.texts, ColorCommandText);
 			end;
 			if token = TokenConditions then
 				ReadConditions(text, command.conditions);
@@ -294,8 +299,8 @@ implementation
 			Exit(False);
 		if (event.name.color = '') then
 			event.name.color := ColorEventName;
-		Write('Event: ');
-		ColorWrite(event.name.text, event.name.color, 1);
+		//Write('Event: ');
+		//ColorWrite(event.name.text, event.name.color, 1);
 		while ReadToken(text, token) do	
 		begin	
 			if token = TokenText then
@@ -308,7 +313,7 @@ implementation
 			if token = TokenTexts then
 			begin
 				event.isMultiLine := true;
-				ReadTexts(text, event.texts);
+				ReadTexts(text, event.texts, ColorEventText);
 			end;			
 			if token = TokenCommands then
 				ReadCommands(text, event.commands);
@@ -341,7 +346,7 @@ implementation
 		ReadToken(text, token);
 		if token = TokenEnd then
 		begin
-			Writeln('events end');
+			//Writeln('events end');
 			ReadToken(text, token);
 		end;
 		
@@ -422,7 +427,7 @@ implementation
 		end;
 	end;
 	
-	function ReadTexts(var text: TextFile; var texts: TMultiLineColorText): Boolean;
+	function ReadTexts(var text: TextFile; var texts: TMultiLineColorText; defaultColor: String): Boolean;
 	var
 		I: Integer;
 		LinesCount: Integer;
@@ -440,7 +445,7 @@ implementation
 				ReadToken(text, texts[I]);
 				if (texts[I].color = '') then
 				begin
-					texts[I].color := ColorEventText;
+					texts[I].color := defaultColor;
 				end;
 			end;
 		end;
@@ -574,11 +579,11 @@ implementation
 			ReadLocations(text, locations);
 		Close(text);
 		
-		ColorWrite('[R+] ', ColorDebug);
-		ColorWrite(fileName, ColorDebug, 1);
+		//ColorWrite('[R+] ', ColorDebug);
+		//ColorWrite(fileName, ColorDebug, 1);
 	end;
 	
-	function LoadStories(fileName: String; var locations: TLocations; var location: TLocation; var event: TEvent): Boolean;
+	function LoadStories(fileName: String; var locations: TLocations; var currentPosition: TPosition): Boolean;
 	var
 		I: Integer;
 		text: TextFile;
@@ -593,15 +598,15 @@ implementation
 		if token = TokenStories then
 			ReadStories(text, stories);
 		Close(text);
-		ColorWrite('[+] Stories', ColorDebug, 1);
+		//ColorWrite('[+] Stories', ColorDebug, 1);
 		
 		for I := 0 to Length(stories) - 1 do
 		begin
 			LoadStory(stories[I], locations);
 		end;
 		
-		location := locations[0];
-		event := location.events[0];
-		ColorWrite('[+] Locations', ColorDebug, 1);
+		currentPosition.location := locations[0];
+		currentPosition.event := currentPosition.location.events[0];
+		//ColorWrite('[+] Locations', ColorDebug, 1);
 	end;
 end.

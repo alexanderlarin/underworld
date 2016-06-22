@@ -11,23 +11,28 @@ interface
 		
 		TMultiLineColorText = array of TColorString;
 		
+		TStat = record
+			value: Integer;
+			changed: Integer;
+		end;
+		
 		THero = record
 			
-			health: Integer;
-			energy: Integer;
-			alchohol: Integer;
-			tune: Integer;
-			vape: Integer;
+			health: TStat;
+			energy: TStat;
+			alchohol: TStat;
+			tune: TStat;
+			vape: TStat;
 			
-			strength: Integer;
-			intelligence: Integer;
-			fortune: Integer;
+			strength: TStat;
+			intelligence: TStat;
+			fortune: TStat;
 			
-			love: Integer;
-			happy: Integer;
+			love: TStat;
+			happy: TStat;
 		
-			ReputationInGroup: Integer;
-			ReputationInUnderworld: Integer;	
+			ReputationInGroup: TStat;
+			ReputationInUnderworld: TStat;	
 		end;
 		
 		TEffect = record
@@ -94,6 +99,17 @@ interface
 		TStory = String;
 		
 		TStories = array of TStory;
+		
+		TPosition = record
+			location: TLocation;
+			event: TEvent;
+		end;
+		
+		TStatus = record
+			hero: THero;
+			antiHero: THero;
+			currentPosition: TPosition;
+		end;
 implementation
 
 end.

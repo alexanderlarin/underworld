@@ -38,199 +38,220 @@ interface
 implementation
 	function Damage(var hero: THero; effect: TEffect): Boolean;
 	begin
-		hero.health := hero.health - effect.value;
-		if hero.health < 0 then
-			hero.health := 0;
-		if hero.health = 0 then
+		hero.health.value := hero.health.value - effect.value;
+		hero.health.changed := hero.health.changed - effect.value;
+		if hero.health.value < 0 then
+			hero.health.value := 0;
+		if hero.health.value = 0 then
 			Exit(False);
 		Exit(True);
 	end;	
 		
 	function DamageAnti(var antiHero: THero; effect: TEffect): Boolean;
 	begin
-		antiHero.health := antiHero.health - effect.value;
-		if antiHero.health < 0 then
-			antiHero.health := 0;
-		if antiHero.health = 0 then
+		antiHero.health.value := antiHero.health.value - effect.value;
+		antiHero.health.changed := antiHero.health.changed - effect.value;
+		if antiHero.health.value < 0 then
+			antiHero.health.value := 0;
+		if antiHero.health.value = 0 then
 			Exit(False);
 		Exit(True);
 	end;
 	
 	function Heal(var hero: THero; effect: TEffect): Boolean;
 	begin
-		hero.health := hero.health + effect.value;
-		if hero.health > 10 then
-			hero.health := 10;
-		if hero.health = 10 then
+		hero.health.value := hero.health.value + effect.value;
+		hero.health.changed := effect.value;
+		if hero.health.value > 10 then
+			hero.health.value := 10;
+		if hero.health.value = 10 then
 			Exit(True);
 		Exit(True);
 	end;
 	
 	function HealAnti(var antiHero: THero; effect: TEffect): Boolean;
 	begin
-		antiHero.health := antiHero.health + effect.value;
-			antiHero.health := 10;
-		if antiHero.health = 10 then
+		antiHero.health.value := antiHero.health.value + effect.value;
+		antiHero.health.changed := -effect.value;
+		if antiHero.health.value > 10 then
+			antiHero.health.value := 10;
+		if antiHero.health.value = 10 then
 			Exit(True);
 		Exit(True);
 	end;
 
 	function Boost(var hero: THero; effect: TEffect): Boolean;
 	begin
-		hero.energy := hero.energy + effect.value;
-		if hero.energy > 10 then
-			hero.energy := 10;
-		if hero.energy = 10 then
+		hero.energy.value := hero.energy.value + effect.value;
+		hero.energy.changed := effect.value;
+		if hero.energy.value > 10 then
+			hero.energy.value := 10;
+		if hero.energy.value = 10 then
 			Exit(True);
 		Exit(True);
 	end;
 	
 	function BoostAnti(var antiHero: THero; effect: TEffect): Boolean;
 	begin
-		antiHero.energy := antiHero.energy + effect.value;
-		if antiHero.energy > 10 then
-			antiHero.energy := 10;
-		if antiHero.energy = 10 then
+		antiHero.energy.value := antiHero.energy.value + effect.value;
+		antiHero.energy.changed := antiHero.energy.changed + effect.value;
+		if antiHero.energy.value > 10 then
+			antiHero.energy.value := 10;
+		if antiHero.energy.value = 10 then
 			Exit(True);
 		Exit(True);
 	end;
 	
 	function Decrease(var hero: THero; effect: TEffect): Boolean;
 	begin
-		hero.energy := hero.energy - effect.value;
-		if hero.energy < 0 then
-			hero.energy := 0;
-		if hero.energy = 0 then
+		hero.energy.value := hero.energy.value - effect.value;
+		hero.energy.changed := hero.energy.changed - effect.value;
+		if hero.energy.value < 0 then
+			hero.energy.value := 0;
+		if hero.energy.value = 0 then
 			Exit(False);
 		Exit(True);
 	end;
 	
 	function DecreaseAnti(var antiHero: THero; effect: TEffect): Boolean;
 	begin
-		antiHero.energy := antiHero.energy - effect.value;
-		if antiHero.energy < 0 then
-			antiHero.energy := 0;
-		if antiHero.energy = 0 then
+		antiHero.energy.value := antiHero.energy.value - effect.value;
+		antiHero.energy.changed := antiHero.energy.changed - effect.value;
+		if antiHero.energy.value < 0 then
+			antiHero.energy.value := 0;
+		if antiHero.energy.value = 0 then
 			Exit(False);
 		Exit(True);
 	end;
 	
 	function TakeToDrink(var hero: THero; effect: TEffect): Boolean;
 	begin
-		hero.alchohol := hero.alchohol + effect.value;
-		if hero.alchohol > 10 then
-			hero.alchohol := 10;
-		if hero.alchohol = 10 then
+		hero.alchohol.value := hero.alchohol.value + effect.value;
+		hero.alchohol.changed := hero.alchohol.changed + effect.value;
+		if hero.alchohol.value > 10 then
+			hero.alchohol.value := 10;
+		if hero.alchohol.value = 10 then
 			Exit(True);
 		Exit(True);
 	end;
 	
 	function TakeToDrinkAnti(var antiHero: THero; effect: TEffect): Boolean;
 	begin
-		antiHero.alchohol := antiHero.alchohol + effect.value;
-		if antiHero.alchohol > 10 then
-			antiHero.alchohol := 10;
-		if antiHero.alchohol = 10 then
+		antiHero.alchohol.value := antiHero.alchohol.value + effect.value;
+		antiHero.alchohol.changed := antiHero.alchohol.changed + effect.value;
+		if antiHero.alchohol.value > 10 then
+			antiHero.alchohol.value := 10;
+		if antiHero.alchohol.value = 10 then
 			Exit(True);
 		Exit(True);
 	end;
 	
 	function Sober(var hero: THero; effect: TEffect): Boolean;
 	begin
-		hero.alchohol := hero.alchohol - effect.value;
-		if hero.alchohol < 0 then
-			hero.alchohol := 0;
-		if hero.alchohol = 0 then 
+		hero.alchohol.value := hero.alchohol.value - effect.value;
+		hero.alchohol.changed := hero.alchohol.changed - effect.value;
+		if hero.alchohol.value < 0 then
+			hero.alchohol.value := 0;
+		if hero.alchohol.value = 0 then 
 			Exit(True);
 		Exit(True);
 	end;
 	
 	function SoberAnti(var antiHero: THero; effect: TEffect): Boolean;
 	begin
-		antiHero.alchohol := antiHero.alchohol - effect.value;
-		if antiHero.alchohol < 0 then
-			antiHero.alchohol := 0;
-		if antiHero.alchohol = 0 then 
+		antiHero.alchohol.value := antiHero.alchohol.value - effect.value;
+		antiHero.alchohol.changed := antiHero.alchohol.changed - effect.value;
+		if antiHero.alchohol.value < 0 then
+			antiHero.alchohol.value := 0;
+		if antiHero.alchohol.value = 0 then 
 			Exit(True);
 		Exit(True);
 	end;
 	
 	function PumpUp(var hero: THero; effect: TEffect): Boolean; 
 	begin
-		hero.strength := hero.strength + effect.value;
-		if hero.strength > 10 then
-			hero.strength := 10;
-		if hero.strength = 10 then
+		hero.strength.value := hero.strength.value + effect.value;
+		hero.strength.changed := hero.strength.changed + effect.value;
+		if hero.strength.value > 10 then
+			hero.strength.value := 10;
+		if hero.strength.value = 10 then
 			Exit(True);
 		Exit(True);
 	end;
 	
 	function PumpUpAnti(var antiHero: THero; effect: TEffect): Boolean; 
 	begin
-		antiHero.strength := antiHero.strength + effect.value;
-		if antiHero.strength > 10 then
-			antiHero.strength := 10;
-		if antiHero.strength = 10 then
+		antiHero.strength.value := antiHero.strength.value + effect.value;
+		antiHero.strength.changed := antiHero.strength.changed + effect.value;
+		if antiHero.strength.value > 10 then
+			antiHero.strength.value := 10;
+		if antiHero.strength.value = 10 then
 			Exit(True);
 		Exit(True);
 	end;
 	
 	function PumpDown(var hero: THero; effect: TEffect): Boolean;
 	begin
-		hero.strength := hero.strength - effect.value;
-		if hero.strength < 0 then
-			hero.strength := 0;
-		if hero.strength = 0 then
+		hero.strength.value := hero.strength.value - effect.value;
+		hero.strength.changed := hero.strength.changed - effect.value;
+		if hero.strength.value < 0 then
+			hero.strength.value := 0;
+		if hero.strength.value = 0 then
 			Exit(True);
 		Exit(True);
 	end;
 	
 	function PumpDownAnti(var antiHero: THero; effect: TEffect): Boolean;
 	begin
-		antiHero.strength := antiHero.strength - effect.value;
-		if antiHero.strength < 0 then
-			antiHero.strength := 0;
-		if antiHero.strength = 0 then
+		antiHero.strength.value := antiHero.strength.value - effect.value;
+		antiHero.strength.changed := antiHero.strength.changed - effect.value;
+		if antiHero.strength.value < 0 then
+			antiHero.strength.value := 0;
+		if antiHero.strength.value = 0 then
 			Exit(True);
 		Exit(True);
 	end;
 	
 	function ReduceIntelligence(var hero: THero; effect: TEffect): Boolean;
 	begin
-		hero.intelligence := hero.intelligence - effect.value;
-		if hero.intelligence < 0 then
-			hero.intelligence := 0;
-		if hero.intelligence = 0 then
+		hero.intelligence.value := hero.intelligence.value - effect.value;
+		hero.intelligence.changed := hero.intelligence.changed - effect.value;
+		if hero.intelligence.value < 0 then
+			hero.intelligence.value := 0;
+		if hero.intelligence.value = 0 then
 			Exit(True);
 		Exit(True);
 	end;
 	
 	function ReduceIntelligenceAnti(var antiHero: THero; effect: TEffect): Boolean;
 	begin
-		antiHero.intelligence := antiHero.intelligence - effect.value;
-		if antiHero.intelligence < 0 then
-			antiHero.intelligence := 0;
-		if antiHero.intelligence = 0 then
+		antiHero.intelligence.value := antiHero.intelligence.value - effect.value;
+		antiHero.intelligence.changed := antiHero.intelligence.changed - effect.value;
+		if antiHero.intelligence.value < 0 then
+			antiHero.intelligence.value := 0;
+		if antiHero.intelligence.value = 0 then
 			Exit(True);
 		Exit(True);
 	end;
 	
 	function IncreaseIntelligence(var hero: THero; effect: TEffect): Boolean;
 	begin
-		hero.intelligence := hero.intelligence + effect.value;
-		if hero.intelligence > 10 then
-			hero.intelligence := 10;
-		if hero.intelligence = 10 then
+		hero.intelligence.value := hero.intelligence.value + effect.value;
+		hero.intelligence.changed := hero.intelligence.changed + effect.value;
+		if hero.intelligence.value > 10 then
+			hero.intelligence.value := 10;
+		if hero.intelligence.value = 10 then
 			Exit(True);
 		Exit(True);
 	end;
 	
 	function IncreaseIntelligenceAnti(var antiHero: THero; effect: TEffect): Boolean;
 	begin
-		antiHero.intelligence := antiHero.intelligence + effect.value;
-		if antiHero.intelligence > 10 then
-			antiHero.intelligence := 10;
-		if antiHero.intelligence = 10 then
+		antiHero.intelligence.value := antiHero.intelligence.value + effect.value;
+		antiHero.intelligence.changed := antiHero.intelligence.changed + effect.value;
+		if antiHero.intelligence.value > 10 then
+			antiHero.intelligence.value := 10;
+		if antiHero.intelligence.value = 10 then
 			Exit(True);
 		Exit(True);
 	end;
@@ -238,214 +259,236 @@ implementation
 	
 	function Luckly(var hero: THero; effect: TEffect): Boolean;
 	begin
-		hero.fortune := hero.fortune + effect.value;
-		if hero.fortune > 10 then
-			hero.fortune := 10;
-		if hero.fortune = 10 then
+		hero.fortune.value := hero.fortune.value + effect.value;
+		hero.fortune.changed := hero.fortune.changed + effect.value;
+		if hero.fortune.value > 10 then
+			hero.fortune.value := 10;
+		if hero.fortune.value = 10 then
 			Exit(True);
 		Exit(True);
 	end;
 	
 	function LucklyAnti(var antiHero: THero; effect: TEffect): Boolean;
 	begin
-		antiHero.fortune := antiHero.fortune + effect.value;
-		if antiHero.fortune > 10 then
-			antiHero.fortune := 10;
-		if antiHero.fortune = 10 then
+		antiHero.fortune.value := antiHero.fortune.value + effect.value;
+		antiHero.fortune.changed := antiHero.fortune.changed + effect.value;
+		if antiHero.fortune.value > 10 then
+			antiHero.fortune.value := 10;
+		if antiHero.fortune.value = 10 then
 			Exit(True);
 		Exit(True);
 	end;
 	
 	function Luckless(var hero: THero; effect: TEffect): Boolean;
 	begin
-		hero.fortune := hero.fortune - effect.value;
-		if hero.fortune < 0 then
-			hero.fortune := 0;
-		if hero.fortune = 0 then
+		hero.fortune.value := hero.fortune.value - effect.value;
+		hero.fortune.changed := hero.fortune.changed - effect.value;
+		if hero.fortune.value < 0 then
+			hero.fortune.value := 0;
+		if hero.fortune.value = 0 then
 			Exit(True);
 		Exit(True);
 	end;
 	
 	function LucklessAnti(var antiHero: THero; effect: TEffect): Boolean;
 	begin
-		antiHero.fortune := antiHero.fortune - effect.value;
-		if antiHero.fortune < 0 then
-			antiHero.fortune := 0;
-		if antiHero.fortune = 0 then
+		antiHero.fortune.value := antiHero.fortune.value - effect.value;
+		antiHero.fortune.changed := antiHero.fortune.changed - effect.value;
+		if antiHero.fortune.value < 0 then
+			antiHero.fortune.value := 0;
+		if antiHero.fortune.value = 0 then
 			Exit(True);
 		Exit(True);
 	end;
 	
 	function Lonely(var hero: THero; effect: TEffect): Boolean;
 	begin
-		hero.love := hero.love - effect.value;
-		if hero.love < 0 then
-			hero.love := 0;
-		if hero.love = 0 then
+		hero.love.value := hero.love.value - effect.value;
+		hero.love.changed := hero.love.changed - effect.value;
+		if hero.love.value < 0 then
+			hero.love.value := 0;
+		if hero.love.value = 0 then
 			Exit(True);
 		Exit(True);
 	end;
 	
 	function LonelyAnti(var antiHero: THero; effect: TEffect): Boolean;
 	begin
-		antiHero.love := antiHero.love - effect.value;
-		if antiHero.love < 0 then
-			antiHero.love := 0;
-		if antiHero.love = 0 then
+		antiHero.love.value := antiHero.love.value - effect.value;
+		antiHero.love.changed := antiHero.love.changed - effect.value;
+		if antiHero.love.value < 0 then
+			antiHero.love.value := 0;
+		if antiHero.love.value = 0 then
 			Exit(True);
 		Exit(True);
 	end;
 	
 	function InLove(var hero: THero; effect: TEffect): Boolean;
 	begin
-		hero.love := hero.love + effect.value;
-		if hero.love > 10 then
-			hero.love := 10;
-		if hero.love = 10 then
+		hero.love.value := hero.love.value + effect.value;
+		hero.love.changed := hero.love.changed + effect.value;
+		if hero.love.value > 10 then
+			hero.love.value := 10;
+		if hero.love.value = 10 then
 			Exit(True);
 		Exit(True);
 	end;
 	
 	function InLoveAnti(var antiHero: THero; effect: TEffect): Boolean;
 	begin
-		antiHero.love := antiHero.love + effect.value;
-		if antiHero.love > 10 then
-			antiHero.love := 10;
-		if antiHero.love = 10 then
+		antiHero.love.value := antiHero.love.value + effect.value;
+		antiHero.love.changed := antiHero.love.changed + effect.value;
+		if antiHero.love.value > 10 then
+			antiHero.love.value := 10;
+		if antiHero.love.value = 10 then
 			Exit(True);
 		Exit(True);
 	end;
 	
   function Happiness(var hero: THero; effect: TEffect): Boolean;
 	begin
-		hero.happy := hero.happy + effect.value;
-		if hero.happy > 10 then
-			hero.happy := 10;
-		if hero.happy = 10 then
+		hero.happy.value := hero.happy.value + effect.value;
+		hero.happy.changed := hero.happy.changed + effect.value;
+		if hero.happy.value > 10 then
+			hero.happy.value := 10;
+		if hero.happy.value = 10 then
 			Exit(True);
 		Exit(True);
 	end;
 	
 	function HappinessAnti(var antiHero: THero; effect: TEffect): Boolean;
 	begin
-		antiHero.happy := antiHero.happy + effect.value;
-		if antiHero.happy > 10 then
-			antiHero.happy := 10;
-		if antiHero.happy = 10 then
+		antiHero.happy.value := antiHero.happy.value + effect.value;
+		antiHero.happy.changed := antiHero.happy.changed + effect.value;
+		if antiHero.happy.value > 10 then
+			antiHero.happy.value := 10;
+		if antiHero.happy.value = 10 then
 			Exit(True);
 		Exit(True);
 	end;
 	
 	function Misfortune(var hero: THero; effect: TEffect): Boolean;
 	begin
-		hero.happy := hero.happy - effect.value;
-		if hero.happy < 0 then
-			hero.happy := 0;
-		if hero.happy = 0 then
+		hero.happy.value := hero.happy.value - effect.value;
+		hero.happy.changed := hero.happy.changed - effect.value;
+		if hero.happy.value < 0 then
+			hero.happy.value := 0;
+		if hero.happy.value = 0 then
 			Exit(True);
 		Exit(True);
 	end;
 	
 	function MisfortuneAnti(var antiHero: THero; effect: TEffect): Boolean;
 	begin
-		antiHero.happy := antiHero.happy - effect.value;
-		if antiHero.happy < 0 then
-			antiHero.happy := 0;
-		if antiHero.happy = 0 then
+		antiHero.happy.value := antiHero.happy.value - effect.value;
+		antiHero.happy.changed := antiHero.happy.changed - effect.value;
+		if antiHero.happy.value < 0 then
+			antiHero.happy.value := 0;
+		if antiHero.happy.value = 0 then
 			Exit(True);
 		Exit(True);
 	end;
 	
 	function Tuning(var hero: THero; effect: TEffect): Boolean;
 	begin
-		hero.tune := hero.tune + effect.value;
+		hero.tune.value := hero.tune.value + effect.value;
+		hero.tune.changed := hero.tune.changed + effect.value;
 	end;
 	
 	function TakeToVape(var hero: THero; effect: TEffect): Boolean;
 	begin
-		hero.vape := hero.vape + effect.value;
-		if hero.vape > 10 then
-			hero.vape := 10;
-		if hero.vape = 10 then
+		hero.vape.value := hero.vape.value + effect.value;
+		hero.vape.changed := hero.vape.changed + effect.value;
+		if hero.vape.value > 10 then
+			hero.vape.value := 10;
+		if hero.vape.value = 10 then
 			Exit(True);
 	end;
 	
 	function UpReputationInGroup(var hero: THero; effect: TEffect): Boolean;
 	begin
-		hero.reputationInGroup := hero.reputationInGroup + effect.value;
-		if hero.reputationInGroup > 10 then
-			hero.reputationInGroup := 10;
-		if hero.reputationInGroup = 10 then
+		hero.reputationInGroup.value := hero.reputationInGroup.value + effect.value;
+		hero.reputationInGroup.changed := hero.reputationInGroup.changed + effect.value;
+		if hero.reputationInGroup.value > 10 then
+			hero.reputationInGroup.value := 10;
+		if hero.reputationInGroup.value = 10 then
 			Exit(True);
 		Exit(True);
 	end;
 	
 	function UpReputationInGroupAnti(var antiHero: THero; effect: TEffect): Boolean;
 	begin
-		antiHero.reputationInGroup := antiHero.reputationInGroup + effect.value;
-		if antiHero.reputationInGroup > 10 then
-			antiHero.reputationInGroup := 10;
-		if antiHero.reputationInGroup = 10 then
+		antiHero.reputationInGroup.value := antiHero.reputationInGroup.value + effect.value;
+		antiHero.reputationInGroup.changed := antiHero.reputationInGroup.changed + effect.value;
+		if antiHero.reputationInGroup.value > 10 then
+			antiHero.reputationInGroup.value := 10;
+		if antiHero.reputationInGroup.value = 10 then
 			Exit(True);
 		Exit(True);
 	end;
 	
 	function DownReputationInGroup(var hero: THero; effect: TEffect): Boolean;
 	begin
-		hero.reputationInGroup := hero.reputationInGroup - effect.value;
-		if hero.reputationInGroup < 0 then
-			hero.reputationInGroup := 0;
-		if hero.reputationInGroup = 0 then
+		hero.reputationInGroup.value := hero.reputationInGroup.value - effect.value;
+		hero.reputationInGroup.changed := hero.reputationInGroup.changed - effect.value;
+		if hero.reputationInGroup.value < 0 then
+			hero.reputationInGroup.value := 0;
+		if hero.reputationInGroup.value = 0 then
 			Exit(True);
 		Exit(True);
 	end;
 	
 	function DownReputationInGroupAnti(var antiHero: THero; effect: TEffect): Boolean;
 	begin
-		antiHero.reputationInGroup := antiHero.reputationInGroup - effect.value;
-		if antiHero.reputationInGroup < 0 then
-			antiHero.reputationInGroup := 0;
-		if antiHero.reputationInGroup = 0 then
+		antiHero.reputationInGroup.value := antiHero.reputationInGroup.value - effect.value;
+		antiHero.reputationInGroup.changed := antiHero.reputationInGroup.changed - effect.value;
+		if antiHero.reputationInGroup.value < 0 then
+			antiHero.reputationInGroup.value := 0;
+		if antiHero.reputationInGroup.value = 0 then
 			Exit(True);
 		Exit(True);
 	end;
 	
 	function UpReputationInUniversity(var hero: THero; effect: TEffect): Boolean;
 	begin
-		hero.reputationInUnderworld := hero.reputationInUnderworld + effect.value;
-		if hero.reputationInUnderworld > 10 then
-			hero.reputationInUnderworld := 10;
-		if hero.reputationInUnderworld = 10 then
+		hero.reputationInUnderworld.value := hero.reputationInUnderworld.value + effect.value;
+		hero.reputationInUnderworld.changed := hero.reputationInGroup.changed + effect.value;
+		if hero.reputationInUnderworld.value > 10 then
+			hero.reputationInUnderworld.value := 10;
+		if hero.reputationInUnderworld.value = 10 then
 			Exit(True);
 		Exit(True);
 	end;
 	
 	function UpReputationInUniversityAnti(var antiHero: THero; effect: TEffect): Boolean;
 	begin
-		antiHero.reputationInUnderworld := antiHero.reputationInUnderworld + effect.value;
-		if antiHero.reputationInUnderworld > 10 then
-			antiHero.reputationInUnderworld := 10;
-		if antiHero.reputationInUnderworld = 10 then
+		antiHero.reputationInUnderworld.value := antiHero.reputationInUnderworld.value + effect.value;
+		antiHero.reputationInUnderworld.changed := antiHero.reputationInUnderworld.changed + effect.value;
+		if antiHero.reputationInUnderworld.value > 10 then
+			antiHero.reputationInUnderworld.value := 10;
+		if antiHero.reputationInUnderworld.value = 10 then
 			Exit(True);
 		Exit(True);
 	end;
 	
 	function DownReputationInUniversity(var hero: THero; effect: TEffect): Boolean;
 	begin
-		hero.reputationInUnderworld := hero.reputationInUnderworld - effect.value;
-		if hero.reputationInUnderworld < 0 then
-			hero.reputationInUnderworld := 0;
-		if hero.reputationInUnderworld = 0 then
+		hero.reputationInUnderworld.value := hero.reputationInUnderworld.value - effect.value;
+		hero.reputationInUnderworld.changed := hero.reputationInUnderworld.changed - effect.value;
+		if hero.reputationInUnderworld.value < 0 then
+			hero.reputationInUnderworld.value := 0;
+		if hero.reputationInUnderworld.value = 0 then
 			Exit(True);
 		Exit(True);
 	end;
 	
 	function DownReputationInUniversityAnti(var antiHero: THero; effect: TEffect): Boolean;
 	begin
-		antiHero.reputationInUnderworld := antiHero.reputationInUnderworld - effect.value;
-		if antiHero.reputationInUnderworld < 0 then
-			antiHero.reputationInUnderworld := 0;
-		if antiHero.reputationInUnderworld = 0 then
+		antiHero.reputationInUnderworld.value := antiHero.reputationInUnderworld.value - effect.value;
+		antiHero.reputationInUnderworld.changed := antiHero.reputationInUnderworld.changed - effect.value;
+		if antiHero.reputationInUnderworld.value < 0 then
+			antiHero.reputationInUnderworld.value := 0;
+		if antiHero.reputationInUnderworld.value = 0 then
 			Exit(True);
 		Exit(True);
 	end;

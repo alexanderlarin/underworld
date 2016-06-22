@@ -5,8 +5,8 @@ interface
 		outputcolor,
 		types;
 	
-	function DisposeAll(var hero: THero;  var antiHero: THero; var locations: TLocations; var location: TLocation; var event: TEvent): Boolean;
-	function DisposeResources(var hero: THero;  var antiHero: THero; var locations: TLocations; var location: TLocation; var event: TEvent): Boolean;
+	function DisposeAll(var locations: TLocations; status: TStatus): Boolean;
+	function DisposeResources(var locations: TLocations; status: TStatus): Boolean;
 	function DisposeLocations(var locations: TLocations): Boolean;
 	function DisposeLocation(var location: TLocation): Boolean;
 	function DisposeEvents(var events: TEvents): Boolean;
@@ -23,26 +23,26 @@ interface
 	function DisposeHero(var hero: THero): Boolean;
 	
 implementation
-	function DisposeAll(var hero: THero;  var antiHero: THero; var locations: TLocations; var location: TLocation; var event: TEvent): Boolean;
+	function DisposeAll(var locations: TLocations; status: TStatus): Boolean;
 	begin
-		if DisposeResources(hero, antiHero, locations, location, event) then
+		if DisposeResources(locations, status) then
 		begin
-			ColorWrite('[+] Finalization', ColorDebug);
+			//ColorWrite('[+] Finalization', ColorDebug);
 		end
 		else
 		begin
-			ColorWrite('[!] Finalization Error', ColorError);
+			//ColorWrite('[!] Finalization Error', ColorError);
 		end;
 	end;
 	
-	function DisposeResources(var hero: THero;  var antiHero: THero; var locations: TLocations; var location: TLocation; var event: TEvent): Boolean;
+	function DisposeResources(var locations: TLocations; status: TStatus): Boolean;
 	begin
-		if not DisposeHero(hero) then
+		if not DisposeHero(status.hero) then
 		begin
 			Exit(False);
 		end;
 		
-		if not DisposeHero(antiHero) then
+		if not DisposeHero(status.antiHero) then
 		begin
 			Exit(False);
 		end;
@@ -53,12 +53,12 @@ implementation
 		end;
 		SetLength(locations, 0);
 		
-		if not DisposeLocation(location) then
+		if not DisposeLocation(status.currentPosition.location) then
 		begin
 			Exit(False);
 		end;
 		
-		if not DisposeEvent(event) then
+		if not DisposeEvent(status.currentPosition.event) then
 		begin
 			Exit(False);
 		end;
@@ -169,6 +169,12 @@ implementation
 	
 	function DisposeTransition(var transition: TTransition): Boolean;
 	begin
+		if not DisposeTexts(transition.texts) then
+		begin
+			Exit(False);
+		end;
+		SetLength(transition.texts, 0);
+		
 		if not DisposeEffects(transition.effects) then
 		begin
 			Exit(False);
@@ -219,6 +225,11 @@ implementation
 	
 	function DisposeCondition(var condition: TCondition): Boolean;
 	begin
+		if not DisposeTexts(condition.texts) then
+		begin
+			Exit(False);
+		end;
+		SetLength(condition.texts, 0);
 		Exit(True);
 	end;
 	

@@ -316,7 +316,7 @@ locations 1
 					text 'Ты не можешь не отвлечься от боя'
 				end texts
 				cmd '1'
-				transitions 1
+				transitions 2
 					transition 'Увернулся'
 					texts 4
 						text 'Оборачиваешься на голос'
@@ -334,7 +334,7 @@ locations 1
 					toLocation 'Битва'
 					toEvent 'Итог'
 					end transition
-					transition 'Не увернулся'
+					transition 'Over'
 					texts 4
 						text 'Оборачиваешься на голос'
 						text 'Анис внезапно достаёт ствол и стреляет в тебя'
@@ -411,7 +411,7 @@ locations 1
 					toLocation 'Game over'
 					toEvent 'Game over'
 					end transition
-					transition 'Ты сдох'
+					transition 'Over'
 					texts 4
 						text 'Ты еле держишься на ногах'
 						text 'АНИС УЛЬТУЕТ!'

@@ -9,11 +9,13 @@ interface
 		windows,
 		{$ENDIF}
 		outputcolor,
+		canvas,
 		storyparser,
 		types;
 	procedure InitEncoding();
+	procedure InitCanvas();
 	procedure InitSettings();
-	procedure InitLocations(var locations: TLocations; var location: TLocation; var event: TEvent);
+	procedure InitLocations(var locations: TLocations; var currentPosition: TPosition);
 	procedure InitHeroes(var hero: THero; var antiHero: THero);
 implementation
 	procedure InitEncoding();
@@ -22,15 +24,35 @@ implementation
 		SetConsoleOutputCP(CP_UTF8);
 		{$ENDIF}
 		ColorWrite('Привет, Дно.', 'Yellow', 1);
-		ColorWrite('[+] Encoding', ColorDebug, 1);
+		//ColorWrite('[+] Encoding', ColorDebug, 1);
+	end;
+	
+	procedure InitCanvas();
+	begin
+		CanvasClear();
+		CanvasAddLayout();
+		CanvasAddStats();
+		CanvasAddChooseCommand();
+		CanvasAddLocation();
+		
+		//TestStats();
+		//TestLocation();
+		//TestTransLocation();
+		//TestEvent();
+		//TestCommand();
+		
+		//CanvasFlush();
+		
+		CanvasResetPos();
+		//CanvasSetReadPos();
 	end;
 	
 	procedure InitSettings();
 	begin
-		ColorWrite('[+] Settings', ColorDebug, 1);
+		//ColorWrite('[+] Settings', ColorDebug, 1);
 	end;
 	
-	procedure InitLocations(var locations: TLocations; var location: TLocation; var event: TEvent);
+	procedure InitLocations(var locations: TLocations; var currentPosition: TPosition);
 	var
 		I: Integer;
 	begin
@@ -40,34 +62,53 @@ implementation
 			begin
 				if (ParamStr(I + 1) <> '') then
 				begin
-					LoadStories(ParamStr(I + 1), locations, location, event);
+					LoadStories(ParamStr(I + 1), locations, currentPosition);
 					Exit();
 				end
 			end;
 		end;
-		LoadStories('default.spt', locations, location, event);
+		LoadStories('default.spt', locations, currentPosition);
 	end;
 	
 	procedure InitHeroes(var hero: THero; var antiHero: THero);
 	begin		
-		hero.health := 9;
-		hero.energy := 7;
-		hero.alchohol := 0;
-		hero.vape := 0;
+		hero.health.value := 9;
+		hero.energy.value := 7;
+		hero.alchohol.value := 0;
+		hero.vape.value := 0;
 		
-		hero.strength := 5;
-		hero.intelligence := 6;
-		hero.fortune := 0;
+		hero.strength.value := 5;
+		hero.intelligence.value := 6;
+		hero.fortune.value := 0;
 		
-		hero.love := 0;
-		hero.happy := 5;
-		hero.reputationInGroup := 5;
-		hero.reputationInUnderworld := 3;
+		hero.love.value := 0;
+		hero.happy.value := 5;
+		hero.reputationInGroup.value := 5;
+		hero.reputationInUnderworld.value := 3;
 		
-		antiHero.health := 10;
+		antiHero.health.value := 10;	
+		antiHero.strength.value := 6;
+		antiHero.intelligence.value := 9;
+
 		
-		antiHero.strength := 6;
-		antiHero.intelligence := 9;
-		ColorWrite('[+] Heroes', ColorDebug, 1);
+		hero.health.changed := 0;
+		hero.energy.changed := 0;
+		hero.alchohol.changed := 0;
+		hero.vape.changed := 0;
+		
+		hero.strength.changed := 0;
+		hero.intelligence.changed := 0;
+		hero.fortune.changed := 0;
+		
+		hero.love.changed := 0;
+		hero.happy.changed := 0;
+		hero.reputationInGroup.changed := 0;
+		hero.reputationInUnderworld.changed := 0;
+		
+		antiHero.health.changed := 0;
+		antiHero.strength.changed := 0;
+		antiHero.intelligence.changed := 0;
+		
+		//ColorWrite('[+] Heroes', ColorDebug, 1);
 	end;
 end.
