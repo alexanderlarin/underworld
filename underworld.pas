@@ -2,6 +2,7 @@
 
 uses
 	effects,
+	echo,
 	engine,
 	initializing,
 	finalizing,
@@ -46,7 +47,7 @@ begin
 	repeat
 		isPlaying := false;
 		Initialize(locations, status);	
-		isPlaying := Playing(locations, status);
+		isPlaying := Play(locations, status);
 		Finalize(locations, status);
 	until not isPlaying;
 end.

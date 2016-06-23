@@ -115,9 +115,9 @@ implementation
 			ColorWrite('|',ColorDefault);
 		end;
 	end;
+	
 	procedure CanvasAddStats();
 	begin
-		
 		GotoXY(51, 1);
 		ColorWrite('Здоровье................', ColorAttribute);
 		
@@ -147,8 +147,6 @@ implementation
 		
 		GotoXY(51, 10);
 		ColorWrite('Репутация в универе.....',ColorAttribute);
-		
-		
 	end;
 	
 	procedure CanvasAddEvent();
@@ -302,6 +300,4 @@ implementation
 			
 		GotoXY(pos.x, pos.y);
 	end;
-	
-	
 end.
