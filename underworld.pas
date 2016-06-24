@@ -1,5 +1,9 @@
 ﻿program Underworld;
 
+{$IFDEF MSWINDOWS}
+{$R underworld-icon.res}
+{$ENDIF} 
+
 uses
 	effects,
 	echo,
