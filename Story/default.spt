@@ -1,12 +1,12 @@
 stories 10
-	story House
-	story University
-	story Porch
-	story Street
-	story Over
-	story Park
-	story Garage
-	story Cinema
-	story Trap
-	story Fight
+	story house
+	story university
+	story porch
+	story street
+	story over
+	story park
+	story garage
+	story cinema
+	story trap
+	story fight
 end stories
