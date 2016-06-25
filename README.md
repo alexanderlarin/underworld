@@ -6,9 +6,9 @@ life at the Tula State University, in which a player must
 dominate other students and fight the League of evil lecturers 
 to get the degree.
 
-<br>The game is intended to run ONLY on MS Windows systems.</br>
-<br>It can't be compiled on other platforms.</br>
-Support only single-player.
+<br>The game is intended to run ONLY on MS Windows systems.
+<br>It can't be compiled on other platforms.
+<br>Support only single-player.
 
 
 Build Status
@@ -24,8 +24,6 @@ How to play Underworld?
 <br>Only digits are allowed to be entered in the console!</br>
 <br>Enter "exit" in the console to leave the game.</br>
 <br>Enter "restart" in the console to restart the game.</br>
-
-
 
 Help our development!
 ------------
