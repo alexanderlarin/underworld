@@ -109,9 +109,9 @@ interface
 			hero: THero;
 			antiHero: THero;
 			currentPosition: TPosition;
+			isCredits: Boolean;
 		end;
-	var
-		isCredits: Boolean;
+		
 implementation
 
 end.

@@ -20,7 +20,7 @@ interface
 implementation
 	procedure InitEncoding();
 	begin
-		{$IFDEF WINDOWS}
+		{$IFDEF WINDOWS}		
 		SetConsoleOutputCP(CP_UTF8);
 		{$ENDIF}
 		ColorWrite('Привет, Дно.', 'Yellow', 1);

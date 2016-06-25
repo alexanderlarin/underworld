@@ -6,8 +6,9 @@ life at the Tula State University, in which a player must
 dominate other students and fight the League of evil lecturers 
 to get the degree.
 
-The game is intended to run on MS Windows systems. 
-Support only single-player.
+The game is intended to run ONLY on MS Windows systems.
+<br>It can't be compiled on other platforms.
+<br>Support only single-player.
 
 
 Build Status
@@ -15,18 +16,14 @@ Build Status
 
 The game is ready to play. 
 
-
 How to play Underworld?
 ------------
 
-Run the "run.bat" to run the game.
-Choose the desired results by entering the corresponding 
-digits in the console.
-Only digits are allowed to be entered in the console!
-Enter "exit" in the console to leave the game.
-Enter "restart" in the console to restart the game.
-
-
+Run the shortcut "Underworld" to run the game (Attention: it can't be moved in other folder!).
+<br>Choose the desired results by entering the corresponding digits in the console.
+<br>Only digits are allowed to be entered in the console!
+<br>Enter "exit" in the console to leave the game.
+<br>Enter "restart" in the console to restart the game.
 
 Help our development!
 ------------
@@ -38,12 +35,12 @@ Underworld developers
 ------------
 
 Idea by: Alexander Larin
-Supervised by: Alexander Larin
-Writers: Vladislav Belousov, Sergei Belousov
-Colored text: Alexander Akatov
-Effects: Ilya Kretinin
-Transition system: Anastasiya Shvecova
-Locations: Alexander Anchishkin, Artyom Sidyakin
-Antihero: Nikita Vasil'kov
-Translated readme: Kate Kolykhalina
-Everything else: Alexander Anchishkin
+<br>Supervised by: Alexander Larin
+<br>Writers: Vladislav Belousov, Sergei Belousov
+<br>Colored text: Alexander Akatov
+<br>Effects: Ilya Kretinin
+<br>Transition system: Anastasiya Shvecova
+<br>Locations: Alexander Anchishkin, Artyom Sidyakin
+<br>Antihero: Nikita Vasil'kov
+<br>Translated readme: Kate Kolykhalina
+<br>Everything else: Alexander Anchishkin

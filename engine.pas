@@ -151,7 +151,7 @@ implementation
 			Exit(False);
 		end;
 		if transition.name = 'GoodOver' then
-			isCredits := true;
+			status.isCredits := true;
 		PrintTransition(transition, line);
 		Affect(status.hero, status.antiHero, transition.effects);
 		ChangeLocation(locations, status.currentPosition.location, transition, lineTransition);	

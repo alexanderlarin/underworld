@@ -1,1 +1,0 @@
-windres --input underworld-rc.rc --output underworld-icon.res
