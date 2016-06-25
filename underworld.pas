@@ -1,9 +1,5 @@
 ﻿program Underworld;
 
-{$IFDEF MSWINDOWS}
-{$R underworld-icon.res}
-{$ENDIF} 
-
 uses
 	effects,
 	echo,
@@ -17,13 +13,14 @@ uses
 procedure Initialize(var locations: TLocations; var status: TStatus);
 begin
 	//ColorWrite('[+] Initizlization', ColorDebug, 1);
-	isCredits := false;
+	status.isCredits := false;
+	InitSettings();
 	InitEncoding();
 	
 	ShowMenu();
 	
 	InitCanvas();
-	InitSettings();
+	
 	InitLocations(locations, status.currentPosition);
 	InitHeroes(status.hero, status.antiHero);
 	
@@ -37,7 +34,7 @@ end;
 
 procedure Finalize(var locations: TLocations; var status: TStatus);
 begin	
-	if isCredits then
+	if status.isCredits then
 		ShowCredits();
 	DisposeAll(locations, status);
 end;
