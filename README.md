@@ -36,13 +36,13 @@ Send your ideas to our e-mail: underworld.association@gmail.com
 Underworld developers
 ------------
 
-<br>Idea by: Alexander Larin</br>
-<br>Supervised by: Alexander Larin</br>
-<br>Writers: Vladislav Belousov, Sergei Belousov</br>
-<br>Colored text: Alexander Akatov</br>
-<br>Effects: Ilya Kretinin</br>
-<br>Transition system: Anastasiya Shvecova</br>
-<br>Locations: Alexander Anchishkin, Artyom Sidyakin</br>
-<br>Antihero: Nikita Vasil'kov</br>
-<br>Translated readme: Kate Kolykhalina</br>
-<br>Everything else: Alexander Anchishkin</br>
+<br>Idea by: Alexander Larin
+<br>Supervised by: Alexander Larin
+<br>Writers: Vladislav Belousov, Sergei Belousov
+<br>Colored text: Alexander Akatov
+<br>Effects: Ilya Kretinin
+<br>Transition system: Anastasiya Shvecova
+<br>Locations: Alexander Anchishkin, Artyom Sidyakin
+<br>Antihero: Nikita Vasil'kov
+<br>Translated readme: Kate Kolykhalina
+<br>Everything else: Alexander Anchishkin
