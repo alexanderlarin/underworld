@@ -6,7 +6,7 @@ life at the Tula State University, in which a player must
 dominate other students and fight the League of evil lecturers 
 to get the degree.
 
-<br>The game is intended to run ONLY on MS Windows systems.
+The game is intended to run ONLY on MS Windows systems.
 <br>It can't be compiled on other platforms.
 <br>Support only single-player.
 
@@ -19,7 +19,7 @@ The game is ready to play.
 How to play Underworld?
 ------------
 
-<br>Run the shortcut "Underworld" to run the game (Attention: it can't be moved in other folder!).
+Run the shortcut "Underworld" to run the game (Attention: it can't be moved in other folder!).
 <br>Choose the desired results by entering the corresponding digits in the console.
 <br>Only digits are allowed to be entered in the console!
 <br>Enter "exit" in the console to leave the game.
@@ -34,7 +34,7 @@ Send your ideas to our e-mail: underworld.association@gmail.com
 Underworld developers
 ------------
 
-<br>Idea by: Alexander Larin
+Idea by: Alexander Larin
 <br>Supervised by: Alexander Larin
 <br>Writers: Vladislav Belousov, Sergei Belousov
 <br>Colored text: Alexander Akatov
