@@ -33,6 +33,18 @@ implementation
 		
 		GotoXY(23, 14);
 		ColorWrite('Нажмите Enter, чтобы начать игру', 'White', 1);
+		
+		GotoXY(23, 17);
+		ColorWrite('Команды:', 'LightBlue', 1);
+		GotoXY(23, 19);
+		ColorWrite('exit - Выход из игры', 'LightGreen', 1);
+		GotoXY(23, 20);
+		ColorWrite('restart - Перезапуск игры', 'LightGreen', 1);
+		
+		GotoXY(ConsoleWidth - 14, ConsoleHeight - 1);
+		ColorWrite('IBAS dev inc.', 'Cyan');
+		GotoXY(ConsoleWidth - 16, ConsoleHeight);
+		ColorWrite('Copyright © 2016', 'Cyan');
 		GotoXY(0, ConsoleHeight);
 		
 		ReadLn; 
@@ -83,17 +95,18 @@ implementation
 		WriteCredit('Ведущий разработчик', 'Александр Ларин', line);		
 		WriteCredit('Сценарий', 'Владислав Белоусов', 'Сергей Белоусов', line);
 		
-		SetLength(people, 8);
-		people[0] := 'Александр Акатов';
-		people[1] := 'Александр Анчишкин';
-		people[2] := 'Владислав Белоусов';
-		people[3] := 'Сергей Белоусов';
-		people[4] := 'Никита Васильков';
-		people[5] := 'Илья Кретинин';
-		people[6] := 'Артём Сидякин';
-		people[7] := 'Анастасия Швецова';
+		SetLength(people, 9);
+		people[0] := 'Александр Ларин';
+		people[1] := 'Александр Акатов';
+		people[2] := 'Александр Анчишкин';
+		people[3] := 'Владислав Белоусов';
+		people[4] := 'Сергей Белоусов';
+		people[5] := 'Никита Васильков';
+		people[6] := 'Илья Кретинин';
+		people[7] := 'Артём Сидякин';
+		people[8] := 'Анастасия Швецова';
 		
-		WriteCredit('Программисты', people, line);
+		WriteCredit('Разработчики', people, line);
 	
 		GotoXY(0, ConsoleHeight);
 		ColorWrite('Enter >> ', ColorTransitionText);
