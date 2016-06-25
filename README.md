@@ -19,11 +19,11 @@ The game is ready to play.
 How to play Underworld?
 ------------
 
-<br>Run the shortcut "Underworld" to run the game (Attention: it can't be moved in other folder!).</br>
-<br>Choose the desired results by entering the corresponding digits in the console.</br>
-<br>Only digits are allowed to be entered in the console!</br>
-<br>Enter "exit" in the console to leave the game.</br>
-<br>Enter "restart" in the console to restart the game.</br>
+<br>Run the shortcut "Underworld" to run the game (Attention: it can't be moved in other folder!).
+<br>Choose the desired results by entering the corresponding digits in the console.
+<br>Only digits are allowed to be entered in the console!
+<br>Enter "exit" in the console to leave the game.
+<br>Enter "restart" in the console to restart the game.
 
 Help our development!
 ------------
