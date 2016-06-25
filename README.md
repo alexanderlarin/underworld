@@ -51,4 +51,5 @@ Idea by: Alexander Larin
 <br>Locations: Alexander Anchishkin, Artyom Sidyakin
 <br>Antihero: Nikita Vasil'kov
 <br>Translated readme: Kate Kolykhalina
+<br>Icon designer: Denis Dmitrakov
 <br>Everything else: Alexander Anchishkin
