@@ -93,7 +93,7 @@ implementation
 		I: Integer;
 	begin
 		GotoXY(PosStatsX, 0);
-		ColorWrite('==ХАРАКТЕРИСТИКИ ПЕРСОНАЖА==',ColorDefault,1);
+		ColorWrite('==ХАРАКТЕРИСТИКИ ПЕРСОНАЖА==', ColorDefault, 1);
 		
 		for I := 0 to StatsHeight do
 		begin

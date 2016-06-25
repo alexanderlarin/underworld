@@ -1,4 +1,8 @@
-﻿program Underworld;
+program Underworld;
+
+{$IFDEF WINDOWS}
+{$R underworld-rc.rc} 
+{$ENDIF}
 
 uses
 	effects,
@@ -8,14 +12,15 @@ uses
 	finalizing,
 	outputcolor,
 	screens,
-	types;	
+	types;
 
 procedure Initialize(var locations: TLocations; var status: TStatus);
 begin
 	//ColorWrite('[+] Initizlization', ColorDebug, 1);
 	status.isCredits := false;
-	InitSettings();
+	
 	InitEncoding();
+	InitSettings();
 	
 	ShowMenu();
 	
@@ -44,7 +49,7 @@ var
 	status: TStatus;	
 	locations: TLocations;
 	
-begin
+begin	
 	repeat
 		isPlaying := false;
 		Initialize(locations, status);	
