@@ -6,6 +6,7 @@ interface
 		cwstring,
 		{$ENDIF}
 		{$IFDEF WINDOWS}
+		consoletuner,
 		windows,
 		{$ENDIF}
 		outputcolor,
@@ -22,7 +23,9 @@ implementation
 	begin
 		{$IFDEF WINDOWS}		
 		SetConsoleOutputCP(CP_UTF8);
+		SetConsoleCP(CP_UTF8);
 		{$ENDIF}
+
 		ColorWrite('Привет, Дно.', 'Yellow', 1);
 		//ColorWrite('[+] Encoding', ColorDebug, 1);
 	end;
@@ -49,6 +52,11 @@ implementation
 	
 	procedure InitSettings();
 	begin
+		{$IFDEF WINDOWS}
+		SetLucidaConsoleFont();
+		SetConsoleTitleW(PWideChar(UTF8Decode('Дно v.1.0')));
+		//SetConsoleTitle('Underworld v.1.0.');
+		{$ENDIF}
 		//ColorWrite('[+] Settings', ColorDebug, 1);
 	end;
 	

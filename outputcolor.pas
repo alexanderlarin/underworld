@@ -91,7 +91,7 @@ implementation
 	begin
 		if Length(UTF8Decode(normalText)) <= lineSize then
 		begin
-			Write(UTF8Decode(normalText));
+			Write(normalText);
 			Exit(1);
 		end
 		else
@@ -99,8 +99,8 @@ implementation
 			I := lineSize;
 			while UTF8Decode(normalText)[I] <> ' ' do
 				I := I - 1;
-				
-			Writeln(Copy(UTF8Decode(normalText), 1, I));
+
+			Writeln(String(UTF8Encode(Copy(UTF8Decode(normalText), 0, I))));
 			Exit(PrintLargeText(UTF8Encode(Copy(UTF8Decode(normalText), I + 1, Length(UTF8Decode(normalText)) - I)), lineSize) + 1);
 			
 		end;

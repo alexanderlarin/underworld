@@ -2,3 +2,5 @@
 underworld.exe
 types.ppu
 *.ppu
+underworld-rc.res
+underworld.or
