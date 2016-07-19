@@ -8,7 +8,7 @@ interface
 			text: String;
 			color: String;
 		end;
-		
+	
 		TMultiLineColorText = array of TColorString;
 		
 		TStat = record

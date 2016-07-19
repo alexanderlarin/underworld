@@ -4,3 +4,6 @@ types.ppu
 *.ppu
 underworld-rc.res
 underworld.or
+
+# ignore executalbe on unix
+underworld

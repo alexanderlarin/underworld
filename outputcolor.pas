@@ -2,9 +2,11 @@ unit OutputColor;
 
 interface
 	uses
-		{$IFDEF WINDOWS}
+	{$IFDEF WINDOWS}
 		windows;
-		{$ENDIF}
+	{$ELSE}
+		crt;
+	{$ENDIF}
 	
 	const
 		ColorDefault = 'LightGray';
@@ -42,6 +44,8 @@ implementation
 	begin
 		{$IFDEF WINDOWS}
 		SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), color);
+		{$ELSE}
+		crt.TextColor(color);
 		{$ENDIF}
 	end;
 	
@@ -49,6 +53,8 @@ implementation
 	begin
 		{$IFDEF WINDOWS}
 		SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), BACKGROUND_RED or BACKGROUND_GREEN or BACKGROUND_INTENSITY);
+		{$ELSE}
+		
 		{$ENDIF}
 	end;
 	

@@ -570,7 +570,7 @@ implementation
 		token: String;
 		folderPath: String;
 	begin
-		folderPath := './Story/';
+		folderPath := './story/';
 		fileName := fileName + '.spt';
 		Assign(text, folderPath + fileName);
 		Reset(text);
@@ -591,7 +591,7 @@ implementation
 		folderPath: String;
 		stories: TStories;
 	begin
-		folderPath := './Story/';
+		folderPath := './story/';
 		Assign(text, folderPath + fileName);
 		Reset(text);
 		ReadToken(text, token);

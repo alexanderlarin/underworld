@@ -12,6 +12,9 @@ uses
 	finalizing,
 	outputcolor,
 	screens,
+	{$IFDEF UNIX}
+	unix,
+	{$ENDIF}
 	types;
 
 procedure Initialize(var locations: TLocations; var status: TStatus);
@@ -44,16 +47,33 @@ begin
 	DisposeAll(locations, status);
 end;
 
+{$IFDEF UNIX}
+function isatty(fd : Integer) : Integer; CDECL; external name 'isatty';
+{$ENDIF}
+
 var
 	isPlaying: Boolean;
 	status: TStatus;	
 	locations: TLocations;
 	
-begin	
+begin
+	{$IFDEF UNIX and $IFNDEF DARWIN}
+	//If program is not running in terminal, run it in xterm.
+	//Allows to run executable directly from file manager.
+	if isatty(1) = 0 then
+	begin
+		Shell(Concat('xterm -geometry 100x26 -e ', ParamStr(0)));
+		Exit;
+	end;
+	{$ENDIF}
 	repeat
 		isPlaying := false;
 		Initialize(locations, status);	
 		isPlaying := Play(locations, status);
 		Finalize(locations, status);
 	until not isPlaying;
+	{$IFDEF UNIX}
+	//Restore terminal settings
+	Shell('echo -ne "\033c"');
+	{$ENDIF}
 end.
