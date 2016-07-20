@@ -5,7 +5,8 @@ interface
 	{$IFDEF WINDOWS}
 		windows;
 	{$ELSE}
-		crt;
+		setlocale,
+		ncrt;
 	{$ENDIF}
 	
 	const
@@ -45,7 +46,7 @@ implementation
 		{$IFDEF WINDOWS}
 		SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), color);
 		{$ELSE}
-		crt.TextColor(color);
+		ncrt.TextColor(color);
 		{$ENDIF}
 	end;
 	

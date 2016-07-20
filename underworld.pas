@@ -13,8 +13,9 @@ uses
 	outputcolor,
 	screens,
 	{$IFDEF UNIX}
+	setlocale,
 	unix,
-	crt,
+	ncrt,
 	{$ENDIF}
 	types;
 

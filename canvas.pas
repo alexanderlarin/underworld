@@ -5,7 +5,8 @@ interface
 	{$IFDEF WINDOWS}
 		windows,
 	{$ELSE}
-		crt,
+		setlocale,
+		ncrt,
 	{$ENDIF}
 		outputcolor;
 	const
@@ -56,7 +57,7 @@ implementation
 		pos.y := y;
 		SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), pos);
 		{$ELSE}
-		crt.GotoXY(x+1,y+1);
+		ncrt.GotoXY(x+1,y+1);
 		{$ENDIF}
 	end;
 	
