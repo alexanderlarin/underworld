@@ -41,6 +41,17 @@ interface
 	procedure ColorWrite(normalText: Real; chosenColor: String; newLine: Integer);
 	
 implementation	
+	procedure MyWriteLn(s : String);
+	begin
+		Write(s);
+		GotoXY(1, WhereY()+1);
+	end;
+	
+	procedure MyWriteLn();
+	begin
+		GotoXY(1, WhereY()+1);
+	end;
+
 	procedure TextColor(color: Integer);
 	begin
 		{$IFDEF WINDOWS}
@@ -62,7 +73,7 @@ implementation
 	procedure ColorWrite(normalText: String);	
 	begin
 		TextColor(7);
-		WriteLn(normalText);
+		MyWriteLn(normalText);
 	end;
 	
 	procedure ColorWrite(normalText: String; chosenColor: String);
@@ -107,7 +118,7 @@ implementation
 			while UTF8Decode(normalText)[I] <> ' ' do
 				I := I - 1;
 
-			Writeln(String(UTF8Encode(Copy(UTF8Decode(normalText), 0, I))));
+			MyWriteln(String(UTF8Encode(Copy(UTF8Decode(normalText), 0, I))));
 			Exit(PrintLargeText(UTF8Encode(Copy(UTF8Decode(normalText), I + 1, Length(UTF8Decode(normalText)) - I)), lineSize) + 1);
 			
 		end;
@@ -142,7 +153,7 @@ implementation
 		TextColor(15);
 		for newLineCounter := 1 to newLine do 
 		begin
-			WriteLn();
+			MyWriteLn();
 		end;
 	end;
 	
@@ -175,7 +186,7 @@ implementation
 		TextColor(15);
 		for newLineCounter := 1 to newLine do 
 		begin
-			WriteLn();
+			MyWriteLn();
 		end;
 	end;
 	
@@ -209,7 +220,7 @@ implementation
 		TextColor(15);
 		for newLineCounter := 1 to newLine do 
 		begin
-			WriteLn();
+			MyWriteLn();
 		end;
 	end;
 	
@@ -268,7 +279,7 @@ implementation
 		TextColor(15);
 		for newLineCounter := 1 to newLine do 
 		begin
-			WriteLn();
+			MyWriteLn();
 		end;
 	end;
 	
@@ -327,7 +338,7 @@ implementation
 		TextColor(15);
 		for newLineCounter := 1 to newLine do 
 		begin
-			WriteLn();
+			MyWriteLn();
 		end;
 	end;
 end.
