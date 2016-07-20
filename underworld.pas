@@ -14,6 +14,7 @@ uses
 	screens,
 	{$IFDEF UNIX}
 	unix,
+	crt,
 	{$ENDIF}
 	types;
 
@@ -62,7 +63,7 @@ begin
 	//Allows to run executable directly from file manager.
 	if isatty(1) = 0 then
 	begin
-		Shell(Concat('xterm -geometry 100x26 -e ', ParamStr(0)));
+		fpSystem(Concat('xterm -geometry 100x26 -e ', ParamStr(0)));
 		Exit;
 	end;
 	{$ENDIF}
@@ -74,6 +75,6 @@ begin
 	until not isPlaying;
 	{$IFDEF UNIX}
 	//Restore terminal settings
-	Shell('echo -ne "\033c"');
+	fpSystem('tput rs1');
 	{$ENDIF}
 end.
