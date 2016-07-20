@@ -43,13 +43,21 @@ interface
 implementation	
 	procedure MyWriteLn(s : String);
 	begin
+	{$IFDEF WINDOWS}
+		WriteLn(s);
+	{$ELSE}
 		Write(s);
 		GotoXY(1, WhereY()+1);
+	{$ENDIF}
 	end;
 	
 	procedure MyWriteLn();
 	begin
+	{$IFDEF WINDOWS}
+		WriteLn();
+	{$ELSE}
 		GotoXY(1, WhereY()+1);
+	{$ENDIF}
 	end;
 
 	procedure TextColor(color: Integer);
