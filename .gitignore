@@ -7,3 +7,5 @@ underworld.or
 
 # ignore executalbe on unix
 underworld
+# Generated shortcut
+underworld.desktop
