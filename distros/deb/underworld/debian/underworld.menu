@@ -1,0 +1,2 @@
+?package(underworld):needs="X11" section="Games/Adventure"\
+  title="Underworld" command="/usr/games/underworld"

@@ -3,7 +3,8 @@ unit Screens;
 interface
 	uses
 		canvas,
-		outputcolor;
+		outputcolor,
+		endprogram;
 		
 	procedure ShowMenu();
 	procedure ShowCredits();
@@ -51,7 +52,7 @@ implementation
 		
 		ReadLn(cmd);
 		if cmd = 'exit' then
-			Halt(0);
+			ExitProgram(0);
 	end;
 	
 	procedure WriteCenter(text: String; color: String; var line: Integer);
