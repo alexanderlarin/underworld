@@ -2,10 +2,13 @@ unit Canvas;
 
 interface
 	uses
-		outputcolor,
-		{$IFDEF WINDOWS}
-		windows;
-		{$ENDIF}
+	{$IFDEF WINDOWS}
+		windows,
+	{$ELSE}
+		setlocale,
+		ncrt,
+	{$ENDIF}
+		outputcolor;
 	const
 		ConsoleWidth = 79;
 		ConsoleHeight = 24;
@@ -44,37 +47,70 @@ interface
 	
 implementation
 	procedure GotoXY(x, y: Integer);
+	{$IFDEF WINDOWS}
 	var
 		pos: TCoord;
+	{$ENDIF}
 	begin
+		{$IFDEF WINDOWS}
 		pos.x := x;
 		pos.y := y;
 		SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), pos);
+		{$ELSE}
+		ncrt.GotoXY(x+1,y+1);
+		{$ENDIF}
 	end;
 	
 	procedure GetXY(var x: Integer; var y: Integer);
+	{$IFDEF WINDOWS}
 	var
 		csbi: CONSOLE_SCREEN_BUFFER_INFO;
+	{$ENDIF}
 	begin
+	{$IFDEF WINDOWS}
 		GetConsoleScreenBufferInfo(GetStdHandle(STD_OUTPUT_HANDLE), csbi);
 		x := csbi.dwCursorPosition.x;
 		y := csbi.dwCursorPosition.y;
+	{$ELSE}
+		x := WhereX()-1;
+		y := WhereY()-1;
+	{$ENDIF}
 	end;
 	
 	procedure LineChar(x, y: Integer; length: Integer; ch: Char);
 	var
+	{$IFDEF WINDOWS}
 		pos: TCoord;
 		lUnused: LongWord;
+	{$ELSE}
+		origX: Integer;
+		origY: Integer;
+		I : Integer;
+	{$ENDIF}
 	begin
+		{$IFDEF WINDOWS}
 		pos.x := x;
 		pos.y := y;
 		FillConsoleOutputAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 0, length, pos, lUnused);
 		FillConsoleOutputCharacter(GetStdHandle(STD_OUTPUT_HANDLE), ch, length, pos, lUnused);
+		{$ELSE}
+		GetXY(origX, origY);
+		GotoXY(x, y);
+		for I := 1 to length do
+		begin
+			Write(ch);
+		end;
+		GotoXY(origX, origY);
+		{$ENDIF}
 	end;
 	
 	procedure CanvasClear();
 	begin
+		{$IFDEF WINDOWS}
 		LineChar(0, 0, 2000, ' ');
+		{$ELSE}
+		ClrScr();
+		{$ENDIF}
 		GotoXY(0, 0);
 	end;
 	
@@ -255,9 +291,10 @@ implementation
 	procedure CanvasForseFlush(); // Erase full screen except event's text
 	var
 		I: Integer;
-		pos: TCoord;
+		x: Integer;
+		y: Integer;
 	begin
-		GetXY(pos.x, pos.y);
+		GetXY(x, y);
 		
 		LineChar(0, ConsoleHeight, 50, ' ');
 			
@@ -298,6 +335,6 @@ implementation
 		for I := 1 to 10 do
 			LineChar(51, I, 28, ' ');
 			
-		GotoXY(pos.x, pos.y);
+		GotoXY(x, y);
 	end;
 end.

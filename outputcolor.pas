@@ -2,9 +2,12 @@ unit OutputColor;
 
 interface
 	uses
-		{$IFDEF WINDOWS}
+	{$IFDEF WINDOWS}
 		windows;
-		{$ENDIF}
+	{$ELSE}
+		setlocale,
+		ncrt;
+	{$ENDIF}
 	
 	const
 		ColorDefault = 'LightGray';
@@ -38,10 +41,31 @@ interface
 	procedure ColorWrite(normalText: Real; chosenColor: String; newLine: Integer);
 	
 implementation	
+	procedure MyWriteLn(s : String);
+	begin
+	{$IFDEF WINDOWS}
+		WriteLn(s);
+	{$ELSE}
+		Write(s);
+		GotoXY(1, WhereY()+1);
+	{$ENDIF}
+	end;
+	
+	procedure MyWriteLn();
+	begin
+	{$IFDEF WINDOWS}
+		WriteLn();
+	{$ELSE}
+		GotoXY(1, WhereY()+1);
+	{$ENDIF}
+	end;
+
 	procedure TextColor(color: Integer);
 	begin
 		{$IFDEF WINDOWS}
 		SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), color);
+		{$ELSE}
+		ncrt.TextColor(color);
 		{$ENDIF}
 	end;
 	
@@ -49,13 +73,15 @@ implementation
 	begin
 		{$IFDEF WINDOWS}
 		SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), BACKGROUND_RED or BACKGROUND_GREEN or BACKGROUND_INTENSITY);
+		{$ELSE}
+		
 		{$ENDIF}
 	end;
 	
 	procedure ColorWrite(normalText: String);	
 	begin
 		TextColor(7);
-		WriteLn(normalText);
+		MyWriteLn(normalText);
 	end;
 	
 	procedure ColorWrite(normalText: String; chosenColor: String);
@@ -100,7 +126,7 @@ implementation
 			while UTF8Decode(normalText)[I] <> ' ' do
 				I := I - 1;
 
-			Writeln(String(UTF8Encode(Copy(UTF8Decode(normalText), 0, I))));
+			MyWriteln(String(UTF8Encode(Copy(UTF8Decode(normalText), 0, I))));
 			Exit(PrintLargeText(UTF8Encode(Copy(UTF8Decode(normalText), I + 1, Length(UTF8Decode(normalText)) - I)), lineSize) + 1);
 			
 		end;
@@ -135,7 +161,7 @@ implementation
 		TextColor(15);
 		for newLineCounter := 1 to newLine do 
 		begin
-			WriteLn();
+			MyWriteLn();
 		end;
 	end;
 	
@@ -168,7 +194,7 @@ implementation
 		TextColor(15);
 		for newLineCounter := 1 to newLine do 
 		begin
-			WriteLn();
+			MyWriteLn();
 		end;
 	end;
 	
@@ -202,7 +228,7 @@ implementation
 		TextColor(15);
 		for newLineCounter := 1 to newLine do 
 		begin
-			WriteLn();
+			MyWriteLn();
 		end;
 	end;
 	
@@ -261,7 +287,7 @@ implementation
 		TextColor(15);
 		for newLineCounter := 1 to newLine do 
 		begin
-			WriteLn();
+			MyWriteLn();
 		end;
 	end;
 	
@@ -320,7 +346,7 @@ implementation
 		TextColor(15);
 		for newLineCounter := 1 to newLine do 
 		begin
-			WriteLn();
+			MyWriteLn();
 		end;
 	end;
 end.

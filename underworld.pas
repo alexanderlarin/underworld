@@ -12,6 +12,11 @@ uses
 	finalizing,
 	outputcolor,
 	screens,
+	{$IFDEF UNIX}
+	setlocale,
+	unix,
+	ncrt,
+	{$ENDIF}
 	types;
 
 procedure Initialize(var locations: TLocations; var status: TStatus);
@@ -49,11 +54,15 @@ var
 	status: TStatus;	
 	locations: TLocations;
 	
-begin	
+begin
 	repeat
 		isPlaying := false;
 		Initialize(locations, status);	
 		isPlaying := Play(locations, status);
 		Finalize(locations, status);
 	until not isPlaying;
+	{$IFDEF UNIX}
+	//Restore terminal settings
+	fpSystem('tput rs1');
+	{$ENDIF}
 end.
