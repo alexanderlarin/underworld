@@ -33,6 +33,7 @@ implementation
 		begin
 			//ColorWrite('[!] Finalization Error', ColorError);
 		end;
+		Exit(True);
 	end;
 	
 	function DisposeResources(var locations: TLocations; status: TStatus): Boolean;

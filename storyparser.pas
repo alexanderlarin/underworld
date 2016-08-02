@@ -161,6 +161,7 @@ implementation
 		begin
 			ReadToken(text, token);			
 		end;
+		Exit(True);
 	end;
 	
 	function ReadTransition(var text: TextFile; var transition: TTransition): Boolean;
@@ -223,6 +224,7 @@ implementation
 		ReadToken(text, token);
 		if token = TokenEnd then
 			ReadToken(text, token);	
+		Exit(True);
 	end;
 	
 	function ReadCommand(var text: TextFile; var command: TCommand): Boolean;
@@ -288,6 +290,7 @@ implementation
 		begin
 			ReadToken(text, token);			
 		end;
+		Exit(True);
 	end;
 	
 	function ReadEvent(var text: TextFile; var event: TEvent): Boolean;
@@ -324,6 +327,7 @@ implementation
 					Exit(True);
 			end;		
 		end;
+		Exit(True);
 	end;
 	
 	function ReadEvents(var text: TextFile; var events: TEvents): Boolean;
@@ -349,7 +353,7 @@ implementation
 			//Writeln('events end');
 			ReadToken(text, token);
 		end;
-		
+		Exit(True);
 	end;
 	
 	function ReadLocation(var text: TextFile; var location: TLocation): Boolean;
@@ -396,6 +400,7 @@ implementation
 		begin
 			ReadToken(text, token);
 		end;
+		Exit(True);
 	end;
 	
 	function ReadStory(var text: TextFile; var story: TStory): Boolean;
@@ -454,6 +459,7 @@ implementation
 		begin
 			ReadToken(text, token);
 		end;
+		Exit(True);
 	end;
 	
 	function ReadToken(var text: TextFile; var token: String): Boolean;
@@ -578,9 +584,9 @@ implementation
 		if token = TokenLocations then
 			ReadLocations(text, locations);
 		Close(text);
-		
 		//ColorWrite('[R+] ', ColorDebug);
 		//ColorWrite(fileName, ColorDebug, 1);
+		Exit(True);
 	end;
 	
 	function LoadStories(fileName: String; var locations: TLocations; var currentPosition: TPosition): Boolean;
@@ -607,6 +613,8 @@ implementation
 		
 		currentPosition.location := locations[0];
 		currentPosition.event := currentPosition.location.events[0];
+		
 		//ColorWrite('[+] Locations', ColorDebug, 1);
+		Exit(True);
 	end;
 end.
