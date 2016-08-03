@@ -34,3 +34,5 @@ Then run on host:
     cd underworld
     pdebuild -- --basetgz $BASETGZ
 ```
+
+Results will be put in /var/cache/pbuilder/result.

@@ -32,7 +32,7 @@ fi
 
 if [ $# -eq 0 ]
 then
-	ARGS="-story /usr/share/underworld/story"
+	ARGS="-story /usr/share/games/underworld/story"
 else
 	ARGS=$*
 fi
