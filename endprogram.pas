@@ -27,7 +27,7 @@ implementation
 		GotoXY(0,0);
 		TextColor(4);
 		WriteLn(message);
-		WriteLn('Push Enter to exit...');
+		WriteLn('Press Enter to exit...');
 		ReadLn;
 		ExitProgram(status);
 	end;

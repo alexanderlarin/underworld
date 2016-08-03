@@ -37,4 +37,4 @@ else
 	ARGS=$*
 fi
 
-exec $XTERM -T "Underworld" -fa 'Monospace' -fs 16 -geometry 80x26 -e /usr/games/underworld $ARGS
+exec $XTERM -T "Underworld" -fa 'Monospace' -fs 16 -geometry 80x26 -e /usr/games/underworld-bin $ARGS

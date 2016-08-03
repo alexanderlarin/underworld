@@ -44,12 +44,14 @@ install:
 	install -m644 story/*.spt $(DESTDIR)/usr/share/games/underworld/story
 	install -m644 underworld.desktop $(DESTDIR)/usr/share/applications/underworld.desktop
 	install -m644 underworld.xpm $(DESTDIR)/usr/share/pixmaps/underworld.xpm
+	install -m644 underworld.png $(DESTDIR)/usr/share/pixmaps/underworld.png
 
 binary-arch: install
 	dh_testdir
 	dh_testroot
 	dh_installchangelogs
 	dh_install
+	dh_installman
 	dh_installmenu
 	dh_lintian
 	dh_strip

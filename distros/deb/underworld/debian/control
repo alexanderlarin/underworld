@@ -2,7 +2,7 @@ Source: underworld
 Section: games
 Priority: optional
 Maintainer: Roman Chistokhodov <freeslave93@gmail.com>
-Build-Depends: debhelper (>= 9)
+Build-Depends: debhelper (>= 9), fpc (>=2), libncursesw5-dev (>=5)
 Standards-Version: 3.9.5
 Homepage: https://github.com/alexanderlarin/underworld
 #Vcs-Git: git://anonscm.debian.org/collab-maint/underworld.git
