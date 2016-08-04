@@ -57,7 +57,7 @@ Name=Underworld
 Name[ru_RU]=Дно
 Comment=Class project for sweety students
 Categories=Game;
-Icon=$THISPATH/underworld.xpm
+Icon=$THISPATH/underworld.png
 Version=1.0
 EOF
 

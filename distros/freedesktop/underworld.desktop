@@ -1,7 +1,6 @@
 [Desktop Entry]
 Type=Application
 Exec=underworld
-TryExec=underworld
 Name=Underworld
 Name[ru_RU]=Дно
 Comment=Class project for sweety students

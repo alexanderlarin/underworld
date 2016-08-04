@@ -20,7 +20,7 @@ Create chroot and login to it:
     sudo pbuilder login --save-after-login --basetgz $BASETGZ
 ```
 
-Insinde chroot run:
+Inside chroot run:
 
 ```
     apt-get install fpc
