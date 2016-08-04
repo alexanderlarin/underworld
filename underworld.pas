@@ -14,10 +14,10 @@ uses
 	screens,
 	{$IFDEF UNIX}
 	setlocale,
-	unix,
 	ncrt,
 	{$ENDIF}
-	types;
+	types,
+	endprogram;
 
 procedure Initialize(var locations: TLocations; var status: TStatus);
 begin
@@ -61,8 +61,5 @@ begin
 		isPlaying := Play(locations, status);
 		Finalize(locations, status);
 	until not isPlaying;
-	{$IFDEF UNIX}
-	//Restore terminal settings
-	fpSystem('tput rs1');
-	{$ENDIF}
+	ExitProgram(0);
 end.

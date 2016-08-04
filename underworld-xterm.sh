@@ -46,7 +46,7 @@ fi
 
 DESKTOPFILE="$THISPATH/underworld.desktop"
 
-if [ ! -f $THISPATH/underworld.desktop ]
+if [ ! -f "$DESKTOPFILE" ]
 then
     echo "Creating shorcut at $DESKTOPFILE"
     cat <<EOF > "$DESKTOPFILE"
@@ -61,7 +61,7 @@ Icon=$THISPATH/underworld.xpm
 Version=1.0
 EOF
 
-    chmod -f +x $DESKTOPFILE
+    chmod -f +x "$DESKTOPFILE"
 fi
 
-exec $XTERM -T "Underworld" -fa 'Monospace' -fs 16 -geometry 80x26 -e ./underworld
+exec $XTERM -T "Underworld" -fa 'Monospace' -fs 16 -geometry 80x26 -e ./underworld $*

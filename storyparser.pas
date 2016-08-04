@@ -2,7 +2,7 @@ unit StoryParser;
 	
 interface
 	uses
-		SysUtils, Types, outputcolor;
+		SysUtils, Types, outputcolor, endprogram;
 	const
 		TokenEnd = 'end'; 
 		TokenText = 'text';
@@ -44,8 +44,8 @@ interface
 	function ReadConditions(var text: TextFile; var conditions: TConditions): Boolean;
 	function ReadEffect(var text: TextFile; var effect: TEffect): Boolean;
 	function ReadEffects(var text: TextFile; var effects: TEffects): Boolean;
-	function LoadStory(fileName: String; var locations: TLocations): Boolean;
-	function LoadStories(fileName: String; var locations: TLocations; var currentPosition: TPosition): Boolean;
+	function LoadStory(fileName: String; var locations: TLocations; folderPath: String): Boolean;
+	function LoadStories(fileName: String; var locations: TLocations; var currentPosition: TPosition; folderPath: String): Boolean;
 
 implementation
 	function ReadEffect(var text: TextFile; var effect: TEffect): Boolean;
@@ -570,16 +570,23 @@ implementation
 		ReadToken := not EOF(text);
 	end;	
 	
-	function LoadStory(fileName: String; var locations: TLocations): Boolean;
+	function LoadStory(fileName: String; var locations: TLocations; folderPath: String): Boolean;
 	var
 		text: TextFile;
 		token: String;
-		folderPath: String;
+		filePath: String;
 	begin
-		folderPath := './story/';
 		fileName := fileName + '.spt';
-		Assign(text, folderPath + fileName);
+		filePath := folderPath + '/' + fileName;
+		Assign(text, filePath);
+		{$I-}
 		Reset(text);
+		{$I+}
+		if (IoResult <> 0) then
+		begin
+			ExitProgram(1, 'Could not read ' + filePath);
+		end;
+		
 		ReadToken(text, token);
 		if token = TokenLocations then
 			ReadLocations(text, locations);
@@ -589,17 +596,24 @@ implementation
 		Exit(True);
 	end;
 	
-	function LoadStories(fileName: String; var locations: TLocations; var currentPosition: TPosition): Boolean;
+	function LoadStories(fileName: String; var locations: TLocations; var currentPosition: TPosition; folderPath: String): Boolean;
 	var
 		I: Integer;
 		text: TextFile;
 		token: String;
-		folderPath: String;
 		stories: TStories;
+		filePath: String;
 	begin
-		folderPath := './story/';
-		Assign(text, folderPath + fileName);
+		filePath := folderPath + '/' + fileName;
+		Assign(text, filePath);
+		{$I-}
 		Reset(text);
+		{$I+}
+		if (IoResult <> 0) then
+		begin
+			ExitProgram(1, 'Could not read ' + filePath);
+		end;
+		
 		ReadToken(text, token);
 		if token = TokenStories then
 			ReadStories(text, stories);
@@ -608,7 +622,7 @@ implementation
 		
 		for I := 0 to Length(stories) - 1 do
 		begin
-			LoadStory(stories[I], locations);
+			LoadStory(stories[I], locations, folderPath);
 		end;
 		
 		currentPosition.location := locations[0];

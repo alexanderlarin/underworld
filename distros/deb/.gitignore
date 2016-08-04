@@ -1,0 +1,10 @@
+*.deb
+*.build
+*.changes
+*.tar.xz
+*.tar.gz
+*.dsc
+*.debhelper
+underworld/*
+!underworld/
+!underworld/debian
