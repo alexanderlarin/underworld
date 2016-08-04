@@ -1,5 +1,12 @@
 # Building rpm package
 
+## Using rpmbuild
+
+```
+    ./make_rpm_orig.sh
+    rpmbuild --define "_topdir `pwd`" -ba SPECS/underworld.spec
+```
+
 ## Using mock
 
 ```

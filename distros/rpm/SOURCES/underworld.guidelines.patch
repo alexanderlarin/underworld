@@ -1,0 +1,14 @@
+--- underworld-xterm.sh	2016-08-04 12:31:25.682694460 +0300
++++ underworld-xterm-fedora.sh	2016-08-04 12:31:56.857839398 +0300
+@@ -32,9 +32,9 @@
+ 
+ if [ $# -eq 0 ]
+ then
+-	ARGS="-story /usr/share/games/underworld/story"
++	ARGS="-story /usr/share/underworld/story"
+ else
+ 	ARGS=$*
+ fi
+ 
+-exec $XTERM -T "Underworld" -fa 'Monospace' -fs 16 -geometry 80x26 -e /usr/games/underworld-bin $ARGS
++exec $XTERM -T "Underworld" -fa 'Monospace' -fs 16 -geometry 80x26 -e underworld-bin $ARGS
