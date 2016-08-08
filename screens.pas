@@ -3,7 +3,8 @@ unit Screens;
 interface
 	uses
 		canvas,
-		outputcolor;
+		outputcolor,
+		endprogram;
 		
 	procedure ShowMenu();
 	procedure ShowCredits();
@@ -13,6 +14,8 @@ interface
 	
 implementation
 	procedure ShowMenu();
+	var
+		cmd: String;
 	begin
 		CanvasClear();
 		GotoXY(4, 2);
@@ -47,8 +50,9 @@ implementation
 		ColorWrite('Copyright © 2016', 'Cyan');
 		GotoXY(0, ConsoleHeight);
 		
-		ReadLn; 
-		
+		ReadLn(cmd);
+		if cmd = 'exit' then
+			ExitProgram(0);
 	end;
 	
 	procedure WriteCenter(text: String; color: String; var line: Integer);

@@ -216,6 +216,7 @@ implementation
 	begin
 		hero.tune.value := hero.tune.value + effect.value;
 		hero.tune.changed := hero.tune.changed + effect.value;
+		Exit(True);
 	end;
 	
 	function TakeToVape(var hero: THero; effect: TEffect): Boolean;

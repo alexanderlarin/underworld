@@ -1,0 +1,9 @@
+[Desktop Entry]
+Type=Application
+Exec=underworld
+Name=Underworld
+Name[ru_RU]=Дно
+Comment=Class project for sweety students
+Categories=Game;
+Icon=underworld
+Version=1.0

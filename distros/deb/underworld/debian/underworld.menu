@@ -1,0 +1,4 @@
+?package(underworld):needs="X11" section="Games/Adventure"\
+  title="Underworld" longtitle="Underworld game"\
+  description="Underworld is an open-source simulator of the student life at the Tula State University, in which a player must dominate other students and fight the League of evil lecturers to get the degree."\
+  command="/usr/games/underworld" icon="/usr/share/pixmaps/underworld.xpm"

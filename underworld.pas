@@ -12,7 +12,12 @@ uses
 	finalizing,
 	outputcolor,
 	screens,
-	types;
+	{$IFDEF UNIX}
+	setlocale,
+	ncrt,
+	{$ENDIF}
+	types,
+	endprogram;
 
 procedure Initialize(var locations: TLocations; var status: TStatus);
 begin
@@ -49,11 +54,12 @@ var
 	status: TStatus;	
 	locations: TLocations;
 	
-begin	
+begin
 	repeat
 		isPlaying := false;
 		Initialize(locations, status);	
 		isPlaying := Play(locations, status);
 		Finalize(locations, status);
 	until not isPlaying;
+	ExitProgram(0);
 end.

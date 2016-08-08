@@ -2,9 +2,12 @@ unit OutputColor;
 
 interface
 	uses
-		{$IFDEF WINDOWS}
+	{$IFDEF WINDOWS}
 		windows;
-		{$ENDIF}
+	{$ELSE}
+		setlocale,
+		ncrt;
+	{$ENDIF}
 	
 	const
 		ColorDefault = 'LightGray';
@@ -26,7 +29,9 @@ interface
 		ColorLocationChanging = 'LightGreen';
 	
 	procedure TextColor(color: Integer);
-	procedure SetBackColor(backColor: Integer);
+	procedure TextColor(color: String);
+	procedure SetLogoBackground();
+	procedure RestoreBackground();
 	procedure ColorWrite(normalText: String);	
 	procedure ColorWrite(normalText: String; chosenColor: String);
 	function ColorWrite(normalText: String; chosenColor: String; newLine: Integer): Integer;
@@ -38,29 +43,37 @@ interface
 	procedure ColorWrite(normalText: Real; chosenColor: String; newLine: Integer);
 	
 implementation	
+	procedure MyWriteLn(s : String);
+	begin
+	{$IFDEF WINDOWS}
+		WriteLn(s);
+	{$ELSE}
+		Write(s);
+		GotoXY(1, WhereY()+1);
+	{$ENDIF}
+	end;
+	
+	procedure MyWriteLn();
+	begin
+	{$IFDEF WINDOWS}
+		WriteLn();
+	{$ELSE}
+		GotoXY(1, WhereY()+1);
+	{$ENDIF}
+	end;
+
 	procedure TextColor(color: Integer);
 	begin
 		{$IFDEF WINDOWS}
 		SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), color);
+		{$ELSE}
+		ncrt.TextColor(color);
 		{$ENDIF}
 	end;
 	
-	procedure SetBackColor(backColor: Integer);
+	procedure TextColor(color: String);
 	begin
-		{$IFDEF WINDOWS}
-		SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), BACKGROUND_RED or BACKGROUND_GREEN or BACKGROUND_INTENSITY);
-		{$ENDIF}
-	end;
-	
-	procedure ColorWrite(normalText: String);	
-	begin
-		TextColor(7);
-		WriteLn(normalText);
-	end;
-	
-	procedure ColorWrite(normalText: String; chosenColor: String);
-	begin
-		case chosenColor of 
+		case color of 
 			'Black': TextColor(0);
 			'Blue': TextColor(1);
 			'Green': TextColor(2);
@@ -81,6 +94,33 @@ implementation
 			else 
 				TextColor(15);
 		end;
+	end;
+	
+	procedure SetLogoBackground();
+	begin
+		{$IFDEF WINDOWS}
+		SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), BACKGROUND_RED or BACKGROUND_GREEN or BACKGROUND_INTENSITY);
+		{$ELSE}
+		TextBackground(14);
+		{$ENDIF}
+	end;
+	
+	procedure RestoreBackground();
+	begin
+		{$IFNDEF WINDOWS}
+		TextBackground(0);
+		{$ENDIF}
+	end;
+	
+	procedure ColorWrite(normalText: String);	
+	begin
+		TextColor(7);
+		MyWriteLn(normalText);
+	end;
+	
+	procedure ColorWrite(normalText: String; chosenColor: String);
+	begin
+		TextColor(chosenColor);
 		Write(normalText);
 		TextColor(15);
 	end;
@@ -100,7 +140,7 @@ implementation
 			while UTF8Decode(normalText)[I] <> ' ' do
 				I := I - 1;
 
-			Writeln(String(UTF8Encode(Copy(UTF8Decode(normalText), 0, I))));
+			MyWriteln(String(UTF8Encode(Copy(UTF8Decode(normalText), 0, I))));
 			Exit(PrintLargeText(UTF8Encode(Copy(UTF8Decode(normalText), I + 1, Length(UTF8Decode(normalText)) - I)), lineSize) + 1);
 			
 		end;
@@ -109,126 +149,44 @@ implementation
 	function ColorWrite(normalText: String; chosenColor: String; newLine: Integer): Integer;
 	var newLineCounter: Integer;
 	begin
-		case chosenColor of 
-			'Black': TextColor(0);
-			'Blue': TextColor(1);
-			'Green': TextColor(2);
-			'Cyan': TextColor(3);
-			'Red': TextColor(4);
-			'Magenta': TextColor(5);
-			'Brown': TextColor(6);
-			'LightGray': TextColor(7);
-			'DarkGray': TextColor(8);
-			'LightBlue': TextColor(9);
-			'LightGreen': TextColor(10);
-			'LightCyan': TextColor(11);
-			'LightRed': TextColor(12);
-			'LightMagenta': TextColor(13);
-			'Yellow': TextColor(14);
-			'White': TextColor(15);
-			'Blink': TextColor(128);
-			else 
-				TextColor(15);
-		end;
-				
+		TextColor(chosenColor);
 		ColorWrite := PrintLargeText(normalText, 50);
 		TextColor(15);
 		for newLineCounter := 1 to newLine do 
 		begin
-			WriteLn();
+			MyWriteLn();
 		end;
 	end;
 	
 	function ColorWrite(normalText: String; chosenColor: String; newLine: Integer; lineSize: Integer): Integer;
 	var newLineCounter: Integer;
 	begin
-		case chosenColor of 
-			'Black': TextColor(0);
-			'Blue': TextColor(1);
-			'Green': TextColor(2);
-			'Cyan': TextColor(3);
-			'Red': TextColor(4);
-			'Magenta': TextColor(5);
-			'Brown': TextColor(6);
-			'LightGray': TextColor(7);
-			'DarkGray': TextColor(8);
-			'LightBlue': TextColor(9);
-			'LightGreen': TextColor(10);
-			'LightCyan': TextColor(11);
-			'LightRed': TextColor(12);
-			'LightMagenta': TextColor(13);
-			'Yellow': TextColor(14);
-			'White': TextColor(15);
-			'Blink': TextColor(128);
-			else 
-				TextColor(15);
-		end;
-				
+		TextColor(chosenColor);
 		ColorWrite := PrintLargeText(normalText, lineSize);
 		TextColor(15);
 		for newLineCounter := 1 to newLine do 
 		begin
-			WriteLn();
+			MyWriteLn();
 		end;
 	end;
 	
 	function ColorWrite(normalText: String; chosenColor: String; backColor: Integer; newLine: Integer; lineSize: Integer): Integer;
 	var newLineCounter: Integer;
 	begin
-		case chosenColor of 
-			'Black': TextColor(0);
-			'Blue': TextColor(1);
-			'Green': TextColor(2);
-			'Cyan': TextColor(3);
-			'Red': TextColor(4);
-			'Magenta': TextColor(5);
-			'Brown': TextColor(6);
-			'LightGray': TextColor(7);
-			'DarkGray': TextColor(8);
-			'LightBlue': TextColor(9);
-			'LightGreen': TextColor(10);
-			'LightCyan': TextColor(11);
-			'LightRed': TextColor(12);
-			'LightMagenta': TextColor(13);
-			'Yellow': TextColor(14);
-			'White': TextColor(15);
-			'Blink': TextColor(128);
-			else 
-				TextColor(15);
-		end;
-		
-		SetBackColor(backColor);
+		TextColor(chosenColor);
+		SetLogoBackground();
 		ColorWrite := PrintLargeText(normalText, lineSize);
+		RestoreBackground();
 		TextColor(15);
 		for newLineCounter := 1 to newLine do 
 		begin
-			WriteLn();
+			MyWriteLn();
 		end;
 	end;
 	
 	procedure ColorWrite(normalText: Integer; chosenColor: String);
 	begin
-		case chosenColor of 
-			'Black': TextColor(0);
-			'Blue': TextColor(1);
-			'Green': TextColor(2);
-			'Cyan': TextColor(3);
-			'Red': TextColor(4);
-			'Magenta': TextColor(5);
-			'Brown': TextColor(6);
-			'LightGray': TextColor(7);
-			'DarkGray': TextColor(8);
-			'LightBlue': TextColor(9);
-			'LightGreen': TextColor(10);
-			'LightCyan': TextColor(11);
-			'LightRed': TextColor(12);
-			'LightMagenta': TextColor(13);
-			'Yellow': TextColor(14);
-			'White': TextColor(15);
-			'Blink': TextColor(128);
-			else 
-				TextColor(15);
-		end;
+		TextColor(chosenColor);
 		Write(normalText);
 		TextColor(15);
 	end;
@@ -236,58 +194,18 @@ implementation
 	procedure ColorWrite(normalText: Integer; chosenColor: String; newLine: Integer);
 	var newLineCounter: Integer;
 	begin
-		case chosenColor of 
-			'Black': TextColor(0);
-			'Blue': TextColor(1);
-			'Green': TextColor(2);
-			'Cyan': TextColor(3);
-			'Red': TextColor(4);
-			'Magenta': TextColor(5);
-			'Brown': TextColor(6);
-			'LightGray': TextColor(7);
-			'DarkGray': TextColor(8);
-			'LightBlue': TextColor(9);
-			'LightGreen': TextColor(10);
-			'LightCyan': TextColor(11);
-			'LightRed': TextColor(12);
-			'LightMagenta': TextColor(13);
-			'Yellow': TextColor(14);
-			'White': TextColor(15);
-			'Blink': TextColor(128);
-			else 
-				TextColor(15);
-		end;
+		TextColor(chosenColor);
 		Write(normalText);
 		TextColor(15);
 		for newLineCounter := 1 to newLine do 
 		begin
-			WriteLn();
+			MyWriteLn();
 		end;
 	end;
 	
 	procedure ColorWrite(normalText: Real; chosenColor: String);
 	begin
-		case chosenColor of 
-			'Black': TextColor(0);
-			'Blue': TextColor(1);
-			'Green': TextColor(2);
-			'Cyan': TextColor(3);
-			'Red': TextColor(4);
-			'Magenta': TextColor(5);
-			'Brown': TextColor(6);
-			'LightGray': TextColor(7);
-			'DarkGray': TextColor(8);
-			'LightBlue': TextColor(9);
-			'LightGreen': TextColor(10);
-			'LightCyan': TextColor(11);
-			'LightRed': TextColor(12);
-			'LightMagenta': TextColor(13);
-			'Yellow': TextColor(14);
-			'White': TextColor(15);
-			'Blink': TextColor(128);
-			else 
-				TextColor(15);
-		end;
+		TextColor(chosenColor);
 		Write(normalText);
 		TextColor(15);
 	end;
@@ -295,32 +213,12 @@ implementation
 	procedure ColorWrite(normalText: Real; chosenColor: String; newLine: Integer);
 	var newLineCounter: Integer;
 	begin
-		case chosenColor of 
-			'Black': TextColor(0);
-			'Blue': TextColor(1);
-			'Green': TextColor(2);
-			'Cyan': TextColor(3);
-			'Red': TextColor(4);
-			'Magenta': TextColor(5);
-			'Brown': TextColor(6);
-			'LightGray': TextColor(7);
-			'DarkGray': TextColor(8);
-			'LightBlue': TextColor(9);
-			'LightGreen': TextColor(10);
-			'LightCyan': TextColor(11);
-			'LightRed': TextColor(12);
-			'LightMagenta': TextColor(13);
-			'Yellow': TextColor(14);
-			'White': TextColor(15);
-			'Blink': TextColor(128);
-			else 
-				TextColor(15);
-		end;
+		TextColor(chosenColor);
 		Write(normalText);
 		TextColor(15);
 		for newLineCounter := 1 to newLine do 
 		begin
-			WriteLn();
+			MyWriteLn();
 		end;
 	end;
 end.
